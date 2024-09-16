@@ -10,6 +10,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from 
 import { X, Link as LinkIcon, DollarSign, Github, Twitter, Linkedin, Instagram, Facebook, Plus, Palette, Settings, BarChart, Moon } from "lucide-react"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import Image from "next/image"
+import { ThemeToggle } from "@/components/theme-toggle"
 
 interface Project {
   name: string;
@@ -77,17 +78,17 @@ export function SinglePageCreator2() {
   }
 
   return (
-    <div className="flex w-full h-screen bg-white text-black">
+    <div className="flex w-full h-screen bg-white dark:bg-neutral-900 text-black dark:text-white border-2 border-black">
       {/* Sidebar */}
-      <div className="w-64 bg-white shadow-md z-10 text-sm">
+      <div className="w-64 bg-white dark:bg-neutral-900 text-black dark:text-white shadow-md z-10 text-sm">
         <nav className="p-4 space-y-2">
           {['Design', 'Settings', 'Analytics', 'Dark Mode'].map((item) => (
             <button
               key={item}
               className={`w-full text-left px-4 py-2 rounded-md transition-colors ${
                 activeTab === item
-                  ? 'bg-gray-100 text-black font-medium'
-                  : 'text-neutral-600 hover:bg-gray-100'
+                  ? 'bg-gray-100 dark:bg-neutral-800 text-black dark:text-white font-medium'
+                  : 'text-neutral-600 hover:bg-gray-100 dark:hover:bg-neutral-800'
               }`}
               onClick={() => setActiveTab(item)}
             >
@@ -98,6 +99,7 @@ export function SinglePageCreator2() {
               {item}
             </button>
           ))}
+          <ThemeToggle />
         </nav>
       </div>
 
@@ -134,7 +136,7 @@ export function SinglePageCreator2() {
             />
           </div>
           <div>
-            <Label htmlFor="socials" className="text-sm font-medium">Social Media</Label>
+            <Label htmlFor="socials" className="text-sm font-medium mr-5">Social Media</Label>
             <Dialog open={isSocialDialogOpen} onOpenChange={setIsSocialDialogOpen}>
               <DialogTrigger asChild>
                 <Button className="mt-1 bg-blue-600 hover:bg-blue-700 text-white">Add Social Media</Button>
@@ -186,10 +188,10 @@ export function SinglePageCreator2() {
             </ul>
           </div>
           <div>
-            <Label htmlFor="projects" className="text-sm font-medium">Projects</Label>
+            <Label htmlFor="projects" className="text-sm font-medium mr-5">Projects</Label>
             <Dialog open={isProjectDialogOpen} onOpenChange={setIsProjectDialogOpen}>
               <DialogTrigger asChild>
-                <Button className="mt-1 bg-blue-500 text-white">Add Project</Button>
+                <Button className="mt-1 bg-blue-600 hover:bg-blue-700 text-white">Add Project</Button>
               </DialogTrigger>
               <DialogContent className='bg-white text-black'>
                 <DialogHeader>
@@ -253,22 +255,22 @@ export function SinglePageCreator2() {
       </div>
 
       {/* Right side - Preview */}
-      <div className="w-1/2 p-8 overflow-auto text-black">
+      <div className="w-1/2 p-8 overflow-auto text-black dark:text-white">
         <div className="flex justify-between items-center mb-4">
           <h2 className="text-xl font-semibold">Preview</h2>
           <div className="flex items-center space-x-2">
-            <span className="text-sm text-gray-600">Mobile</span>
+            <span className="text-sm text-gray-600 dark:text-white">Mobile</span>
             <Switch
               checked={isDesktopPreview}
               onCheckedChange={setIsDesktopPreview}
               className="bg-blue-500"
             />
-            <span className="text-sm text-gray-600">Desktop</span>
+            <span className="text-sm text-gray-600 dark:text-white">Desktop</span>
           </div>
         </div>
-        <div className="flex justify-center">
+        <div className="flex justify-center ">
           <div 
-            className={`bg-white rounded-xl border overflow-hidden transition-all duration-300 ${
+            className={`bg-white dark:bg-neutral-900 text-black dark:text-white rounded-xl border overflow-hidden transition-all duration-300 ${
               isDesktopPreview ? 'w-[1024px]' : 'w-[375px]'
             }`}
           >
@@ -281,7 +283,7 @@ export function SinglePageCreator2() {
                 className="w-32 h-32 rounded-full mx-auto mb-4"
               />
               <h1 className="text-3xl font-bold text-center mb-2">{name}</h1>
-              <p className="text-center text-gray-700 whitespace-pre-wrap mb-4">{bio}</p>
+              <p className="text-center text-gray-700 dark:text-white whitespace-pre-wrap mb-4">{bio}</p>
               <div className="flex justify-center items-center space-x-4 mb-8">
                 {socials.map((social, index) => {
                   const IconComponent = socialIcons[social.platform as keyof typeof socialIcons]
