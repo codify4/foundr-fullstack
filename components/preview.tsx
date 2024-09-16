@@ -1,6 +1,4 @@
-import { Plus, Github, Twitter, Linkedin, Instagram, Facebook, LinkIcon, DollarSign } from "lucide-react"
-import { Button } from "./ui/button"
-import { Dialog, DialogTrigger } from "./ui/dialog"
+import { Github, Twitter, Linkedin, Instagram, Facebook, LinkIcon, DollarSign } from "lucide-react"
 import { Switch } from "./ui/switch"
 import Image from "next/image"
 
@@ -38,7 +36,7 @@ const socialIcons = {
     facebook: Facebook,
 }
 
-const Preview = ({ name, avatarUrl, bio, projects, socials, isDesktopPreview, isProjectDialogOpen, isSocialDialogOpen, setIsProjectDialogOpen, setIsSocialDialogOpen, setIsDesktopPreview }: PreviewProps) => {
+const Preview = ({ name, avatarUrl, bio, projects, socials, isDesktopPreview, setIsDesktopPreview }: PreviewProps) => {
     return (
         <div className="w-1/2 p-8 overflow-auto text-black dark:text-white">
             <div className="flex justify-between items-center mb-4">
