@@ -1,4 +1,3 @@
-import { SinglePageCreator1 } from "@/components/single-page-creator1";
 import { SinglePageCreator2 } from "@/components/single-page-creator2";
 
 export default function Home() {
