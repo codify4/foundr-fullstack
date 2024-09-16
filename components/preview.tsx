@@ -55,9 +55,7 @@ const Preview = ({ name, avatarUrl, bio, projects, socials, isDesktopPreview, is
             </div>
             <div className="flex justify-center ">
                 <div 
-                    className={`bg-white dark:bg-neutral-900 text-black dark:text-white rounded-xl border overflow-hidden transition-all duration-300 ${
-                    isDesktopPreview ? 'w-[1024px]' : 'w-[375px]'
-                    }`}
+                    className={`bg-white dark:bg-neutral-900 text-black dark:text-white rounded-xl border overflow-hidden transition-all duration-300 ${isDesktopPreview ? 'w-[1024px]' : 'w-[375px]'}`}
                 >
                     <div className="p-8">
                         <Image
@@ -84,55 +82,41 @@ const Preview = ({ name, avatarUrl, bio, projects, socials, isDesktopPreview, is
                                     </a>
                                 )
                             })}
-                            <Dialog open={isSocialDialogOpen} onOpenChange={setIsSocialDialogOpen}>
-                                <DialogTrigger asChild>
-                                    <Button variant="outline" size="icon" className="rounded-full">
-                                        <Plus className="h-4 w-4" />
-                                    </Button>
-                                </DialogTrigger>
-                            </Dialog>
-                    </div>
-                    <div className="mb-8">
-                        <div className="flex justify-between items-center mb-4">
-                        <h2 className="text-2xl font-semibold">Projects</h2>
-                        <Dialog open={isProjectDialogOpen} onOpenChange={setIsProjectDialogOpen}>
-                            <DialogTrigger asChild>
-                                <Button variant="outline" size="sm">
-                                    Add Project
-                                </Button>
-                            </DialogTrigger>
-                        </Dialog>
                         </div>
-                        <ul className="space-y-6">
-                            {projects.map((project, index) => (
-                                <li key={index} className="border border-gray-200 rounded-lg p-6 shadow-md hover:shadow-lg transition-shadow duration-300">
-                                    <h3 className="text-xl font-semibold mb-2">
-                                        {project.name}
-                                    </h3>
-                                    <p className="text-gray-700 mb-3">{project.description}</p>
-                                    <div className="flex items-center justify-between mt-4">
-                                        <a 
-                                            href={project.link} 
-                                            target="_blank" 
-                                            rel="noopener noreferrer" 
-                                            className="text-blue-500 hover:text-blue-700 flex items-center"
-                                        >
-                                            <LinkIcon className="h-4 w-4 mr-1" />
-                                            View Project
-                                        </a>
-                                        <div className="flex items-center text-green-600">
-                                            <DollarSign className="h-4 w-4 mr-1" />
-                                            <span>{project.revenue.toLocaleString()}</span>
+                        <div className="mb-8">
+                            <div className="flex justify-between items-center mb-4">
+                                <h2 className="text-2xl font-semibold">Projects</h2>
+                            </div>
+                            <ul className="space-y-6">
+                                {projects.map((project, index) => (
+                                    <li key={index} className="border border-gray-200 rounded-lg p-6 shadow-md hover:shadow-lg transition-shadow duration-300">
+                                        <h3 className="text-xl font-semibold mb-2">
+                                            {project.name}
+                                        </h3>
+                                        <p className="text-gray-700 mb-3">{project.description}</p>
+                                        <div className="flex items-center justify-between mt-4">
+                                            <a 
+                                                href={project.link} 
+                                                target="_blank" 
+                                                rel="noopener noreferrer" 
+                                                className="text-blue-500 hover:text-blue-700 flex items-center"
+                                            >
+                                                <LinkIcon className="h-4 w-4 mr-1" />
+                                                View Project
+                                            </a>
+                                            <div className="flex items-center text-green-600">
+                                                <DollarSign className="h-4 w-4 mr-1" />
+                                                <span>{project.revenue.toLocaleString()}</span>
+                                            </div>
                                         </div>
-                                    </div>
-                                </li>
-                            ))}
-                        </ul>
+                                    </li>
+                                ))}
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
     )
 }
 export default Preview
