@@ -1,14 +1,15 @@
 "use client"
 
 import { useState } from 'react'
-import { Input } from "./ui/input"
-import { Textarea } from "./ui/textarea"
-import { Label } from "./ui/label"
-import { Button } from "./ui/button"
-import { Switch } from "./ui/switch"
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "./ui/dialog"
-import { X, Link as LinkIcon, DollarSign, Github, Twitter, Linkedin, Instagram, Facebook, Plus } from "lucide-react"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "./ui/select"
+import { Input } from "@/components/ui/input"
+import { Textarea } from "@/components/ui/textarea"
+import { Label } from "@/components/ui/label"
+import { Button } from "@/components/ui/button"
+import { Switch } from "@/components/ui/switch"
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog"
+import { X, Link as LinkIcon, DollarSign, Github, Twitter, Linkedin, Instagram, Facebook, Plus, Palette, Settings, BarChart, Moon } from "lucide-react"
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
+import Image from "next/image"
 
 interface Project {
   name: string;
@@ -30,15 +31,16 @@ const socialIcons = {
   facebook: Facebook,
 }
 
-export function SinglePageCreator() {
+export function SinglePageCreator2() {
   const [name, setName] = useState('Your Name')
-  const [avatarUrl, setAvatarUrl] = useState('/placeholder.svg?height=100&width=100')
+  const [avatarUrl, setAvatarUrl] = useState('/favicon.ico')
   const [bio, setBio] = useState('Your bio goes here...')
   const [projects, setProjects] = useState<Project[]>([])
   const [socials, setSocials] = useState<Social[]>([])
   const [isDesktopPreview, setIsDesktopPreview] = useState(true)
   const [isProjectDialogOpen, setIsProjectDialogOpen] = useState(false)
   const [isSocialDialogOpen, setIsSocialDialogOpen] = useState(false)
+  const [activeTab, setActiveTab] = useState('Design')
   const [newProject, setNewProject] = useState<Project>({
     name: '',
     link: '',
@@ -76,8 +78,31 @@ export function SinglePageCreator() {
 
   return (
     <div className="flex w-full h-screen bg-white text-black">
+      {/* Sidebar */}
+      <div className="w-64 bg-white shadow-md z-10 text-sm">
+        <nav className="p-4 space-y-2">
+          {['Design', 'Settings', 'Analytics', 'Dark Mode'].map((item) => (
+            <button
+              key={item}
+              className={`w-full text-left px-4 py-2 rounded-md transition-colors ${
+                activeTab === item
+                  ? 'bg-gray-100 text-black font-medium'
+                  : 'text-neutral-600 hover:bg-gray-100'
+              }`}
+              onClick={() => setActiveTab(item)}
+            >
+              {item === 'Design' && <Palette className="inline-block w-5 h-5 mr-2" />}
+              {item === 'Settings' && <Settings className="inline-block w-5 h-5 mr-2" />}
+              {item === 'Analytics' && <BarChart className="inline-block w-5 h-5 mr-2" />}
+              {item === 'Dark Mode' && <Moon className="inline-block w-5 h-5 mr-2" />}
+              {item}
+            </button>
+          ))}
+        </nav>
+      </div>
+
       {/* Left side - Input form */}
-      <div className="w-1/2 p-8 overflow-auto">
+      <div className="w-2/5 p-8 overflow-auto">
         <h1 className="text-2xl font-bold mb-6">Create Your Single Page Website</h1>
         <div className="space-y-4">
           <div>
@@ -112,9 +137,9 @@ export function SinglePageCreator() {
             <Label htmlFor="socials" className="text-sm font-medium">Social Media</Label>
             <Dialog open={isSocialDialogOpen} onOpenChange={setIsSocialDialogOpen}>
               <DialogTrigger asChild>
-                <Button className="mt-1 bg-blue-500 text-white">Add Social Media</Button>
+                <Button className="mt-1 bg-blue-600 hover:bg-blue-700 text-white">Add Social Media</Button>
               </DialogTrigger>
-              <DialogContent>
+              <DialogContent className='bg-white text-black'>
                 <DialogHeader>
                   <DialogTitle>Add Social Media Link</DialogTitle>
                 </DialogHeader>
@@ -166,7 +191,7 @@ export function SinglePageCreator() {
               <DialogTrigger asChild>
                 <Button className="mt-1 bg-blue-500 text-white">Add Project</Button>
               </DialogTrigger>
-              <DialogContent>
+              <DialogContent className='bg-white text-black'>
                 <DialogHeader>
                   <DialogTitle>Add New Project</DialogTitle>
                 </DialogHeader>
@@ -243,15 +268,17 @@ export function SinglePageCreator() {
         </div>
         <div className="flex justify-center">
           <div 
-            className={`bg-white rounded-xl shadow-lg overflow-hidden transition-all duration-300 ${
+            className={`bg-white rounded-xl border overflow-hidden transition-all duration-300 ${
               isDesktopPreview ? 'w-[1024px]' : 'w-[375px]'
             }`}
           >
             <div className="p-8">
-              <img
+              <Image
                 src={avatarUrl}
                 alt="Avatar"
-                className="w-32 h-32 rounded-full mx-auto mb-4 border-4 border-blue-500 shadow-lg"
+                width={130}
+                height={130}
+                className="w-32 h-32 rounded-full mx-auto mb-4"
               />
               <h1 className="text-3xl font-bold text-center mb-2">{name}</h1>
               <p className="text-center text-gray-700 whitespace-pre-wrap mb-4">{bio}</p>
