@@ -18,13 +18,13 @@ export function ThemeToggle() {
     return (
         <DropdownMenu>
             <DropdownMenuTrigger asChild>
-                <Button variant="outline" className="text-neutral-600 gap-2">
+                <Button variant="outline" className="text-neutral-600 gap-2 w-full">
                     <span>Toggle theme</span>
                     <Moon className="size-5 hidden dark:block" />
                     <Sun className="size-5 block dark:hidden" />
                 </Button>
             </DropdownMenuTrigger>
-            <DropdownMenuContent align="end" className="bg-white dark:bg-neutral-900">
+            <DropdownMenuContent align="start" className="w-10 bg-white dark:bg-neutral-900 text-black dark:text-white">
                 <DropdownMenuItem onClick={() => setTheme("light")}>
                     Light
                 </DropdownMenuItem>
