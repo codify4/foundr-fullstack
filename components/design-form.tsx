@@ -64,8 +64,8 @@ const DesignForm = ({
   removeSocial 
 }: DesignFormProps) => {
   return (
-      <div className="w-2/5 p-8 overflow-auto">
-        <h1 className="text-2xl font-bold mb-6">Create Your Single Page Website</h1>
+      <div className="w-full lg:w-2/5 p-4 md:p-8 overflow-auto">
+        <h1 className="text-xl lg:text-2xl font-bold mb-6">Create Your Single Page Website</h1>
         <div className="space-y-4">
           <div>
             <Label htmlFor="name" className="text-sm font-medium">Name</Label>
@@ -101,7 +101,7 @@ const DesignForm = ({
               <DialogTrigger asChild>
                 <Button className="mt-1 bg-blue-600 hover:bg-blue-700 text-white">Add Social Media</Button>
               </DialogTrigger>
-              <DialogContent className='bg-white dark:bg-neutral-900 text-black dark:text-white'>
+              <DialogContent className='w-11/12 rounded-lg bg-white dark:bg-neutral-900 text-black dark:text-white'>
                 <DialogHeader>
                   <DialogTitle>Add Social Media Link</DialogTitle>
                 </DialogHeader>
@@ -154,7 +154,7 @@ const DesignForm = ({
               <DialogTrigger asChild>
                 <Button className="mt-1 bg-blue-600 hover:bg-blue-700 text-white">Add Project</Button>
               </DialogTrigger>
-              <DialogContent className='bg-white dark:bg-neutral-900 text-black dark:text-white'>
+              <DialogContent className='w-11/12 rounded-lg bg-white dark:bg-neutral-900 text-black dark:text-white'>
                 <DialogHeader>
                   <DialogTitle>Add New Project</DialogTitle>
                 </DialogHeader>

@@ -38,10 +38,10 @@ const socialIcons = {
 
 const Preview = ({ name, avatarUrl, bio, projects, socials, isDesktopPreview, setIsDesktopPreview }: PreviewProps) => {
     return (
-        <div className="w-1/2 p-8 overflow-auto text-black dark:text-white">
+        <div className="w-full lg:w-1/2 p-8 overflow-auto text-black dark:text-white">
             <div className="flex justify-between items-center mb-4">
                 <h2 className="text-xl font-semibold">Preview</h2>
-                <div className="flex items-center space-x-2">
+                <div className="hidden md:flex items-center space-x-2">
                     <span className="text-sm text-gray-600 dark:text-white">Mobile</span>
                         <Switch
                             checked={isDesktopPreview}

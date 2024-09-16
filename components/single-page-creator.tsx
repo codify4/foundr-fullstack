@@ -17,7 +17,7 @@ interface Social {
   url: string;
 }
 
-export function SinglePageCreator2() {
+export function SinglePageCreator() {
   const [name, setName] = useState('Your Name')
   const [avatarUrl, setAvatarUrl] = useState('/favicon.ico')
   const [bio, setBio] = useState('Your bio goes here...')
@@ -62,7 +62,7 @@ export function SinglePageCreator2() {
   }
 
   return (
-    <div className="flex w-full h-screen bg-white dark:bg-neutral-900 text-black dark:text-white border-2 border-black">
+    <div className="flex flex-col lg:flex-row w-full lg:h-screen p-5 lg:p-0 bg-white dark:bg-neutral-900 text-black dark:text-white border-2 border-black">
       {/* Sidebar */}
       <Sidebar />
 
