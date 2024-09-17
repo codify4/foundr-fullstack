@@ -5,6 +5,14 @@ import Sidebar from './sidebar'
 import DesignForm from './design-form'
 import Preview from './preview'
 
+import {
+  useQuery,
+  useMutation,
+  useQueryClient,
+  QueryClient,
+  QueryClientProvider,
+} from '@tanstack/react-query'
+
 interface Project {
   name: string;
   link: string;
@@ -17,7 +25,13 @@ interface Social {
   url: string;
 }
 
-export function SinglePageCreator() {
+const api_url = process.env.API_URL || 'http://localhost:3001'
+
+export function SinglePageCreator() { 
+  const queryClient = useQueryClient()
+
+  const { data } = useQuery({ queryKey: ['page'], queryFn: () => fetch(`${api_url}/page/1`).then((res) => res.json()) })
+
   const [name, setName] = useState('Your Name')
   const [avatarUrl, setAvatarUrl] = useState('/favicon.ico')
   const [bio, setBio] = useState('Your bio goes here...')
@@ -43,6 +57,8 @@ export function SinglePageCreator() {
       setNewProject({ name: '', link: '', description: '', revenue: 0 })
       setIsProjectDialogOpen(false)
     }
+
+    console.log(data);
   }
 
   const removeProject = (index: number) => {
