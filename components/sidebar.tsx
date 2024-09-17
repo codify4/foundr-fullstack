@@ -22,8 +22,8 @@ const Sidebar = () => {
                                 key={item}
                                 className={`w-full text-left text-md px-4 py-3 rounded-md transition-colors ${
                                     activeTab === item
-                                    ? 'bg-gray-100 dark:bg-neutral-800 text-black dark:text-white font-medium'
-                                    : 'text-neutral-600 hover:bg-gray-100 dark:hover:bg-neutral-800'
+                                    ? 'bg-gray-50 dark:bg-neutral-800 text-black dark:text-white font-medium'
+                                    : 'text-neutral-500 hover:text-black dark:hover:bg-neutral-800'
                                 }`}
                                 onClick={() => setActiveTab(item)}
                             >
