@@ -7,10 +7,7 @@ import Preview from './preview'
 
 import {
   useQuery,
-  useMutation,
   useQueryClient,
-  QueryClient,
-  QueryClientProvider,
 } from '@tanstack/react-query'
 
 interface Project {
@@ -30,7 +27,17 @@ const api_url = process.env.API_URL || 'http://localhost:3001'
 export function SinglePageCreator() { 
   const queryClient = useQueryClient()
 
-  const { data } = useQuery({ queryKey: ['page'], queryFn: () => fetch(`${api_url}/page/1`).then((res) => res.json()) })
+  const { data } = useQuery({ 
+    queryKey: ['user'], 
+    queryFn: () => fetch(`${api_url}/user/test`,
+      {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      }
+    ).then((res) => res.json()) 
+  })
 
   const [name, setName] = useState('Your Name')
   const [avatarUrl, setAvatarUrl] = useState('/favicon.ico')
