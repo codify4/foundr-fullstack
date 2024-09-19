@@ -1,6 +1,6 @@
 import { BentoCard, BentoGrid } from "@/components/magicui/bento-grid";
 import AnimatedBeamOutput from "./AnimatedBeam";
-import { CalendarCheck, ChartLine, CircleDot, Link, LinkIcon, ProjectorIcon } from "lucide-react";
+import { CalendarCheck, ChartLine, LinkIcon, ProjectorIcon } from "lucide-react";
 import { AnimatedListDemo } from "./AnimatedList";
 import { ChartDemo } from "./DemoChart";
 import { PieChartDemo } from "./PieChartDemo";

@@ -1,5 +1,5 @@
 
-import { Github, InstagramIcon, Linkedin, Twitter, X } from "lucide-react";
+import { Github, InstagramIcon, Linkedin, Twitter } from "lucide-react";
 import Link from "next/link";
 
 export const socials = [
