@@ -22,7 +22,7 @@ interface Social {
   url: string;
 }
 
-const api_url = process.env.API_URL || 'http://localhost:3001'
+const api_url = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001'
 
 export function SinglePageCreator() { 
   const queryClient = useQueryClient()
