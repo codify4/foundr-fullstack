@@ -1,5 +1,5 @@
 import PricingCard from "./PricingCard";
-import { PRICING } from "../../constants/pricing";
+import { PRICING } from "@/constants/pricing";
  
 export default function Pricing() {
   return (
