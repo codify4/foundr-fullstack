@@ -38,9 +38,9 @@ export default function Hero() {
           </div>
         </BlurFade>
         <BlurFade duration={0.75} className="z-10 mt-5">
-          <Link href="https://launch.drip.ma/waitlist/foundr-waitlist" target="_blank">
+          <Link href="signup" target="_blank">
             <Button variant="default" className="group hover:bg-secondary px-10 py-2 rounded-md">
-              Join Waitlist
+              Get Started
               <ChevronRightIcon className="ml-1 size-4 transition-transform duration-300 ease-in-out group-hover:translate-x-1" />
             </Button>
           </Link>
