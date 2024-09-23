@@ -1,4 +1,5 @@
 /* Components */
+import { signIn } from "@/auth"
 import { Button } from "@/components/ui/button"
 import {
   Card,
@@ -20,7 +21,14 @@ function SignupPage() {
                     <CardTitle className="text-2xl">Sign Up</CardTitle>
                 </CardHeader>
                 <CardContent>
-                    <form id="signup-form" className="grid gap-4">
+                    <form 
+                        id="signup-form" 
+                        className="grid gap-4"
+                        action={async (formData) => {
+                            "use server"
+                            await signIn("credentials", formData)
+                        }}
+                    >
                         <div className="grid gap-2">
                             <Label htmlFor="username">foundr.lol/</Label>
                             <Input

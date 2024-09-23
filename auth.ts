@@ -48,4 +48,21 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       },
     }),
   ],
+  // callbacks: {
+  //   async jwt({ token, user }) {
+  //     if (user) {
+  //       token.accessToken = user.accessToken;
+  //       token.refreshToken = user.refreshToken;
+  //     }
+  //     return token;
+  //   },
+  //   async session({ session, token }) {
+  //     session.user.accessToken = token.accessToken;
+  //     session.user.refreshToken = token.refreshToken;
+  //     return session;
+  //   }
+  // },
+  // pages: {
+  //   signIn: '/auth/signin',
+  // }
 })
