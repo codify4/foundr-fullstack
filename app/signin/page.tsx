@@ -1,8 +1,3 @@
-/* Next */
-import Link from "next/link"
-
-/* Components */
-import { Button } from "@/components/ui/button"
 import {
   Card,
   CardContent,
@@ -19,12 +14,13 @@ async function LoginPage() {
         <section className="flex flex-col items-center justify-center h-svh bg-white">
             <Card className="mx-auto w-[500px] shadow-xl">
                 <CardHeader>
-                    <CardTitle className="text-2xl">Login</CardTitle>
+                    <CardTitle className="text-2xl">Sign In</CardTitle>
                 </CardHeader>
-                <CardContent>
-                    <form id="signup-form" className="grid gap-4">
-                        <div className="grid gap-2">
-                            <Label htmlFor="Username">Username</Label>
+                <CardContent className="flex flex-col items-center justify-center gap-5">
+                    <form id="signup-form" className="w-full">
+                        <div className="w-full">
+                            {/* Make this a seperate component and make it look cool */}
+                            <Label htmlFor="Username">foundr.lol/</Label>
                             <Input
                                 id="Username"
                                 type="Username"
@@ -33,8 +29,8 @@ async function LoginPage() {
                                 required
                             />
                         </div>
-                        <SignIn />
                     </form>
+                    <SignIn />
                 </CardContent>
             </Card>
         </section>
