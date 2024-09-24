@@ -3,6 +3,7 @@ import { Card, CardContent } from "@/components/ui/card"
 import { SignOut } from "./sign-out"
 import { auth } from "@/auth"
 import { redirect } from "next/navigation";
+import { Button } from "../ui/button";
 
 export async function SettingsPage() {
   const session = await auth();
@@ -14,8 +15,14 @@ export async function SettingsPage() {
 
   return (
     <div className="w-1/3 mx-auto p-6 space-y-8">
-      <h1 className="text-3xl font-bold">Settings</h1>
-      
+      <div className="flex flex-row justify-between">
+        <h1 className="text-3xl font-bold">Settings</h1>
+        <Link href="/dashboard">
+          <Button className="w-full bg-black hover:bg-secondary sm:w-auto">
+            Back to Dashboard
+          </Button>
+        </Link>
+      </div>
       <Card>
         <CardContent className="p-6 space-y-4">
           <div>
