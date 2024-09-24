@@ -18,11 +18,12 @@ const TopNav = () => {
               <span className="text-lg font-semibold">Foundr</span>
             </Link>
           </div>
-          <Link href="signin" target='_blank'>
+          <Link href="signin">
             <Button variant="outline" className='hidden text-primary hover:text-primary md:flex md:items-center md:justify-center px-5 py-2 rounded-md'>Sign In</Button>
           </Link>
           <div className="md:hidden">
-            <button
+            <Button
+              variant="outline"
               onClick={() => setIsOpen(!isOpen)}
               className="inline-flex items-center justify-center p-2 rounded-md"
             >
@@ -36,7 +37,7 @@ const TopNav = () => {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16" />
                 </svg>
               )}
-            </button>
+            </Button>
           </div>
         </div>
       </div>
