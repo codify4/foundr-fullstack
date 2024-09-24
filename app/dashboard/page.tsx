@@ -1,4 +1,4 @@
-import { SinglePageCreator } from "@/components/single-page-creator";
+import { SinglePageCreator } from "@/components/dashboard/single-page-creator";
 
 export default function Home() {
   	return (
