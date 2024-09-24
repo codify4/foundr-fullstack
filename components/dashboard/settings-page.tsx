@@ -1,14 +1,16 @@
 import Link from "next/link"
 import { Card, CardContent } from "@/components/ui/card"
 import { SignOut } from "./sign-out"
+import { auth } from "@/auth"
+import { redirect } from "next/navigation";
 
-export function SettingsPage() {
-  // This would typically come from your app's state or props
-  const user = {
-    name: "John Doe",
-    email: "john@example.com"
-  }
-  const isPublished = true
+export async function SettingsPage() {
+  const session = await auth();
+  const user = session?.user;
+
+  if (!user) redirect("/signin");
+
+  const isPublished = true;
 
   return (
     <div className="w-1/3 mx-auto p-6 space-y-8">
@@ -18,12 +20,12 @@ export function SettingsPage() {
         <CardContent className="p-6 space-y-4">
           <div>
             <h2 className="text-sm font-medium text-muted-foreground">Name</h2>
-            <p className="text-lg font-semibold">{user.name}</p>
+            <p className="text-lg font-semibold">{user?.name || "User"}</p>
           </div>
           
           <div>
             <h2 className="text-sm font-medium text-muted-foreground">Email</h2>
-            <p className="text-lg">{user.email}</p>
+            <p className="text-lg">{user?.email || "email@example.com"}</p>
           </div>
         </CardContent>
       </Card>

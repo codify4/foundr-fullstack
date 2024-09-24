@@ -18,7 +18,7 @@ const TopNav = () => {
               <span className="text-lg font-semibold">Foundr</span>
             </Link>
           </div>
-          <Link href="signup" target='_blank'>
+          <Link href="signin" target='_blank'>
             <Button variant="outline" className='hidden text-primary hover:text-primary md:flex md:items-center md:justify-center px-5 py-2 rounded-md'>Sign In</Button>
           </Link>
           <div className="md:hidden">

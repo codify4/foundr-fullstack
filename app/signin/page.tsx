@@ -8,9 +8,15 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import SignInGoogle from "./sign-in-google"
 import SignInGithub from "./sign-in-github"
+import { auth } from "@/auth"
+import { redirect } from "next/navigation"
 
 
 async function LoginPage() {
+    const session = await auth();
+    const user = session?.user;
+
+    if (user) redirect("/dashboard");
     return (
         <section className="flex flex-col items-center justify-center h-svh bg-white">
             <Card className="mx-auto w-[500px] shadow-xl">
@@ -27,7 +33,6 @@ async function LoginPage() {
                                 type="Username"
                                 name="Username"
                                 placeholder="username"
-                                required
                             />
                         </div>
                     </form>
