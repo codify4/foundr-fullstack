@@ -7,7 +7,7 @@ export default async function Dashboard() {
 	const user = session?.user;
 
 	if (!user) redirect("/signin");
-	
+
   	return (
 		<div>
 			<SinglePageCreator />

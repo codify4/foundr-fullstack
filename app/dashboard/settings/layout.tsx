@@ -14,10 +14,8 @@ export default function DashboardLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={`${inter.className} antialiased`}>
-        {children}
-      </body>
-    </html>
+    <div className={`${inter.className} antialiased`}>
+      {children}
+    </div>
   );
 }

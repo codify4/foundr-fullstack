@@ -10,9 +10,10 @@ import {
   } from "@/components/ui/sheet"
 import { Button } from "../ui/button"
 import Link from "next/link"
+import { usePathname } from "next/navigation"
 
 const Sidebar = () => {
-    const [activeTab, setActiveTab] = useState()
+    const pathname = usePathname();
     
     return (
         <>
@@ -21,9 +22,9 @@ const Sidebar = () => {
                     <div className="flex flex-col">
                         <Link
                             className={`w-full flex items-center text-left text-md py-3 rounded-md transition-colors ${
-                                activeTab
+                                pathname === '/dashboard'
                                 ? 'bg-gray-50 dark:bg-neutral-800 text-black dark:text-white font-medium'
-                                : 'text-neutral-500 dark:text-white hover:text-black dark:hover:dark:hover:text-neutral-300'
+                                : 'text-neutral-500 dark:text-white w-full flex items-center text-left text-md py-3 rounded-md transition-colors'
                             }`}
                             href={`/dashboard`}
                         >   
@@ -32,7 +33,7 @@ const Sidebar = () => {
                         </Link>
                         <Link
                             className={`w-full flex items-center text-left text-md py-3 rounded-md transition-colors ${
-                                activeTab
+                                pathname === '/dashboard/analytics'
                                 ? 'bg-gray-50 dark:bg-neutral-800 text-black dark:text-white font-medium'
                                 : 'text-neutral-500 dark:text-white hover:text-black dark:hover:dark:hover:text-neutral-300'
                             }`}
@@ -43,7 +44,7 @@ const Sidebar = () => {
                         </Link>
                         <Link
                             className={`w-full flex items-center text-left text-md py-3 rounded-md transition-colors ${
-                                activeTab
+                                pathname === '/dashboard/settings'
                                 ? 'bg-gray-50 dark:bg-neutral-800 text-black dark:text-white font-medium'
                                 : 'text-neutral-500 dark:text-white hover:text-black dark:hover:dark:hover:text-neutral-300'
                             }`}
@@ -68,7 +69,7 @@ const Sidebar = () => {
                         <div className="flex flex-col">
                             <Link
                                 className={`w-full text-left text-md px-4 py-3 rounded-md transition-colors cursor-pointer ${
-                                    activeTab
+                                    pathname === '/dashboard'
                                     ? 'bg-gray-50 dark:bg-neutral-800 text-black dark:text-white font-medium'
                                     : 'text-neutral-500 hover:text-black dark:hover:bg-neutral-800'
                                 }`}
@@ -79,7 +80,7 @@ const Sidebar = () => {
                             </Link>
                             <Link
                                 className={`w-full text-left text-md px-4 py-3 rounded-md transition-colors ${
-                                    activeTab
+                                    pathname === '/dashboard/analytics'
                                     ? 'bg-gray-50 dark:bg-neutral-800 text-black dark:text-white font-medium'
                                     : 'text-neutral-500 hover:text-black dark:hover:bg-neutral-800'
                                 }`}
@@ -90,7 +91,7 @@ const Sidebar = () => {
                             </Link>
                             <Link
                                 className={`w-full text-left text-md px-4 py-3 rounded-md transition-colors ${
-                                    activeTab
+                                    pathname === '/dashboard/settings'
                                     ? 'bg-gray-50 dark:bg-neutral-800 text-black dark:text-white font-medium'
                                     : 'text-neutral-500 hover:text-black dark:hover:bg-neutral-800'
                                 }`}

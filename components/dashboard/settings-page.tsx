@@ -14,15 +14,8 @@ export async function SettingsPage() {
   const isPublished = true;
 
   return (
-    <div className="w-1/3 mx-auto p-6 space-y-8">
-      <div className="flex flex-row justify-between">
-        <h1 className="text-3xl font-bold">Settings</h1>
-        <Link href="/dashboard">
-          <Button className="w-full bg-black hover:bg-secondary sm:w-auto">
-            Back to Dashboard
-          </Button>
-        </Link>
-      </div>
+    <div className="w-1/2 mx-auto my-2 p-6 space-y-8">
+      <h1 className="text-3xl font-bold">Settings</h1>
       <Card>
         <CardContent className="p-6 space-y-4">
           <div>
@@ -37,23 +30,27 @@ export async function SettingsPage() {
         </CardContent>
       </Card>
       
-      <Card>
-        <CardContent className="p-6">
-          <div className="flex items-center justify-between">
-            <Link href="/foundr/me" className="text-lg font-semibold hover:underline">
-              foundr/me
-            </Link>
-            <span 
-              className={`px-3 py-1 rounded-full text-sm font-medium ${
-                isPublished ? 'bg-blue-100 text-blue-800' : 'bg-gray-100 text-gray-800'
-              }`}
-              aria-label={isPublished ? "Published" : "Not Published"}
-            >
-              {isPublished ? 'Published' : 'Not Published'}
-            </span>
-          </div>
-        </CardContent>
-      </Card>
+      <div>
+        <h2 className="text-2xl font-bold mb-4">Status</h2>
+        
+        <Card>
+          <CardContent className="p-6">
+            <div className="flex items-center justify-between">
+              <Link href="/foundr/me" className="text-lg font-semibold hover:underline">
+                foundr/me
+              </Link>
+              <span 
+                className={`px-3 py-1 rounded-full text-sm font-medium ${
+                  isPublished ? 'bg-blue-100 text-blue-800' : 'bg-gray-100 text-gray-800'
+                }`}
+                aria-label={isPublished ? "Published" : "Not Published"}
+              >
+                {isPublished ? 'Published' : 'Not Published'}
+              </span>
+            </div>
+          </CardContent>
+        </Card>
+      </div>
       
       <SignOut />
     </div>
