@@ -31,8 +31,10 @@ async function LoginPage() {
                             />
                         </div>
                     </form>
-                    <SignInGoogle />
-                    <SignInGithub />
+                    <div className="flex flex-col items-center justify-center gap-2 w-full">
+                        <SignInGoogle />
+                        <SignInGithub />
+                    </div>
                 </CardContent>
             </Card>
         </section>
