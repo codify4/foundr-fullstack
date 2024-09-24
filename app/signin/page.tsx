@@ -6,7 +6,8 @@ import {
 } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
-import SignIn from "./sign-in-button"
+import SignInGoogle from "./sign-in-google"
+import SignInGithub from "./sign-in-github"
 
 
 async function LoginPage() {
@@ -30,7 +31,8 @@ async function LoginPage() {
                             />
                         </div>
                     </form>
-                    <SignIn />
+                    <SignInGoogle />
+                    <SignInGithub />
                 </CardContent>
             </Card>
         </section>
