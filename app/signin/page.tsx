@@ -11,6 +11,7 @@ import {
 } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
+import SignIn from "./sign-in-button"
 
 
 async function LoginPage() {
@@ -23,34 +24,17 @@ async function LoginPage() {
                 <CardContent>
                     <form id="signup-form" className="grid gap-4">
                         <div className="grid gap-2">
-                            <Label htmlFor="email">Email</Label>
+                            <Label htmlFor="Username">Username</Label>
                             <Input
-                                id="email"
-                                type="email"
-                                name="email"
-                                placeholder="m@example.com"
+                                id="Username"
+                                type="Username"
+                                name="Username"
+                                placeholder="username"
                                 required
                             />
                         </div>
-                        <div className="grid gap-2">
-                            <Label htmlFor="password">Password</Label>
-                            <Input 
-                                id="password" 
-                                type="password" 
-                                name="password"
-                                required 
-                            />
-                        </div>
-                        <Button className="bg-black hover:bg-primary w-full">
-                            Login
-                        </Button>
+                        <SignIn />
                     </form>
-                    <div className="flex flex-row items-center justify-center gap-2 mt-4 text-md">
-                        Don&apos;t have an account?{" "}
-                        <Link href="/signup" className="underline">
-                            Sign Up
-                        </Link>
-                    </div>
                 </CardContent>
             </Card>
         </section>
