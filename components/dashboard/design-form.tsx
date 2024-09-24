@@ -1,9 +1,9 @@
 import { Label } from "@radix-ui/react-label"
-import { Textarea } from "./ui/textarea"
-import { Input } from "./ui/input"
-import { Button } from "./ui/button"
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "./ui/dialog"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "./ui/select"
+import { Textarea } from "../ui/textarea"
+import { Input } from "../ui/input"
+import { Button } from "../ui/button"
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "../ui/dialog"
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../ui/select"
 import { X } from "lucide-react"
 
 interface Project {

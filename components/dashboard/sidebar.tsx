@@ -8,7 +8,7 @@ import {
     SheetContent,
     SheetTrigger,
   } from "@/components/ui/sheet"
-import { Button } from "./ui/button"
+import { Button } from "../ui/button"
 
 const Sidebar = () => {
     const [activeTab, setActiveTab] = useState('Design')
