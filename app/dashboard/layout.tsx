@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import { TopNavbarComponent } from "@/components/dashboard/top-navbar";
 
 export const metadata: Metadata = {
   title: "Foundr | Dashboard",
@@ -14,7 +13,6 @@ export default function DashboardLayout({
   return (
     <html lang="en">
       <body>
-        <TopNavbarComponent />
         {children}
       </body>
     </html>

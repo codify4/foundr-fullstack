@@ -1,8 +1,8 @@
 import { SinglePageCreator } from "@/components/dashboard/single-page-creator";
 
-export default function Home() {
+export default function Dashboard() {
   	return (
-		<div className="">
+		<div>
 			<SinglePageCreator />
 		</div>
   	);
