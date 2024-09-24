@@ -14,7 +14,7 @@ const Sidebar = () => {
     const [activeTab, setActiveTab] = useState('Design')
     return (
         <>
-            <div className="hidden lg:flex w-64 py-3 bg-white dark:bg-neutral-900 text-black dark:text-white border z-10 text-sm">
+            <div className="hidden lg:flex w-64 py-3 bg-white dark:bg-neutral-900 text-black dark:text-white border-r z-10 text-sm">
                 <nav className="p-4 space-y-2">
                     <div>
                         {['Design', 'Settings', 'Analytics'].map((item) => (
