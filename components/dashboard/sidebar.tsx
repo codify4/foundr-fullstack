@@ -23,7 +23,7 @@ const Sidebar = () => {
                             className={`w-full flex items-center text-left text-md py-3 rounded-md transition-colors ${
                                 activeTab
                                 ? 'bg-gray-50 dark:bg-neutral-800 text-black dark:text-white font-medium'
-                                : 'text-neutral-500 hover:text-black dark:hover:bg-neutral-800'
+                                : 'text-neutral-500 dark:text-white hover:text-black dark:hover:dark:hover:text-neutral-300'
                             }`}
                             href={`/dashboard`}
                         >   
@@ -34,7 +34,7 @@ const Sidebar = () => {
                             className={`w-full flex items-center text-left text-md py-3 rounded-md transition-colors ${
                                 activeTab
                                 ? 'bg-gray-50 dark:bg-neutral-800 text-black dark:text-white font-medium'
-                                : 'text-neutral-500 hover:text-black dark:hover:bg-neutral-800'
+                                : 'text-neutral-500 dark:text-white hover:text-black dark:hover:dark:hover:text-neutral-300'
                             }`}
                             href={`/dashboard/analytics`}
                         >   
@@ -45,7 +45,7 @@ const Sidebar = () => {
                             className={`w-full flex items-center text-left text-md py-3 rounded-md transition-colors ${
                                 activeTab
                                 ? 'bg-gray-50 dark:bg-neutral-800 text-black dark:text-white font-medium'
-                                : 'text-neutral-500 hover:text-black dark:hover:bg-neutral-800'
+                                : 'text-neutral-500 dark:text-white hover:text-black dark:hover:dark:hover:text-neutral-300'
                             }`}
                             href={`/dashboard/settings`}
                         >

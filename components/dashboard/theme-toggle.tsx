@@ -18,7 +18,7 @@ export function ThemeToggle() {
     return (
         <DropdownMenu>
             <DropdownMenuTrigger asChild>
-                <Button variant="outline" className="text-neutral-600 gap-2 w-full">
+                <Button variant="outline" className="dark:bg-neutral-900 text-neutral-600 dark:text-white gap-2 w-full">
                     <span>Toggle theme</span>
                     <Moon className="size-5 hidden dark:block" />
                     <Sun className="size-5 block dark:hidden" />
