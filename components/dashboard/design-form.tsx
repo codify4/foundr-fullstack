@@ -100,7 +100,7 @@ const DesignForm = ({
             <Label htmlFor="socials" className="text-sm font-medium mr-5">Social Media</Label>
             <Dialog open={isSocialDialogOpen} onOpenChange={setIsSocialDialogOpen}>
               <DialogTrigger asChild>
-                <Button className="mt-1 bg-primary hover:bg-secondary text-white">Add Social Media</Button>
+                <Button className="mt-1 bg-primary hover:bg-secondary dark:bg-secondary dark:hover:bg-primary text-white">Add Social Media</Button>
               </DialogTrigger>
               <DialogContent className='w-11/12 rounded-lg bg-white dark:bg-neutral-900 text-black dark:text-white'>
                 <DialogHeader>
@@ -134,7 +134,7 @@ const DesignForm = ({
                       className="mt-1"
                     />
                   </div>
-                  <Button onClick={addSocial} className="bg-primary hover:bg-secondary text-white">Add Social Media</Button>
+                  <Button onClick={addSocial} className="bg-primary hover:bg-secondary dark:bg-secondary dark:hover:bg-primary text-white">Add Social Media</Button>
                 </div>
               </DialogContent>
             </Dialog>
@@ -153,7 +153,7 @@ const DesignForm = ({
             <Label htmlFor="projects" className="text-sm font-medium mr-5">Projects</Label>
             <Dialog open={isProjectDialogOpen} onOpenChange={setIsProjectDialogOpen}>
               <DialogTrigger asChild>
-                <Button className="mt-1 bg-primary hover:bg-secondary text-white">Add Project</Button>
+                <Button className="mt-1 bg-primary hover:bg-secondary dark:bg-secondary dark:hover:bg-primary text-white">Add Project</Button>
               </DialogTrigger>
               <DialogContent className='w-11/12 rounded-lg bg-white dark:bg-neutral-900 text-black dark:text-white'>
                 <DialogHeader>
