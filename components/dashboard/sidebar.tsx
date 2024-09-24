@@ -2,7 +2,6 @@
 
 import { BarChart, Menu, Palette, Settings } from "lucide-react"
 import { ThemeToggle } from "./theme-toggle"
-import { useState } from "react"
 import {
     Sheet,
     SheetContent,
@@ -23,7 +22,7 @@ const Sidebar = () => {
                         <Link
                             className={`w-full flex items-center text-left text-md py-3 rounded-md transition-colors ${
                                 pathname === '/dashboard'
-                                ? 'bg-gray-50 dark:bg-neutral-800 text-black dark:text-white font-medium'
+                                ? 'bg-gray-50 dark:bg-neutral-900 text-black dark:text-white font-medium'
                                 : 'text-neutral-500 dark:text-white w-full flex items-center text-left text-md py-3 rounded-md transition-colors'
                             }`}
                             href={`/dashboard`}
@@ -34,7 +33,7 @@ const Sidebar = () => {
                         <Link
                             className={`w-full flex items-center text-left text-md py-3 rounded-md transition-colors ${
                                 pathname === '/dashboard/analytics'
-                                ? 'bg-gray-50 dark:bg-neutral-800 text-black dark:text-white font-medium'
+                                ? 'bg-gray-50 dark:bg-neutral-900 text-black dark:text-white font-medium'
                                 : 'text-neutral-500 dark:text-white hover:text-black dark:hover:dark:hover:text-neutral-300'
                             }`}
                             href={`/dashboard/analytics`}
@@ -45,7 +44,7 @@ const Sidebar = () => {
                         <Link
                             className={`w-full flex items-center text-left text-md py-3 rounded-md transition-colors ${
                                 pathname === '/dashboard/settings'
-                                ? 'bg-gray-50 dark:bg-neutral-800 text-black dark:text-white font-medium'
+                                ? 'bg-gray-50 dark:bg-neutral-900 text-black dark:text-white font-medium'
                                 : 'text-neutral-500 dark:text-white hover:text-black dark:hover:dark:hover:text-neutral-300'
                             }`}
                             href={`/dashboard/settings`}

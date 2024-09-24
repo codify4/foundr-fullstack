@@ -3,7 +3,6 @@ import { Card, CardContent } from "@/components/ui/card"
 import { SignOut } from "./sign-out"
 import { auth } from "@/auth"
 import { redirect } from "next/navigation";
-import { Button } from "../ui/button";
 
 export async function SettingsPage() {
   const session = await auth();
@@ -16,7 +15,7 @@ export async function SettingsPage() {
   return (
     <div className="w-1/2 mx-auto my-2 p-6 space-y-8">
       <h1 className="text-3xl font-bold">Settings</h1>
-      <Card>
+      <Card className="dark:bg-neutral-800">
         <CardContent className="p-6 space-y-4">
           <div>
             <h2 className="text-sm font-medium text-muted-foreground">Name</h2>
@@ -33,7 +32,7 @@ export async function SettingsPage() {
       <div>
         <h2 className="text-2xl font-bold mb-4">Status</h2>
         
-        <Card>
+        <Card className="dark:bg-neutral-800">
           <CardContent className="p-6">
             <div className="flex items-center justify-between">
               <Link href="/foundr/me" className="text-lg font-semibold hover:underline">
