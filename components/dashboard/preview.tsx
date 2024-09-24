@@ -46,7 +46,6 @@ const Preview = ({ name, avatarUrl, bio, projects, socials, isDesktopPreview, se
                         <Switch
                             checked={isDesktopPreview}
                             onCheckedChange={setIsDesktopPreview}
-                            className="bg-blue-500"
                         />
                     <span className="text-sm text-gray-600 dark:text-white">Desktop</span>
                 </div>
