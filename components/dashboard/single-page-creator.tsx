@@ -20,9 +20,9 @@ interface Social {
 export function SinglePageCreator() {
 
   const [slug, setSlug] = useState('toplali');
-  const [name, setName] = useState('Your Name')
+  const [name, setName] = useState('Mr. Founder')
   const [avatarUrl, setAvatarUrl] = useState('/favicon.ico')
-  const [bio, setBio] = useState('Your bio goes here...')
+  const [bio, setBio] = useState('10x software engineer, 10x designer, 10x developer')
   const [projects, setProjects] = useState<Project[]>([])
   const [socials, setSocials] = useState<Social[]>([])
   const [isDesktopPreview, setIsDesktopPreview] = useState(true)

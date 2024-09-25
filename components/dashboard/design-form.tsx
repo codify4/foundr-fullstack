@@ -72,7 +72,7 @@ const DesignForm = ({
         <h1 className="text-xl lg:text-2xl font-bold mb-6">Create Your Single Page Website</h1>
         <div className="space-y-4">
           <div>
-            <Label htmlFor="slug" className="text-sm font-medium">Name</Label>
+            <Label htmlFor="slug" className="text-sm font-medium">Slug</Label>
             <Input
               id="slug"
               autoComplete="off"
