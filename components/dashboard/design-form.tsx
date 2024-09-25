@@ -6,6 +6,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from 
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../ui/select"
 import { X } from "lucide-react"
 import SlugInput from "./slug-input"
+import PageInfo from "./page-info"
 
 interface Project {
     name: string;
@@ -72,36 +73,7 @@ const DesignForm = ({
       <div className="w-full lg:w-2/5 p-4 md:p-8 overflow-auto">
         <h1 className="text-xl lg:text-2xl font-bold mb-6">Create Your Single Page Website</h1>
         <div className="space-y-4">
-          <SlugInput />
-          <div>
-            <Label htmlFor="name" className="text-sm font-medium">Name</Label>
-            <Input
-              id="name"
-              autoComplete="off"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              className="mt-1"
-            />
-          </div>
-          <div>
-            <Label htmlFor="avatar" className="text-sm font-medium">Avatar URL</Label>
-            <Input
-              id="avatar"
-              value={avatarUrl}
-              onChange={(e) => setAvatarUrl(e.target.value)}
-              className="mt-1"
-            />
-          </div>
-          <div>
-            <Label htmlFor="bio" className="text-sm font-medium">Bio</Label>
-            <Textarea
-              id="bio"
-              value={bio}
-              onChange={(e) => setBio(e.target.value)}
-              className="mt-1"
-              rows={5}
-            />
-          </div>
+          <PageInfo />
           <div>
             <Label htmlFor="socials" className="text-sm font-medium mr-5">Social Media</Label>
             <Dialog open={isSocialDialogOpen} onOpenChange={setIsSocialDialogOpen}>
