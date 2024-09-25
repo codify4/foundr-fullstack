@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { Input } from "../ui/input"
 import { Label } from "../ui/label"
-import { updateSlug } from "@/actions/user-actions";
+
 import { Button } from "../ui/button";
 
 const SlugInput = () => {
@@ -11,7 +11,7 @@ const SlugInput = () => {
     
     return (
         <form action={async () => {
-            await updateSlug(slug)
+            //await updateSlug(slug)
         }}>
             <Label htmlFor="slug" className="text-sm font-medium">foundr.lol/</Label>
             <Input

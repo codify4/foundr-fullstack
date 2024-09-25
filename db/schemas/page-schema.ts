@@ -1,5 +1,5 @@
 import { pgTable, serial, timestamp, varchar, text, integer, pgEnum } from 'drizzle-orm/pg-core';
-import { relations } from 'drizzle-orm';
+import { InferInsertModel, InferSelectModel, relations } from 'drizzle-orm';
 import { users } from './auth-schema';
 
 export const socialsEnum = pgEnum('socials', ['twitter', 'instagram', 'facebook', 'linkedin', 'github', 'website']);
@@ -12,7 +12,7 @@ export const page = pgTable('page', {
     name: text('name').notNull(),
     bio: text('bio').notNull(),
     pageSlug: text('page_slug').notNull().unique(),
-    userId: integer('user_id').notNull(),
+    userId: text('user_id').notNull().references(() => users.id),
 });
 
 export const pageRelations = relations(page, ({ many, one }) => ({
@@ -30,7 +30,7 @@ export const socialLink = pgTable('social_link', {
     updatedAt: timestamp('updated_at').defaultNow(),
     type: socialsEnum('type'),
     link: varchar('link'),
-    pageId: integer('page_id').notNull(),
+    pageId: integer('page_id').notNull().references(() => page.id),
 });
 
 export const socialLinkRelations = relations(socialLink, ({ one }) => ({
@@ -48,7 +48,7 @@ export const project = pgTable('project', {
     oneLiner: varchar('one_liner'),
     url: varchar('url'),
     mrr: varchar('mrr'),
-    pageId: integer('page_id').notNull(),
+    pageId: integer('page_id').notNull().references(() => page.id),
 });
 
 export const projectRelations = relations(project, ({ one }) => ({
@@ -57,3 +57,11 @@ export const projectRelations = relations(project, ({ one }) => ({
         references: [page.id],
     }),
 }));
+
+export type SelectPage = InferSelectModel<typeof page>;
+export type SelectProject = InferSelectModel<typeof project>;
+export type SelectSocial = InferSelectModel<typeof socialLink>;
+
+export type InsertPage = InferInsertModel<typeof page>;
+export type InsertProject = InferInsertModel<typeof project>;
+export type InsertSocial = InferInsertModel<typeof socialLink>;
