@@ -8,6 +8,13 @@
       "when": 1727193925000,
       "tag": "0000_green_scream",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1727277934066,
+      "tag": "0001_lethal_hercules",
+      "breakpoints": true
     }
   ]
 }
