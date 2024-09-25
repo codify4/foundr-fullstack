@@ -19,6 +19,7 @@ interface Social {
 
 export function SinglePageCreator() {
 
+  const [slug, setSlug] = useState('toplali');
   const [name, setName] = useState('Your Name')
   const [avatarUrl, setAvatarUrl] = useState('/favicon.ico')
   const [bio, setBio] = useState('Your bio goes here...')
@@ -69,6 +70,7 @@ export function SinglePageCreator() {
 
       {/* Left side - Input form */}
       <DesignForm
+        slug={slug}
         name={name}
         avatarUrl={avatarUrl}
         bio={bio}
@@ -80,6 +82,7 @@ export function SinglePageCreator() {
         isSocialDialogOpen={isSocialDialogOpen}
         setIsProjectDialogOpen={setIsProjectDialogOpen}
         setIsSocialDialogOpen={setIsSocialDialogOpen}
+        setSlug={setSlug}
         setName={setName}
         setAvatarUrl={setAvatarUrl}
         setBio={setBio}

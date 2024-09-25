@@ -19,6 +19,7 @@ interface Social {
 }
 
 type DesignFormProps = {
+  slug: string;
   name: string;
   avatarUrl: string;
   bio: string;
@@ -30,6 +31,7 @@ type DesignFormProps = {
   isSocialDialogOpen: boolean;
   setIsProjectDialogOpen: React.Dispatch<React.SetStateAction<boolean>>;
   setIsSocialDialogOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  setSlug: React.Dispatch<React.SetStateAction<string>>;
   setName: React.Dispatch<React.SetStateAction<string>>;
   setAvatarUrl: React.Dispatch<React.SetStateAction<string>>;
   setBio: React.Dispatch<React.SetStateAction<string>>;
@@ -42,6 +44,7 @@ type DesignFormProps = {
 }
 
 const DesignForm = ({ 
+  slug,
   name, 
   avatarUrl, 
   bio, 
@@ -52,7 +55,8 @@ const DesignForm = ({
   isProjectDialogOpen, 
   isSocialDialogOpen, 
   setIsProjectDialogOpen, 
-  setIsSocialDialogOpen, 
+  setIsSocialDialogOpen,
+  setSlug,
   setName, 
   setAvatarUrl, 
   setBio, 
@@ -67,6 +71,16 @@ const DesignForm = ({
       <div className="w-full lg:w-2/5 p-4 md:p-8 overflow-auto">
         <h1 className="text-xl lg:text-2xl font-bold mb-6">Create Your Single Page Website</h1>
         <div className="space-y-4">
+          <div>
+            <Label htmlFor="slug" className="text-sm font-medium">Name</Label>
+            <Input
+              id="slug"
+              autoComplete="off"
+              value={slug}
+              onChange={(e) => setSlug(e.target.value)}
+              className="mt-1"
+            />
+          </div>
           <div>
             <Label htmlFor="name" className="text-sm font-medium">Name</Label>
             <Input
