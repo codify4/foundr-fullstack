@@ -11,7 +11,7 @@ export const page = pgTable('page', {
     image: text('image').notNull(),
     name: text('name').notNull(),
     bio: text('bio').notNull(),
-    pageSlug: text('page_slug').notNull(),
+    pageSlug: text('page_slug').notNull().unique(),
     userId: integer('user_id').notNull(),
 });
 

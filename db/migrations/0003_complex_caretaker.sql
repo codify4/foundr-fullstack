@@ -1,0 +1,1 @@
+ALTER TABLE "page" ADD CONSTRAINT "page_page_slug_unique" UNIQUE("page_slug");

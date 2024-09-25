@@ -1,29 +1,23 @@
 'use server'
 
+import { auth } from '@/auth';
 import { db } from '@/db/drizzle';
 import { page } from '@/db/schemas/page-schema';
 import { eq } from 'drizzle-orm';
 
-export async function addPageSlug(formData: FormData) {
-  const pageId = formData.get('pageId') as string;
-  const slug = formData.get('slug') as string;
+async function getPageId(slug: string) {
+  const result = await db.select({ id: page.id })
+  .from(page)
+  .where(eq(page.pageSlug, slug))
 
-  if (!pageId || !slug) {
-    return { message: 'Page ID and slug are required.' };
+  return result;
+}
+
+export async function updateSlug(slug: string) {
+  const pageId = await getPageId(slug);
+  if (pageId.length === 0) {
+    return { message: 'Page not found' };
   }
-
-  try {
-    const validSlug = slug.toLowerCase().replace(/[^a-z0-9-]/g, '-');
-
-    const existingPage = await db.select().from(page).where(eq(page.pageSlug, validSlug));
-    if (existingPage) {
-      return { message: 'This slug is already in use. Please choose another.' };
-    }
-
-    await db.update(page).set({ pageSlug: validSlug, updatedAt: new Date() }).where(eq(page.id, parseInt(pageId)));
-
-  } catch (error) {
-    console.error('Error updating page slug:', error);
-    return { message: 'An error occurred while updating the page slug.' };
-  }
+  
+  await db.update(page).set({ pageSlug: slug });
 }

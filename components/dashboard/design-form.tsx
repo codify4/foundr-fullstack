@@ -5,6 +5,7 @@ import { Button } from "../ui/button"
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "../ui/dialog"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../ui/select"
 import { X } from "lucide-react"
+import SlugInput from "./slug-input"
 
 interface Project {
     name: string;
@@ -71,16 +72,7 @@ const DesignForm = ({
       <div className="w-full lg:w-2/5 p-4 md:p-8 overflow-auto">
         <h1 className="text-xl lg:text-2xl font-bold mb-6">Create Your Single Page Website</h1>
         <div className="space-y-4">
-          <div>
-            <Label htmlFor="slug" className="text-sm font-medium">Slug</Label>
-            <Input
-              id="slug"
-              autoComplete="off"
-              value={slug}
-              onChange={(e) => setSlug(e.target.value)}
-              className="mt-1"
-            />
-          </div>
+          <SlugInput />
           <div>
             <Label htmlFor="name" className="text-sm font-medium">Name</Label>
             <Input
