@@ -15,6 +15,13 @@
       "when": 1727277934066,
       "tag": "0001_lethal_hercules",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1727279700950,
+      "tag": "0002_lazy_lady_mastermind",
+      "breakpoints": true
     }
   ]
 }
