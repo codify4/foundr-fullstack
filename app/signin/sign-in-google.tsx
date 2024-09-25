@@ -14,7 +14,7 @@ export default function SignInGoogle() {
       <Button 
         type="submit"
         variant="default"
-        className="w-full inline-flex items-center justify-center whitespace-nowrap rounded-md focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 bg-black text-white shadow hover:bg-primary h-9 px-4 py-2 group relative gap-2 overflow-hidden tracking-tighter transform-gpu ring-offset-current transition-all duration-300 ease-out hover:ring-2 hover:ring-primary hover:ring-offset-2"
+        className="w-full inline-flex items-center justify-center whitespace-nowrap rounded-md focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 bg-black text-white shadow hover:bg-red-600 h-9 px-4 py-2 group relative gap-2 overflow-hidden tracking-tighter transform-gpu ring-offset-current transition-all duration-300 ease-out hover:ring-2 hover:ring-red-600 hover:ring-offset-2"
       >
         <Chrome size={20}/>
         Sign In with Google
