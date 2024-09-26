@@ -30,7 +30,7 @@ export const socialLink = pgTable('social_link', {
     updatedAt: timestamp('updated_at').defaultNow(),
     type: socialsEnum('type'),
     link: varchar('link'),
-    pageId: integer('page_id').notNull().references(() => page.id),
+    pageId: integer('page_id').notNull().references(() => page.id, { onDelete: 'cascade' }),
 });
 
 export const socialLinkRelations = relations(socialLink, ({ one }) => ({
@@ -48,7 +48,7 @@ export const project = pgTable('project', {
     oneLiner: varchar('one_liner'),
     url: varchar('url'),
     mrr: varchar('mrr'),
-    pageId: integer('page_id').notNull().references(() => page.id),
+    pageId: integer('page_id').notNull().references(() => page.id, { onDelete: 'cascade' }),
 });
 
 export const projectRelations = relations(project, ({ one }) => ({

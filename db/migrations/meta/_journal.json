@@ -71,6 +71,13 @@
       "when": 1727286017843,
       "tag": "0009_military_doctor_faustus",
       "breakpoints": true
+    },
+    {
+      "idx": 10,
+      "version": "7",
+      "when": 1727363023686,
+      "tag": "0010_tan_vision",
+      "breakpoints": true
     }
   ]
 }

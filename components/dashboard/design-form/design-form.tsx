@@ -6,7 +6,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { X } from "lucide-react"
 import PageInfo from "./page-info"
 import { Textarea } from "@/components/ui/textarea"
-
+import { auth } from "@/auth"
 
 interface Project {
     name: string;
@@ -21,10 +21,6 @@ interface Social {
 }
 
 type DesignFormProps = {
-  slug: string;
-  name: string;
-  avatarUrl: string;
-  bio: string;
   projects: Project[];
   socials: Social[];
   newProject: Project;
@@ -33,10 +29,6 @@ type DesignFormProps = {
   isSocialDialogOpen: boolean;
   setIsProjectDialogOpen: React.Dispatch<React.SetStateAction<boolean>>;
   setIsSocialDialogOpen: React.Dispatch<React.SetStateAction<boolean>>;
-  setSlug: React.Dispatch<React.SetStateAction<string>>;
-  setName: React.Dispatch<React.SetStateAction<string>>;
-  setAvatarUrl: React.Dispatch<React.SetStateAction<string>>;
-  setBio: React.Dispatch<React.SetStateAction<string>>;
   setNewProject: React.Dispatch<React.SetStateAction<Project>>;
   setNewSocial: React.Dispatch<React.SetStateAction<Social>>;
   addProject: () => void;
@@ -45,11 +37,7 @@ type DesignFormProps = {
   removeSocial: (index: number) => void;
 }
 
-const DesignForm = ({ 
-  slug,
-  name, 
-  avatarUrl, 
-  bio, 
+const DesignForm = async ({ 
   projects, 
   socials, 
   newProject, 
@@ -58,22 +46,23 @@ const DesignForm = ({
   isSocialDialogOpen, 
   setIsProjectDialogOpen, 
   setIsSocialDialogOpen,
-  setSlug,
-  setName, 
-  setAvatarUrl, 
-  setBio, 
   setNewProject, 
   setNewSocial, 
   addProject, 
   removeProject, 
   addSocial, 
-  removeSocial 
+  removeSocial,
 }: DesignFormProps) => {
+
+  const session = await auth();
+  const user = session?.user;
+
+  if (!user) return null;
   return (
       <div className="w-full lg:w-2/5 p-4 md:p-8 overflow-auto">
         <h1 className="text-xl lg:text-2xl font-bold mb-6">Create Your Single Page Website</h1>
         <div className="space-y-4">
-          <PageInfo />
+          <PageInfo userId={user.id || ''} />
           <div>
             <Label htmlFor="socials" className="text-sm font-medium mr-5">Social Media</Label>
             <Dialog open={isSocialDialogOpen} onOpenChange={setIsSocialDialogOpen}>
