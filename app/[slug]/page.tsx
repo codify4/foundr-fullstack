@@ -61,33 +61,30 @@ export default async function SlugPage({ params }: { params: { slug: string } })
           <h2 className="text-2xl font-semibold mb-4">Projects</h2>
           <div className="space-y-6">
             {projects.map((project: SelectProject) => (
-              <div key={project.id}>
-                <Card>
-                  <CardHeader>
-                    <CardTitle>{project.name}</CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <p className="text-muted-foreground mb-4">{project.oneLiner}</p>
-                    <div className="flex items-center justify-between">
-                      <Button variant="outline" asChild>
-                        <a 
-                          href={project.url || '#'} 
-                          target="_blank" 
-                          rel="noopener noreferrer"
-                          className="flex items-center"
-                        >
-                          <LinkIcon className="h-4 w-4 mr-2" />
-                          View Project
-                        </a>
-                      </Button>
-                      <div className="flex items-center text-green-600">
-                        <DollarSign className="h-4 w-4 mr-1" />
-                        <span>{project.mrr}</span>
-                      </div>
+              <Card key={project.id}>
+                <CardHeader>
+                  <CardTitle>{project.name}</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-muted-foreground mb-4">{project.oneLiner}</p>
+                  <div className="flex items-center justify-between">
+                    <Button variant="outline" asChild>
+                      <Link 
+                        href={project.url || '#'} 
+                        target="_blank" 
+                        className="flex items-center"
+                      >
+                        <LinkIcon className="h-4 w-4 mr-2" />
+                        View Project
+                      </Link>
+                    </Button>
+                    <div className="flex items-center text-green-600">
+                      <DollarSign className="h-4 w-4 mr-1" />
+                      <span>{project.mrr}</span>
                     </div>
-                  </CardContent>
-                </Card>
-              </div>
+                  </div>
+                </CardContent>
+              </Card>
             ))}
           </div>
         </CardContent>
