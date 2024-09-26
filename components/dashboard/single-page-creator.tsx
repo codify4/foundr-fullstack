@@ -2,8 +2,8 @@
 
 import { useState } from 'react'
 import Sidebar from './sidebar'
-import DesignForm from './design-form'
-import Preview from './preview'
+import DesignForm from './design-form/design-form'
+import Preview from './preview/preview'
 
 interface Project {
   name: string;

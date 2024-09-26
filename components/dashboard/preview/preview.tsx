@@ -1,5 +1,5 @@
 import { Github, Twitter, Linkedin, Instagram, Facebook, LinkIcon, DollarSign } from "lucide-react"
-import { Switch } from "../ui/switch"
+import { Switch } from "@/components/ui/switch"
 import Image from "next/image"
 
 type PreviewProps = {

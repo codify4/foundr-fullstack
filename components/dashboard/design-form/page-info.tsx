@@ -1,7 +1,8 @@
-import { Input } from "../ui/input"
-import { Label } from "../ui/label"
-import { Textarea } from "../ui/textarea"
+import { Label } from "@/components/ui/label"
 import SlugInput from "./slug-input"
+import { Input } from "@/components/ui/input"
+import { Textarea } from "@/components/ui/textarea"
+
 
 const PageInfo = () => {
   return (

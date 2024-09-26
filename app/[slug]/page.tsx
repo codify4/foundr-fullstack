@@ -5,6 +5,7 @@ import { getPageWithRelations } from '@/actions/page-actions'
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { SelectSocial, SelectProject } from '@/db/schemas/page-schema'
+import Link from 'next/link'
 
 const socialIcons: { [key: string]: React.ComponentType } = {
   github: Github,
@@ -29,7 +30,7 @@ export default async function SlugPage({ params }: { params: { slug: string } })
         <CardHeader className="text-center">
           <div className="mb-4">
             <Image
-              src={image}
+              src={'/favicon.ico'}
               alt={`${name}'s avatar`}
               width={130}
               height={130}
@@ -45,24 +46,22 @@ export default async function SlugPage({ params }: { params: { slug: string } })
             {socials.map((social: SelectSocial) => {
               const IconComponent = socialIcons[social.type as keyof typeof socialIcons]
               return IconComponent ? (
-                <a
+                <Link
                   key={social.id}
                   href={social.link || '#'}
                   target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-primary hover:text-primary-foreground transition-colors"
-                  aria-label={`Visit ${name}'s ${social.type} profile`}
+                  className="text-primary hover:text-primary transition-colors"
                 >
                   <IconComponent />
-                </a>
+                </Link>
               ) : null
             })}
           </div>
 
           <h2 className="text-2xl font-semibold mb-4">Projects</h2>
-          <ul className="space-y-6">
+          <div className="space-y-6">
             {projects.map((project: SelectProject) => (
-              <li key={project.id}>
+              <div key={project.id}>
                 <Card>
                   <CardHeader>
                     <CardTitle>{project.name}</CardTitle>
@@ -88,9 +87,9 @@ export default async function SlugPage({ params }: { params: { slug: string } })
                     </div>
                   </CardContent>
                 </Card>
-              </li>
+              </div>
             ))}
-          </ul>
+          </div>
         </CardContent>
       </Card>
     </div>
