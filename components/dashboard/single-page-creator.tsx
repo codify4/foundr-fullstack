@@ -70,10 +70,6 @@ export function SinglePageCreator() {
 
       {/* Left side - Input form */}
       <DesignForm
-        slug={slug}
-        name={name}
-        avatarUrl={avatarUrl}
-        bio={bio}
         projects={projects}
         socials={socials}
         newProject={newProject}
@@ -82,10 +78,6 @@ export function SinglePageCreator() {
         isSocialDialogOpen={isSocialDialogOpen}
         setIsProjectDialogOpen={setIsProjectDialogOpen}
         setIsSocialDialogOpen={setIsSocialDialogOpen}
-        setSlug={setSlug}
-        setName={setName}
-        setAvatarUrl={setAvatarUrl}
-        setBio={setBio}
         setNewProject={setNewProject}
         setNewSocial={setNewSocial}
         addProject={addProject}
