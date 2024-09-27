@@ -1,8 +1,8 @@
 import { Label } from "@radix-ui/react-label"
-import { Textarea } from "../ui/textarea"
-import { Input } from "../ui/input"
-import { Button } from "../ui/button"
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "../ui/dialog"
+import { Textarea } from "@/components/ui/textarea"
+import { Input } from "@/components/ui/input"
+import { Button } from "@/components/ui/button"
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog"
 import { X } from "lucide-react"
 import { getProjectsByPageId } from "@/actions/project-actions"
 
