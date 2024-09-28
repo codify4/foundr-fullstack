@@ -1,8 +1,8 @@
 export interface Project {
     name: string;
-    link: string;
-    description: string;
-    revenue: number;
+    url: string;
+    oneLiner: string;
+    mrr: string;
 }
   
 export interface Social {

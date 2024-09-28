@@ -1,6 +1,7 @@
 import { Github, Twitter, Linkedin, Instagram, Facebook, LinkIcon, DollarSign } from "lucide-react"
 import { Switch } from "@/components/ui/switch"
 import Image from "next/image"
+import { Project, Social } from "@/types/page-types";
 
 type PreviewProps = {
     name: string;
@@ -14,18 +15,6 @@ type PreviewProps = {
     setIsProjectDialogOpen: React.Dispatch<React.SetStateAction<boolean>>;
     setIsSocialDialogOpen: React.Dispatch<React.SetStateAction<boolean>>;
     setIsDesktopPreview: React.Dispatch<React.SetStateAction<boolean>>;
-}
-
-interface Project {
-    name: string;
-    link: string;
-    description: string;
-    revenue: number;
-}
-  
-interface Social {
-    platform: string;
-    url: string;
 }
 
 const socialIcons = {
@@ -90,10 +79,10 @@ const Preview = ({ name, avatarUrl, bio, projects, socials, isDesktopPreview, se
                                         <h3 className="text-xl font-semibold mb-2">
                                             {project.name}
                                         </h3>
-                                        <p className="text-gray-700 mb-3">{project.description}</p>
+                                        <p className="text-gray-700 mb-3">{project.oneLiner}</p>
                                         <div className="flex items-center justify-between mt-4">
                                             <a 
-                                                href={project.link} 
+                                                href={project.url} 
                                                 target="_blank" 
                                                 rel="noopener noreferrer" 
                                                 className="text-blue-500 hover:text-blue-700 flex items-center"
@@ -103,7 +92,7 @@ const Preview = ({ name, avatarUrl, bio, projects, socials, isDesktopPreview, se
                                             </a>
                                             <div className="flex items-center text-green-600">
                                                 <DollarSign className="h-4 w-4 mr-1" />
-                                                <span>{project.revenue.toLocaleString()}</span>
+                                                <span>{project.mrr}</span>
                                             </div>
                                         </div>
                                     </li>

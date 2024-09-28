@@ -4,18 +4,7 @@ import { useState } from 'react'
 import Sidebar from './sidebar'
 import DesignForm from './design-form/design-form'
 import Preview from './preview/preview'
-
-interface Project {
-  name: string;
-  link: string;
-  description: string;
-  revenue: number;
-}
-
-interface Social {
-  platform: string;
-  url: string;
-}
+import { Project, Social } from '@/types/page-types'
 
 export function SinglePageCreator() {
 
@@ -30,9 +19,9 @@ export function SinglePageCreator() {
   const [isSocialDialogOpen, setIsSocialDialogOpen] = useState(false)
   const [newProject, setNewProject] = useState<Project>({
     name: '',
-    link: '',
-    description: '',
-    revenue: 0
+    url: '',
+    oneLiner: '',
+    mrr: '',
   })
   const [newSocial, setNewSocial] = useState<Social>({
     platform: '',
@@ -42,7 +31,7 @@ export function SinglePageCreator() {
   const addProject = () => {
     if (newProject.name.trim()) {
       setProjects([...projects, newProject])
-      setNewProject({ name: '', link: '', description: '', revenue: 0 })
+      setNewProject({ name: '', url: '', oneLiner: '', mrr: '' })
       setIsProjectDialogOpen(false)
     }
   }
@@ -80,8 +69,6 @@ export function SinglePageCreator() {
         setIsSocialDialogOpen={setIsSocialDialogOpen}
         setNewProject={setNewProject}
         setNewSocial={setNewSocial}
-        addProject={addProject}
-        removeProject={removeProject}
         addSocial={addSocial}
         removeSocial={removeSocial}
       />
