@@ -37,7 +37,7 @@ type DesignFormProps = {
   removeSocial: (index: number) => void;
 }
 
-const DesignForm = async ({ 
+const DesignForm = ({ 
   projects, 
   socials, 
   newProject, 
@@ -54,15 +54,12 @@ const DesignForm = async ({
   removeSocial,
 }: DesignFormProps) => {
 
-  const session = await auth();
-  const user = session?.user;
 
-  if (!user) return null;
   return (
       <div className="w-full lg:w-2/5 p-4 md:p-8 overflow-auto">
         <h1 className="text-xl lg:text-2xl font-bold mb-6">Create Your Single Page Website</h1>
         <div className="space-y-4">
-          <PageInfo userId={user.id || ''} />
+          <PageInfo />
           <div>
             <Label htmlFor="socials" className="text-sm font-medium mr-5">Social Media</Label>
             <Dialog open={isSocialDialogOpen} onOpenChange={setIsSocialDialogOpen}>

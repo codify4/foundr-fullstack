@@ -8,8 +8,9 @@ import { Button } from "@/components/ui/button"
 import { getPageIdForUser, createPage, updatePage } from '@/actions/page-actions'
 import { InsertPage } from '@/db/schemas/page-schema'
 import { redirect } from 'next/navigation'
+import { auth } from '@/auth'
 
-const PageInfo = ({ userId }: { userId: string }) => {
+const PageInfo = () => {
   const [slug, setSlug] = useState('')
   const [name, setName] = useState('')
   const [image, setImage] = useState('')
@@ -17,6 +18,8 @@ const PageInfo = ({ userId }: { userId: string }) => {
   const [isSubmitting, setIsSubmitting] = useState(false)
 
   const handleAction = async (formData: FormData) => {
+    const session = await auth();
+    const userId = session?.user?.id || '';
     setIsSubmitting(true)
     const pageData: Omit<InsertPage, 'id' | 'createdAt' | 'updatedAt'> = {
       pageSlug: formData.get('slug') as string,
