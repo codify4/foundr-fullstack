@@ -3,11 +3,30 @@
 import { eq } from 'drizzle-orm';
 import { project, InsertProject, SelectProject } from '@/db/schemas/page-schema';
 import { db } from '@/db/drizzle';
+import { auth } from '@/auth';
 
-export async function createProject(data: InsertProject): Promise<SelectProject> {
-  const [newProject] = await db.insert(project).values(data).returning();
-  return newProject;
+export async function createProject(projectData: Omit<InsertProject, 'id' | 'createdAt' | 'updatedAt'>): Promise<SelectProject> {
+  const session = await auth();
+
+  if (!session || !session.user) {
+    throw new Error('You must be logged in to add a habit');
+  }
+
+  const userId = session.user.id;
+
+  if (!userId || !projectData) {
+    throw new Error('Missing required fields');
+  }
+  
+  try {
+    const [newProject] = await db.insert(project).values({...projectData }).returning();
+    return newProject;
+  } catch (error) {
+    console.error('Error creating page:', error);
+    throw error;
+  }
 }
+
   
 export async function getProjectById(id: number): Promise<SelectProject | undefined> {
   const [foundProject] = await db.select().from(project).where(eq(project.id, id));
