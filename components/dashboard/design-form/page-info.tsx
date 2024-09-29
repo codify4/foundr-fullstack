@@ -10,11 +10,19 @@ import { InsertPage } from '@/db/schemas/page-schema'
 import { redirect } from 'next/navigation'
 import { auth } from '@/auth'
 
-const PageInfo = () => {
-  const [slug, setSlug] = useState('')
-  const [name, setName] = useState('')
-  const [image, setImage] = useState('')
-  const [bio, setBio] = useState('')
+type PageInfoProps = {
+  slug: string;
+  name: string;
+  image: string;
+  bio: string;
+  setSlug: React.Dispatch<React.SetStateAction<string>>;
+  setName: React.Dispatch<React.SetStateAction<string>>;
+  setImage: React.Dispatch<React.SetStateAction<string>>;
+  setBio: React.Dispatch<React.SetStateAction<string>>;
+}
+
+const PageInfo = ({ slug, name, image, bio, setSlug, setName, setImage, setBio }: PageInfoProps) => {
+
   const [isSubmitting, setIsSubmitting] = useState(false)
 
   const handleAction = async (formData: FormData) => {

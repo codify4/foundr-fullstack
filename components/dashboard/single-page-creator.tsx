@@ -6,17 +6,16 @@ import DesignForm from './design-form/design-form'
 import Preview from './preview/preview'
 import { Project, Social } from '@/types/page-types'
 
-export function SinglePageCreator() {
+export function SinglePageCreator({ initialSocials, initialProjects }: { initialSocials: Social[], initialProjects: Project[] }) {
 
-  const [slug, setSlug] = useState('toplali');
-  const [name, setName] = useState('Mr. Founder')
-  const [avatarUrl, setAvatarUrl] = useState('/favicon.ico')
+  const [slug, setSlug] = useState('')
+  const [name, setName] = useState('Mr Foundr')
+  const [image, setImage] = useState('/favicon.ico')
   const [bio, setBio] = useState('10x software engineer, 10x designer, 10x developer')
-  const [projects, setProjects] = useState<Project[]>([])
-  const [socials, setSocials] = useState<Social[]>([])
-  const [isDesktopPreview, setIsDesktopPreview] = useState(true)
-  const [isProjectDialogOpen, setIsProjectDialogOpen] = useState(false)
-  const [isSocialDialogOpen, setIsSocialDialogOpen] = useState(false)
+
+  const [projects, setProjects] = useState<Project[]>(initialProjects)
+  const [socials, setSocials] = useState<Social[]>(initialSocials)
+
   const [newProject, setNewProject] = useState<Project>({
     name: '',
     url: '',
@@ -28,6 +27,10 @@ export function SinglePageCreator() {
     link: ''
   })
 
+  const [isDesktopPreview, setIsDesktopPreview] = useState(true)
+  const [isProjectDialogOpen, setIsProjectDialogOpen] = useState(false)
+  const [isSocialDialogOpen, setIsSocialDialogOpen] = useState(false)
+
   return (
     <div className="flex flex-col lg:flex-row w-full lg:h-screen p-5 lg:p-0 bg-white dark:bg-neutral-900 text-black dark:text-white border">
       {/* Sidebar */}
@@ -35,6 +38,14 @@ export function SinglePageCreator() {
 
       {/* Left side - Input form */}
       <DesignForm
+        slug={slug}
+        name={name}
+        image={image}
+        bio={bio}
+        setSlug={setSlug}
+        setName={setName}
+        setImage={setImage}
+        setBio={setBio}
         projects={projects}
         socials={socials}
         newProject={newProject}
@@ -45,12 +56,14 @@ export function SinglePageCreator() {
         setIsSocialDialogOpen={setIsSocialDialogOpen}
         setNewProject={setNewProject}
         setNewSocial={setNewSocial}
+        setProjects={setProjects}
+        setSocials={setSocials}
       />
 
       {/* Right side - Preview */}
       <Preview 
         name={name}
-        avatarUrl={avatarUrl}
+        avatarUrl={image}
         bio={bio}
         projects={projects}
         socials={socials}

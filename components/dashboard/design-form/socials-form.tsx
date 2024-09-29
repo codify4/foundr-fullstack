@@ -13,16 +13,17 @@ import { createSocialLink } from "@/actions/socials-actions"
 
 type SocialFormProps = {
   socials: Social[];
+  setSocials: React.Dispatch<React.SetStateAction<Social[]>>;
   newSocial: Social;
   setNewSocial: React.Dispatch<React.SetStateAction<Social>>;
   isSocialDialogOpen: boolean;
   setIsSocialDialogOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }  
 
-const SocialForm = ({ socials, newSocial, setNewSocial, isSocialDialogOpen, setIsSocialDialogOpen }: SocialFormProps) => {
+const SocialForm = ({ socials, setSocials, newSocial, setNewSocial, isSocialDialogOpen, setIsSocialDialogOpen }: SocialFormProps) => {
     const [isSubmitting, setIsSubmitting] = useState(false);
 
-    const handleCreateSocialLink = async (formData: FormData) => {
+    const handleCreateSocialLink = async () => {
         setIsSubmitting(true)
         try {
             const pageId = await getPageIdForUser()
@@ -31,12 +32,13 @@ const SocialForm = ({ socials, newSocial, setNewSocial, isSocialDialogOpen, setI
                 throw new Error('User page not found')
             }
         
-            await createSocialLink({
+            const createdSocialLink = await createSocialLink({
                 type: newSocial.type as string,
                 link: newSocial.link as string,
                 pageId: pageId
-            })
-            
+            });
+            setSocials(prevSocials => [...(prevSocials || []), createdSocialLink]);
+
             setIsSubmitting(false)
             setIsSocialDialogOpen(false)
             setNewSocial({ type: '', link: '' })
@@ -101,7 +103,7 @@ const SocialForm = ({ socials, newSocial, setNewSocial, isSocialDialogOpen, setI
                 </DialogContent>
             </Dialog>
             <ul className="mt-2 space-y-2">
-            {socials.map((social) => (
+            {socials?.map((social) => (
                 <li key={social.link} className="flex items-center justify-between bg-white dark:bg-neutral-800 text-black dark:text-white p-2 rounded">
                 <span>{social.type}</span>
                 <Button 

@@ -10,22 +10,25 @@ import { createProject } from "@/actions/project-actions"
 import { InsertProject } from '@/db/schemas/page-schema'
 import { getPageIdForUser } from '@/actions/page-actions'
 import { Project } from '@/types/page-types'
+import { X } from 'lucide-react'
 
 type ProjectFormProps = {
     open: boolean;
     setOpen: React.Dispatch<React.SetStateAction<boolean>>;
+    projects: Project[];
+    setProjects: React.Dispatch<React.SetStateAction<Project[]>>;
     newProject: Project;
     setNewProject: React.Dispatch<React.SetStateAction<Project>>;
 }
 
-const ProjectForm = ({ open, setOpen, newProject, setNewProject }: ProjectFormProps) => {
+const ProjectForm = ({ open, setOpen, projects, setProjects, newProject, setNewProject }: ProjectFormProps) => {
 
     const [isSubmitting, setIsSubmitting] = useState(false)
 
     const handleCreateProject = async (formData: FormData) => {
         setIsSubmitting(true)
         try {
-            const pageId = await getPageIdForUser()
+            const pageId = await getPageIdForUser();
             
             if (!pageId) {
                 throw new Error('User page not found')
@@ -39,15 +42,16 @@ const ProjectForm = ({ open, setOpen, newProject, setNewProject }: ProjectFormPr
                 pageId: pageId
             }
 
-            await createProject(projectData)
+            const createdProject = await createProject(projectData);
+            setProjects(prevProjects => [...(prevProjects || []), createdProject]);
             
-            setIsSubmitting(false)
-            setOpen(false)
+            setIsSubmitting(false);
+            setOpen(false);
             // Reset form fields
-            setNewProject({ name: '', url: '', oneLiner: '', mrr: '' })
+            setNewProject({ name: '', url: '', oneLiner: '', mrr: '' });
         } catch (error) {
-            console.error('Error creating project:', error)
-            setIsSubmitting(false)
+            console.error('Error creating project:', error);
+            setIsSubmitting(false);
         }
     }
 
@@ -126,6 +130,21 @@ const ProjectForm = ({ open, setOpen, newProject, setNewProject }: ProjectFormPr
                     </form>
                 </DialogContent>
             </Dialog>
+
+            <div>
+                {projects?.map((project) => (
+                    <div key={project.name} className="flex items-center justify-between bg-white dark:bg-neutral-800 text-black dark:text-white p-2 rounded">
+                        <span>{project.name}</span>
+                        <Button 
+                            variant="ghost" 
+                            size="sm"
+                        >   
+                            {/* Seperate component for deleting social link */}
+                            <X className="h-4 w-4" />
+                        </Button>
+                    </div>
+                ))}
+            </div>
         </div>
     )
 }

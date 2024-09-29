@@ -54,7 +54,7 @@ const Preview = ({ name, avatarUrl, bio, projects, socials, isDesktopPreview, se
                         <h1 className="text-3xl font-bold text-center mb-2">{name}</h1>
                         <p className="text-center text-gray-700 dark:text-white whitespace-pre-wrap mb-4">{bio}</p>
                         <div className="flex justify-center items-center space-x-4 mb-8">
-                            {socials.map((social, index) => {
+                            {socials?.map((social, index) => {
                                 const IconComponent = socialIcons[social.type as keyof typeof socialIcons]
                                 return (
                                     <a
@@ -74,7 +74,7 @@ const Preview = ({ name, avatarUrl, bio, projects, socials, isDesktopPreview, se
                                 <h2 className="text-2xl font-semibold">Projects</h2>
                             </div>
                             <ul className="space-y-6">
-                                {projects.map((project, index) => (
+                                {projects?.map((project, index) => (
                                     <li key={index} className="border border-gray-200 rounded-lg p-6 shadow-md hover:shadow-lg transition-shadow duration-300">
                                         <h3 className="text-xl font-semibold mb-2">
                                             {project.name}
