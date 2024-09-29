@@ -1,11 +1,13 @@
-import { notFound } from 'next/navigation'
 import Image from 'next/image'
 import { Github, Twitter, Linkedin, Instagram, Facebook, LinkIcon, DollarSign } from 'lucide-react'
-import { getPageWithRelations } from '@/actions/page-actions'
+import { getPageBySlug } from '@/actions/page-actions'
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
-import { SelectSocial, SelectProject } from '@/db/schemas/page-schema'
+import { SelectPage } from '@/db/schemas/page-schema'
 import Link from 'next/link'
+import { getProjectByPageSlug } from '@/actions/project-actions'
+import { getSocialLinkByPageSlug } from '@/actions/socials-actions'
+import { Project, Social } from '@/types/page-types'
 
 const socialIcons: { [key: string]: React.ComponentType } = {
   github: Github,
@@ -16,13 +18,18 @@ const socialIcons: { [key: string]: React.ComponentType } = {
 }
 
 export default async function SlugPage({ params }: { params: { slug: string } }) {
-  const pageData = await getPageWithRelations(params.slug)
+  const pageInfo: SelectPage = await getPageBySlug(params.slug);
+  const projects: Project[] = await getProjectByPageSlug(params.slug);
+  const socials: Social[] = await getSocialLinkByPageSlug(params.slug);
 
-  if (!pageData) {
-    notFound()
+  if (!pageInfo && !projects && !socials) {
+    return (
+      <div className='flex flex-col items-center justify-center h-screen'>
+        <h1>Page not found</h1>
+        <Link href="/dashboard" className='underline text-primary'>Go back to dashboard</Link>
+      </div>
+    );
   }
-
-  const { name, image, bio, socials, projects } = pageData
 
   return (
     <div className="container mx-auto px-4 py-8">
@@ -31,23 +38,23 @@ export default async function SlugPage({ params }: { params: { slug: string } })
           <div className="mb-4">
             <Image
               src={'/favicon.ico'}
-              alt={`${name}'s avatar`}
+              alt={`${pageInfo.name}'s avatar`}
               width={130}
               height={130}
               className="rounded-full mx-auto"
             />
           </div>
-          <CardTitle className="text-3xl font-bold">{name}</CardTitle>
+          <CardTitle className="text-3xl font-bold">{pageInfo.name}</CardTitle>
         </CardHeader>
         <CardContent>
-          <p className="text-center text-muted-foreground whitespace-pre-wrap mb-6">{bio}</p>
+          <p className="text-center text-muted-foreground whitespace-pre-wrap mb-6">{pageInfo.bio}</p>
           
           <div className="flex justify-center items-center space-x-4 mb-8">
-            {socials.map((social: SelectSocial) => {
+            {socials?.map((social) => {
               const IconComponent = socialIcons[social.type as keyof typeof socialIcons]
               return IconComponent ? (
                 <Link
-                  key={social.id}
+                  key={social.link}
                   href={social.link || '#'}
                   target="_blank"
                   className="text-primary hover:text-primary transition-colors"
@@ -60,8 +67,8 @@ export default async function SlugPage({ params }: { params: { slug: string } })
 
           <h2 className="text-2xl font-semibold mb-4">Projects</h2>
           <div className="space-y-6">
-            {projects.map((project: SelectProject) => (
-              <Card key={project.id}>
+            {projects?.map((project) => (
+              <Card key={project.name}>
                 <CardHeader>
                   <CardTitle>{project.name}</CardTitle>
                 </CardHeader>

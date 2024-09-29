@@ -1,7 +1,7 @@
 'use server'
 
 import { eq } from 'drizzle-orm';
-import { page, socialLink, project, InsertPage, SelectPage } from '@/db/schemas/page-schema';
+import { page, InsertPage, SelectPage } from '@/db/schemas/page-schema';
 import { db } from '@/db/drizzle';
 import { auth } from '@/auth';
 
@@ -79,42 +79,4 @@ export async function getPageById(id: number) {
 export async function getPageBySlug(slug: string) {
   const [foundPage] = await db.select().from(page).where(eq(page.pageSlug, slug));
   return foundPage;
-}
-
-export async function getPageWithRelations(slug: string){
-  const pageResult = await db
-    .select()
-    .from(page)
-    .where(eq(page.pageSlug, slug))
-    .limit(1);
-
-  if (pageResult.length === 0) return undefined;
-
-  const pageData = pageResult[0];
-
-  const socials = await db
-    .select()
-    .from(socialLink)
-    .where(eq(socialLink.pageId, pageData.id));
-
-  const projects = await db
-    .select()
-    .from(project)
-    .where(eq(project.pageId, pageData.id));
-
-  return {
-    ...pageData,
-    socials,
-    projects,
-  };
-}
-
-export async function checkPageExistsForUser(userId: string) {
-  const result = await db.select({ id: page.id })
-    .from(page)
-    .where(eq(page.userId, userId))
-    .limit(1);
-  
-  if(!result) return false;
-  return true;
 }

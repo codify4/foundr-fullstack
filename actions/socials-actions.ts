@@ -1,18 +1,10 @@
 'use server'
 
 import { eq } from 'drizzle-orm';
-import { socialLink, InsertSocial, SelectSocial } from '@/db/schemas/page-schema';
+import { socialLink, InsertSocial, SelectSocial, page } from '@/db/schemas/page-schema';
 import { db } from '@/db/drizzle';
 import { revalidatePath } from 'next/cache';
-import { auth } from '@/auth';
-
-async function getAuthenticatedUser() {
-  const session = await auth();
-  if (!session?.user) {
-    throw new Error('Authentication required');
-  }
-  return session.user;
-}
+import { getAuthenticatedUser } from '@/lib/get-session';
 
 export async function createSocialLink(data: InsertSocial): Promise<SelectSocial> {
   await getAuthenticatedUser();
@@ -29,8 +21,33 @@ export async function createSocialLink(data: InsertSocial): Promise<SelectSocial
 export async function getSocialLinksByPageId(pageId: number): Promise<SelectSocial[]> {
   await getAuthenticatedUser();
   try {
-    return db.select().from(socialLink)
+    return db
+      .select()
+      .from(socialLink)
       .where(eq(socialLink.pageId, pageId))
+      .orderBy(socialLink.createdAt);
+  } catch (error) {
+    console.error('Error fetching social links:', error);
+    throw new Error('Failed to fetch social links');
+  }
+}
+
+export async function getSocialLinkByPageSlug(slug: string): Promise<SelectSocial[]> {
+  try {
+    const [foundPage] = await db
+      .select()
+      .from(page)
+      .where(eq(page.pageSlug, slug));
+
+    if (!foundPage) {
+      console.error("No page found for slug:", slug);
+      return [];
+    }
+
+    return await db
+      .select()
+      .from(socialLink)
+      .where(eq(socialLink.pageId, foundPage.id))
       .orderBy(socialLink.createdAt);
   } catch (error) {
     console.error('Error fetching social links:', error);

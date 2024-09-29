@@ -5,36 +5,13 @@ import { project, InsertProject, SelectProject, page } from '@/db/schemas/page-s
 import { db } from '@/db/drizzle';
 import { revalidatePath } from 'next/cache';
 import { auth } from '@/auth';
-
-// Helper function to get the authenticated user
-async function getAuthenticatedUser() {
-  const session = await auth();
-  if (!session?.user) {
-    throw new Error('Authentication required');
-  }
-  return session.user;
-}
-
-// Cached function to get a project by ID
-export const getProjectById = async (id: number): Promise<SelectProject | null> => {
-  try {
-    const [foundProject] = await db
-      .select()
-      .from(project)
-      .where(eq(project.id, id))
-      .limit(1);
-    return foundProject || null;
-  } catch (error) {
-    console.error('Error fetching project:', error);
-    throw new Error('Failed to fetch project');
-  }
-};
+import { getAuthenticatedUser } from '@/lib/get-session';
 
 export async function createProject(data: InsertProject): Promise<SelectProject> {
   try {
     await getAuthenticatedUser();
     const [newProject] = await db.insert(project).values(data).returning();
-    revalidatePath(`/projects/${newProject.pageId}`);
+    revalidatePath("/dashboard");
     return newProject;
   } catch (error) {
     console.error('Error creating project:', error);
@@ -55,6 +32,29 @@ export async function getProjectsByPageId(pageId: number): Promise<SelectProject
   }
 }
 
+export async function getProjectByPageSlug(slug: string): Promise<SelectProject[]> {
+  try {
+    const [foundPage] = await db
+      .select()
+      .from(page)
+      .where(eq(page.pageSlug, slug));
+
+    if (!foundPage) {
+      console.error("No page found for slug:", slug);
+      return [];
+    }
+
+    return await db
+      .select()
+      .from(project)
+      .where(eq(project.pageId, foundPage.id))
+      .orderBy(project.createdAt);
+  } catch (error) {
+    console.error('Error fetching projects:', error);
+    throw new Error('Failed to fetch projects');
+  }
+}
+
 export async function updateProject(id: number, data: Partial<InsertProject>): Promise<SelectProject | null> {
   try {
     await getAuthenticatedUser();
@@ -63,7 +63,7 @@ export async function updateProject(id: number, data: Partial<InsertProject>): P
       .set({ ...data, updatedAt: new Date() })
       .where(eq(project.id, id))
       .returning();
-    revalidatePath(`/projects/${updatedProject.pageId}`);
+    revalidatePath("/dashboard");
     return updatedProject || null;
   } catch (error) {
     console.error('Error updating project:', error);
@@ -78,7 +78,7 @@ export async function deleteProject(id: number): Promise<void> {
       .where(eq(project.id, id))
       .returning();
     if (deletedProject) {
-      revalidatePath(`/projects/${deletedProject.pageId}`);
+      revalidatePath("/dashboard");
     }
   } catch (error) {
     console.error('Error deleting project:', error);
