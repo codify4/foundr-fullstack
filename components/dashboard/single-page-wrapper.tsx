@@ -5,7 +5,7 @@ import { SinglePageCreator } from './single-page-creator'
 import { redirect } from 'next/navigation'
 import { Project, Social } from '@/types/page-types'
 
-export default async function SinglePageCreatorWrapper() {
+export default async function SinglePageWrapper() {
   const pageId = await getPageIdForUser()
   if(!pageId) {
     redirect('/signin')

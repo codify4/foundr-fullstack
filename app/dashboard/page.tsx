@@ -1,5 +1,5 @@
 import { auth } from "@/auth";
-import { SinglePageCreator } from "@/components/dashboard/single-page-creator";
+import SinglePageWrapper from "@/components/dashboard/single-page-wrapper";
 import { redirect } from "next/navigation";
 
 export default async function Dashboard() {
@@ -10,7 +10,7 @@ export default async function Dashboard() {
 
   	return (
 		<div>
-			<SinglePageCreator />
+			<SinglePageWrapper />
 		</div>
   	);
 }
