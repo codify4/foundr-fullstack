@@ -9,6 +9,7 @@ import { getPageIdForUser, createPage, updatePage } from '@/actions/page-actions
 import { InsertPage } from '@/db/schemas/page-schema'
 import { redirect } from 'next/navigation'
 import { auth } from '@/auth'
+import { getAuthenticatedUser } from '@/lib/get-session'
 
 type PageInfoProps = {
   slug: string;
@@ -26,9 +27,8 @@ const PageInfo = ({ slug, name, image, bio, setSlug, setName, setImage, setBio }
   const [isSubmitting, setIsSubmitting] = useState(false)
 
   const handleAction = async (formData: FormData) => {
-    const session = await auth();
-    const userId = session?.user?.id || '';
-
+    const user = await getAuthenticatedUser();
+    const userId = user?.id || '';
     setIsSubmitting(true)
     
     const pageData: Omit<InsertPage, 'id' | 'createdAt' | 'updatedAt'> = {
