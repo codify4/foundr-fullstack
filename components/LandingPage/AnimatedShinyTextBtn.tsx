@@ -4,7 +4,7 @@ import { cn } from "@/lib/utils";
 import AnimatedShinyText from "@/components/magicui/animated-shiny-text";
 import { ArrowRightIcon } from "lucide-react";
 
-export async function AnimatedShinyTextDemo() {
+export function AnimatedShinyTextDemo() {
   return (
     <div className="z-50 flex items-center justify-center mb-5">
       <div
