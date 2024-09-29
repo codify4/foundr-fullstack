@@ -1,7 +1,7 @@
 import PageInfo from "./page-info"
 import ProjectForm from "./projects/project-form"
 import { Project, Social } from "@/types/page-types"
-import SocialForm from "./socials-form"
+import SocialForm from "./socials/socials-form"
 import { SelectProject, SelectSocial } from "@/db/schemas/page-schema"
 
 

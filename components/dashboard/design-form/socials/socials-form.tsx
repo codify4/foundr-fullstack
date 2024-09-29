@@ -11,9 +11,10 @@ import { useState } from "react"
 import { getPageIdForUser } from "@/actions/page-actions"
 import { createSocialLink } from "@/actions/socials-actions"
 import { SelectSocial } from "@/db/schemas/page-schema"
+import SocialsList from "./socials-list"
 
 type SocialFormProps = {
-  socials: Social[];
+  socials: SelectSocial[];
   setSocials: React.Dispatch<React.SetStateAction<SelectSocial[]>>;
   newSocial: Social;
   setNewSocial: React.Dispatch<React.SetStateAction<Social>>;
@@ -103,20 +104,7 @@ const SocialForm = ({ socials, setSocials, newSocial, setNewSocial, isSocialDial
                     </form>
                 </DialogContent>
             </Dialog>
-            <ul className="mt-2 space-y-2">
-            {socials?.map((social) => (
-                <li key={social.link} className="flex items-center justify-between bg-gray-200 dark:bg-neutral-800 text-black dark:text-white py-2 px-5 rounded-lg my-2">
-                <span>{social.type}</span>
-                <Button 
-                    variant="ghost" 
-                    size="sm"
-                >   
-                    {/* Seperate component for deleting social link */}
-                    <X className="h-4 w-4" />
-                </Button>
-                </li>
-            ))}
-            </ul>
+            <SocialsList socials={socials} />
         </div>
     )
 }
