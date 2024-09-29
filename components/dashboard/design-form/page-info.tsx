@@ -28,7 +28,9 @@ const PageInfo = ({ slug, name, image, bio, setSlug, setName, setImage, setBio }
   const handleAction = async (formData: FormData) => {
     const session = await auth();
     const userId = session?.user?.id || '';
+
     setIsSubmitting(true)
+    
     const pageData: Omit<InsertPage, 'id' | 'createdAt' | 'updatedAt'> = {
       pageSlug: formData.get('slug') as string,
       name: formData.get('name') as string,
@@ -68,7 +70,6 @@ const PageInfo = ({ slug, name, image, bio, setSlug, setName, setImage, setBio }
           onChange={(e) => setSlug(e.target.value)}
           autoComplete="off"
           className="mt-1"
-          required
         />
       </div>
       <div>
@@ -80,7 +81,6 @@ const PageInfo = ({ slug, name, image, bio, setSlug, setName, setImage, setBio }
           onChange={(e) => setName(e.target.value)}
           autoComplete="off"
           className="mt-1"
-          required
         />
       </div>
       <div>
@@ -91,7 +91,6 @@ const PageInfo = ({ slug, name, image, bio, setSlug, setName, setImage, setBio }
           value={image}
           onChange={(e) => setImage(e.target.value)}
           className="mt-1"
-          required
         />
       </div>
       <div>
@@ -103,7 +102,6 @@ const PageInfo = ({ slug, name, image, bio, setSlug, setName, setImage, setBio }
           onChange={(e) => setBio(e.target.value)}
           className="mt-1"
           rows={5}
-          required
         />
       </div>
       <Button type="submit" disabled={isSubmitting} className='hover:bg-secondary'>
