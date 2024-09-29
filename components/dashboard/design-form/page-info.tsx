@@ -8,7 +8,6 @@ import { Button } from "@/components/ui/button"
 import { getPageIdForUser, createPage, updatePage } from '@/actions/page-actions'
 import { InsertPage } from '@/db/schemas/page-schema'
 import { redirect } from 'next/navigation'
-import { auth } from '@/auth'
 import { getAuthenticatedUser } from '@/lib/get-session'
 
 type PageInfoProps = {
@@ -84,9 +83,9 @@ const PageInfo = ({ slug, name, image, bio, setSlug, setName, setImage, setBio }
         />
       </div>
       <div>
-        <Label htmlFor="avatar" className="text-sm font-medium">Avatar URL</Label>
+        <Label htmlFor="image" className="text-sm font-medium">Avatar URL</Label>
         <Input
-          id="avatar"
+          id="image"
           name="image"
           value={image}
           onChange={(e) => setImage(e.target.value)}
