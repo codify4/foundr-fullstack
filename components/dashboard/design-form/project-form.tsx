@@ -38,7 +38,7 @@ const ProjectForm = ({ open, setOpen, projects, setProjects, newProject, setNewP
                 name: formData.get('name') as string,
                 url: formData.get('url') as string,
                 oneLiner: formData.get('oneLiner') as string,
-                mrr: formData.get('oneLiner') as string,
+                mrr: formData.get('mrr') as string,
                 pageId: pageId
             }
 
