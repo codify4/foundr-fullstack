@@ -55,11 +55,11 @@ const Preview = ({ name, avatarUrl, bio, projects, socials, isDesktopPreview, se
                         <p className="text-center text-gray-700 dark:text-white whitespace-pre-wrap mb-4">{bio}</p>
                         <div className="flex justify-center items-center space-x-4 mb-8">
                             {socials.map((social, index) => {
-                                const IconComponent = socialIcons[social.platform as keyof typeof socialIcons]
+                                const IconComponent = socialIcons[social.type as keyof typeof socialIcons]
                                 return (
                                     <a
                                         key={index}
-                                        href={social.url}
+                                        href={social.link}
                                         target="_blank"
                                         rel="noopener noreferrer"
                                         className="text-blue-500 hover:text-blue-700"

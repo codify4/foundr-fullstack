@@ -4,10 +4,12 @@ export interface Project {
     oneLiner: string;
     mrr: string;
 }
-  
+
+export type SocialTypes = 'github' | 'twitter' | 'linkedin' | 'instagram' | 'facebook' | null;
+
 export interface Social {
-    platform: string;
-    url: string;
+    type: string;
+    link: string;
 }
   
 export type Page = {

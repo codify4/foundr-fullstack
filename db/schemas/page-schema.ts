@@ -28,8 +28,8 @@ export const socialLink = pgTable('social_link', {
     id: serial('id').primaryKey(),
     createdAt: timestamp('created_at').defaultNow(),
     updatedAt: timestamp('updated_at').defaultNow(),
-    type: socialsEnum('type'),
-    link: varchar('link'),
+    type: varchar('type').notNull(),
+    link: varchar('link').notNull(),
     pageId: integer('page_id').notNull().references(() => page.id, { onDelete: 'cascade' }),
 });
 
@@ -44,10 +44,10 @@ export const project = pgTable('project', {
     id: serial('id').primaryKey(),
     createdAt: timestamp('created_at').defaultNow(),
     updatedAt: timestamp('updated_at').defaultNow(),
-    name: varchar('name'),
-    oneLiner: varchar('one_liner'),
-    url: varchar('url'),
-    mrr: varchar('mrr'),
+    name: varchar('name').notNull(),
+    oneLiner: varchar('one_liner').notNull(),
+    url: varchar('url').notNull(),
+    mrr: varchar('mrr').notNull(),
     pageId: integer('page_id').notNull().references(() => page.id, { onDelete: 'cascade' }),
 });
 

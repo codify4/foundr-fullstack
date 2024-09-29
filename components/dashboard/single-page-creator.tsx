@@ -24,33 +24,9 @@ export function SinglePageCreator() {
     mrr: '',
   })
   const [newSocial, setNewSocial] = useState<Social>({
-    platform: '',
-    url: ''
+    type: '',
+    link: ''
   })
-
-  const addProject = () => {
-    if (newProject.name.trim()) {
-      setProjects([...projects, newProject])
-      setNewProject({ name: '', url: '', oneLiner: '', mrr: '' })
-      setIsProjectDialogOpen(false)
-    }
-  }
-
-  const removeProject = (index: number) => {
-    setProjects(projects.filter((_, i) => i !== index))
-  }
-
-  const addSocial = () => {
-    if (newSocial.platform && newSocial.url.trim()) {
-      setSocials([...socials, newSocial])
-      setNewSocial({ platform: '', url: '' })
-      setIsSocialDialogOpen(false)
-    }
-  }
-
-  const removeSocial = (index: number) => {
-    setSocials(socials.filter((_, i) => i !== index))
-  }
 
   return (
     <div className="flex flex-col lg:flex-row w-full lg:h-screen p-5 lg:p-0 bg-white dark:bg-neutral-900 text-black dark:text-white border">
@@ -69,8 +45,6 @@ export function SinglePageCreator() {
         setIsSocialDialogOpen={setIsSocialDialogOpen}
         setNewProject={setNewProject}
         setNewSocial={setNewSocial}
-        addSocial={addSocial}
-        removeSocial={removeSocial}
       />
 
       {/* Right side - Preview */}
