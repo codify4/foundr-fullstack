@@ -133,7 +133,7 @@ const ProjectForm = ({ open, setOpen, projects, setProjects, newProject, setNewP
 
             <div>
                 {projects?.map((project) => (
-                    <div key={project.name} className="flex items-center justify-between bg-white dark:bg-neutral-800 text-black dark:text-white p-2 rounded">
+                    <div key={project.name} className="flex items-center justify-between bg-gray-200 dark:bg-neutral-800 text-black dark:text-white py-2 px-5 rounded-lg my-2">
                         <span>{project.name}</span>
                         <Button 
                             variant="ghost" 

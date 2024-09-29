@@ -104,7 +104,7 @@ const SocialForm = ({ socials, setSocials, newSocial, setNewSocial, isSocialDial
             </Dialog>
             <ul className="mt-2 space-y-2">
             {socials?.map((social) => (
-                <li key={social.link} className="flex items-center justify-between bg-white dark:bg-neutral-800 text-black dark:text-white p-2 rounded">
+                <li key={social.link} className="flex items-center justify-between bg-gray-200 dark:bg-neutral-800 text-black dark:text-white py-2 px-5 rounded-lg my-2">
                 <span>{social.type}</span>
                 <Button 
                     variant="ghost" 
