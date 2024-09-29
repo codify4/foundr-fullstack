@@ -44,11 +44,12 @@ export async function getSocialLinkByPageSlug(slug: string): Promise<SelectSocia
       return [];
     }
 
-    return await db
+    const socials = await db
       .select()
       .from(socialLink)
       .where(eq(socialLink.pageId, foundPage.id))
       .orderBy(socialLink.createdAt);
+    return socials;
   } catch (error) {
     console.error('Error fetching social links:', error);
     throw new Error('Failed to fetch social links');

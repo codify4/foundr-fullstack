@@ -8,6 +8,8 @@ import Link from 'next/link'
 import { getProjectByPageSlug } from '@/actions/project-actions'
 import { getSocialLinkByPageSlug } from '@/actions/socials-actions'
 import { Project, Social } from '@/types/page-types'
+import { Suspense } from 'react'
+
 
 const socialIcons: { [key: string]: React.ComponentType } = {
   github: Github,
@@ -17,10 +19,18 @@ const socialIcons: { [key: string]: React.ComponentType } = {
   facebook: Facebook,
 }
 
-export default async function SlugPage({ params }: { params: { slug: string } }) {
-  const pageInfo: SelectPage = await getPageBySlug(params.slug);
-  const projects: Project[] = await getProjectByPageSlug(params.slug);
-  const socials: Social[] = await getSocialLinkByPageSlug(params.slug);
+export default async function Page({ params }: { params: { slug: string } }) {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <SlugPage slug={params.slug} />
+    </Suspense>
+  );
+}
+
+async function SlugPage({ slug }: { slug: string }) {
+  const pageInfo: SelectPage = await getPageBySlug(slug);
+  const projects: Project[] = await getProjectByPageSlug(slug);
+  const socials: Social[] = await getSocialLinkByPageSlug(slug);
 
   if (!pageInfo && !projects && !socials) {
     return (
@@ -38,16 +48,16 @@ export default async function SlugPage({ params }: { params: { slug: string } })
           <div className="mb-4">
             <Image
               src={'/favicon.ico'}
-              alt={`${pageInfo.name}'s avatar`}
+              alt="avatar"
               width={130}
               height={130}
               className="rounded-full mx-auto"
             />
           </div>
-          <CardTitle className="text-3xl font-bold">{pageInfo.name}</CardTitle>
+          <CardTitle className="text-3xl font-bold">{pageInfo?.name}</CardTitle>
         </CardHeader>
         <CardContent>
-          <p className="text-center text-muted-foreground whitespace-pre-wrap mb-6">{pageInfo.bio}</p>
+          <p className="text-center text-muted-foreground whitespace-pre-wrap mb-6">{pageInfo?.bio}</p>
           
           <div className="flex justify-center items-center space-x-4 mb-8">
             {socials?.map((social) => {

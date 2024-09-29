@@ -44,11 +44,12 @@ export async function getProjectByPageSlug(slug: string): Promise<SelectProject[
       return [];
     }
 
-    return await db
+    const projects = await db
       .select()
       .from(project)
       .where(eq(project.pageId, foundPage.id))
       .orderBy(project.createdAt);
+    return projects;
   } catch (error) {
     console.error('Error fetching projects:', error);
     throw new Error('Failed to fetch projects');

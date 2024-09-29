@@ -4,6 +4,7 @@ import { eq } from 'drizzle-orm';
 import { page, InsertPage, SelectPage } from '@/db/schemas/page-schema';
 import { db } from '@/db/drizzle';
 import { auth } from '@/auth';
+import { revalidatePath } from 'next/cache';
 
 export async function getPageIdForUser(): Promise<number | null> {
   const session = await auth();
@@ -50,7 +51,7 @@ export async function updatePage(pageId: number, pageData: Partial<Omit<InsertPa
   const session = await auth();
 
   if (!session || !session.user) {
-    throw new Error('You must be logged in to add a habit');
+    throw new Error('You must be logged in to update a page');
   }
 
   const userId = session.user.id;
@@ -64,6 +65,11 @@ export async function updatePage(pageId: number, pageData: Partial<Omit<InsertPa
       .set({ ...pageData, updatedAt: new Date() })
       .where(eq(page.id, pageId))
       .returning();
+    
+    if (updatedPage) {
+      revalidatePath(`/${updatedPage.pageSlug}`);
+    }
+
     return updatedPage || null;
   } catch (error) {
     console.error('Error updating page:', error);
@@ -77,6 +83,9 @@ export async function getPageById(id: number) {
 }
 
 export async function getPageBySlug(slug: string) {
-  const [foundPage] = await db.select().from(page).where(eq(page.pageSlug, slug));
+  const [foundPage] = await db
+  .select()
+  .from(page)
+  .where(eq(page.pageSlug, slug));
   return foundPage;
 }
