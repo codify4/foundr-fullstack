@@ -10,10 +10,11 @@ import { X } from "lucide-react"
 import { useState } from "react"
 import { getPageIdForUser } from "@/actions/page-actions"
 import { createSocialLink } from "@/actions/socials-actions"
+import { SelectSocial } from "@/db/schemas/page-schema"
 
 type SocialFormProps = {
   socials: Social[];
-  setSocials: React.Dispatch<React.SetStateAction<Social[]>>;
+  setSocials: React.Dispatch<React.SetStateAction<SelectSocial[]>>;
   newSocial: Social;
   setNewSocial: React.Dispatch<React.SetStateAction<Social>>;
   isSocialDialogOpen: boolean;

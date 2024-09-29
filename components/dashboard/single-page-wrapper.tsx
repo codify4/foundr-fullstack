@@ -3,8 +3,7 @@ import { getProjectsByPageId } from '@/actions/project-actions'
 import { getPageById, getPageIdForUser } from '@/actions/page-actions'
 import { SinglePageCreator } from './single-page-creator'
 import { redirect } from 'next/navigation'
-import { Project, Social } from '@/types/page-types'
-import { SelectPage } from '@/db/schemas/page-schema'
+import { SelectPage, SelectProject, SelectSocial } from '@/db/schemas/page-schema'
 
 export default async function SinglePageWrapper() {
   const pageId = await getPageIdForUser()
@@ -13,8 +12,8 @@ export default async function SinglePageWrapper() {
   }
   
   const pageInfo: SelectPage = await getPageById(pageId)
-  const socials: Social[] = await getSocialLinksByPageId(pageId)
-  const projects: Project[] = await getProjectsByPageId(pageId)
+  const socials: SelectSocial[] = await getSocialLinksByPageId(pageId)
+  const projects: SelectProject[] = await getProjectsByPageId(pageId)
 
   return (
     <SinglePageCreator 

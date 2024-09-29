@@ -78,9 +78,8 @@ export async function deleteProject(id: number): Promise<void> {
       .delete(project)
       .where(eq(project.id, id))
       .returning();
-    if (deletedProject) {
-      revalidatePath("/dashboard");
-    }
+      
+    revalidatePath("/dashboard");
   } catch (error) {
     console.error('Error deleting project:', error);
     throw new Error('Failed to delete project');

@@ -7,16 +7,16 @@ import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog"
 import { createProject } from "@/actions/project-actions"
-import { InsertProject } from '@/db/schemas/page-schema'
+import { InsertProject, SelectProject } from '@/db/schemas/page-schema'
 import { getPageIdForUser } from '@/actions/page-actions'
 import { Project } from '@/types/page-types'
-import { X } from 'lucide-react'
+import ProjectList from './project-list'
 
 type ProjectFormProps = {
     open: boolean;
     setOpen: React.Dispatch<React.SetStateAction<boolean>>;
-    projects: Project[];
-    setProjects: React.Dispatch<React.SetStateAction<Project[]>>;
+    projects: SelectProject[];
+    setProjects: React.Dispatch<React.SetStateAction<SelectProject[]>>;
     newProject: Project;
     setNewProject: React.Dispatch<React.SetStateAction<Project>>;
 }
@@ -131,20 +131,7 @@ const ProjectForm = ({ open, setOpen, projects, setProjects, newProject, setNewP
                 </DialogContent>
             </Dialog>
 
-            <div>
-                {projects?.map((project) => (
-                    <div key={project.name} className="flex items-center justify-between bg-gray-200 dark:bg-neutral-800 text-black dark:text-white py-2 px-5 rounded-lg my-2">
-                        <span>{project.name}</span>
-                        <Button 
-                            variant="ghost" 
-                            size="sm"
-                        >   
-                            {/* Seperate component for deleting social link */}
-                            <X className="h-4 w-4" />
-                        </Button>
-                    </div>
-                ))}
-            </div>
+            <ProjectList projects={projects} />
         </div>
     )
 }

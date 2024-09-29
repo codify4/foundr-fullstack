@@ -1,7 +1,8 @@
 import PageInfo from "./page-info"
-import ProjectForm from "./project-form"
+import ProjectForm from "./projects/project-form"
 import { Project, Social } from "@/types/page-types"
 import SocialForm from "./socials-form"
+import { SelectProject, SelectSocial } from "@/db/schemas/page-schema"
 
 
 type DesignFormProps = {
@@ -13,8 +14,8 @@ type DesignFormProps = {
   setName: React.Dispatch<React.SetStateAction<string>>;
   setImage: React.Dispatch<React.SetStateAction<string>>;
   setBio: React.Dispatch<React.SetStateAction<string>>;
-  projects: Project[];
-  socials: Social[];
+  projects: SelectProject[];
+  socials: SelectSocial[];
   newProject: Project;
   newSocial: Social;
   isProjectDialogOpen: boolean;
@@ -23,8 +24,8 @@ type DesignFormProps = {
   setIsSocialDialogOpen: React.Dispatch<React.SetStateAction<boolean>>;
   setNewProject: React.Dispatch<React.SetStateAction<Project>>;
   setNewSocial: React.Dispatch<React.SetStateAction<Social>>;
-  setProjects: React.Dispatch<React.SetStateAction<Project[]>>;
-  setSocials: React.Dispatch<React.SetStateAction<Social[]>>;
+  setProjects: React.Dispatch<React.SetStateAction<SelectProject[]>>;
+  setSocials: React.Dispatch<React.SetStateAction<SelectSocial[]>>;
 }
 
 const DesignForm = ({
