@@ -5,10 +5,8 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
-import SignInGoogle from "./sign-in-google"
-import SignInGithub from "./sign-in-github"
+import SignInGoogle from "./components/sign-in-google"
+import SignInGithub from "./components/sign-in-github"
 import { auth } from "@/auth"
 import { redirect } from "next/navigation"
 

@@ -7,7 +7,8 @@ import { SelectPage, SelectProject, SelectSocial } from '@/db/schemas/page-schem
 
 export default async function SinglePageWrapper() {
   const pageId = await getPageIdForUser()
-  if(!pageId) {
+
+  if (!pageId) {
     redirect('/signin')
   }
   
