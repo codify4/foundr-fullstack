@@ -15,7 +15,7 @@ async function LoginPage() {
     const session = await auth();
     const user = session?.user;
 
-    if (user) redirect("/dashboard");
+    if (user) redirect("/form");
     return (
         <section className="flex flex-col items-center justify-center h-svh bg-white">
             <Card className="mx-auto w-[500px] shadow-xl">
