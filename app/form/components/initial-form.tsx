@@ -10,16 +10,18 @@ function IntialForm() {
     const [bio, setBio] = useState('')
     
     return (
-        <PageInfo
-            slug={slug}
-            name={name}
-            image={image}
-            bio={bio}
-            setSlug={setSlug}
-            setName={setName}
-            setImage={setImage} 
-            setBio={setBio}
-        />
+        <div className="flex flex-col items-center justify-center w-full bg-white">
+            <PageInfo
+                slug={slug}
+                name={name}
+                image={image}
+                bio={bio}
+                setSlug={setSlug}
+                setName={setName}
+                setImage={setImage} 
+                setBio={setBio}
+            />
+        </div>
     )
 }
 export default IntialForm

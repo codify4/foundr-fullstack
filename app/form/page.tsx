@@ -9,7 +9,7 @@ async function FormPage() {
 	if(!user) redirect('/signin')
     
     return (
-        <div className="flex flex-col items-center justify-center h-svh bg-white">
+        <div className="flex flex-col items-center justify-center h-svh w-full bg-white">
             <IntialForm />
         </div>
     )
