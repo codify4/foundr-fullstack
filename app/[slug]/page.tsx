@@ -47,7 +47,7 @@ async function SlugPage({ slug }: { slug: string }) {
         <CardHeader className="text-center">
           <div className="mb-4">
             <Image
-              src={'/favicon.ico'}
+              src={pageInfo?.image}
               alt="avatar"
               width={130}
               height={130}

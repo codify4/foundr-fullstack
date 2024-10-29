@@ -11,8 +11,8 @@ async function FormPage() {
     
     return (
         <div className="flex flex-col items-center justify-center h-svh w-svw bg-white px-4 py-8 gap-10">
-            <h1 className="text-black text-4xl font-extrabold">Firstly, your page info!</h1>
-            <Card className="flex flex-col items-center justify-center w-2/5 bg-white px-5 py-8">
+            <h1 className="text-black text-3xl md:text-4xl font-extrabold">Firstly, your page info!</h1>
+            <Card className="flex flex-col items-center justify-center w-11/12 md:w-2/5 bg-white px-5 py-8">
                 <IntialForm />
             </Card>
         </div>

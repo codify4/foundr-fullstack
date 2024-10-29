@@ -9,16 +9,21 @@ import SignInGoogle from "./components/sign-in-google"
 import SignInGithub from "./components/sign-in-github"
 import { auth } from "@/auth"
 import { redirect } from "next/navigation"
+import { getPageIdForUser } from "@/actions/page-actions"
 
 
 async function LoginPage() {
     const session = await auth();
     const user = session?.user;
 
-    if (user) redirect("/form");
+    if (user) {
+        const pageId = await getPageIdForUser();
+        redirect(pageId ? "/dashboard" : "/form");
+    }
+
     return (
         <section className="flex flex-col items-center justify-center h-svh bg-white">
-            <Card className="mx-auto w-[500px] shadow-xl">
+            <Card className="mx-auto w-11/12 md:w-[500px] shadow-xl">
                 <CardHeader>
                     <CardTitle className="text-2xl">Sign In</CardTitle>
                     <CardDescription>Choose a provider to sign in</CardDescription>
