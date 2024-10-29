@@ -13,7 +13,7 @@ export async function SettingsPage() {
   const isPublished = true;
 
   return (
-    <div className="w-1/2 mx-auto my-2 p-6 space-y-8">
+    <div className="w-full md:w-1/2 mx-auto my-2 p-6 space-y-8">
       <h1 className="text-3xl font-bold">Settings</h1>
       <Card className="dark:bg-neutral-800">
         <CardContent className="p-6 space-y-4">
