@@ -1,0 +1,1 @@
+ALTER TABLE "page" ALTER COLUMN "image" SET NOT NULL;

@@ -8,7 +8,7 @@ export const page = pgTable('page', {
     id: serial('id').primaryKey(),
     createdAt: timestamp('created_at').defaultNow(),
     updatedAt: timestamp('updated_at').defaultNow(),
-    image: text('image'),
+    image: text('image').notNull(),
     name: text('name').notNull(),
     bio: text('bio').notNull(),
     pageSlug: text('page_slug').notNull().unique(),
