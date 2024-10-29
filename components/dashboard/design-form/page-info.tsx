@@ -41,12 +41,7 @@ const PageInfo = ({ slug, name, image, bio, setSlug, setName, setImage, setBio }
     try {
       const pageId = await getPageIdForUser()
       
-      if (pageId) {
-        await updatePage(pageId, pageData)
-      } else {
-        await createPage(pageData)
-      }
-      
+      if (pageId) await updatePage(pageId, pageData)
       setIsSubmitting(false)
       redirect('/dashboard')
     } catch (error) {
@@ -104,7 +99,7 @@ const PageInfo = ({ slug, name, image, bio, setSlug, setName, setImage, setBio }
         />
       </div>
       <Button type="submit" disabled={isSubmitting} className='hover:bg-secondary'>
-        {isSubmitting ? 'Updating...' : 'Save Page'}
+        {isSubmitting ? 'Updating...' : 'Publish Changes'}
       </Button>
     </form>
   )
