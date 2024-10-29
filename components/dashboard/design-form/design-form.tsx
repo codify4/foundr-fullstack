@@ -54,7 +54,7 @@ const DesignForm = ({
 
   return (
       <div className="w-full lg:w-2/5 p-4 md:p-8 overflow-auto">
-        <h1 className="text-xl lg:text-2xl font-bold mb-6">Create Your Single Page Website</h1>
+        <h1 className="text-xl lg:text-2xl font-bold mb-6">Design</h1>
         <div className="space-y-4">
           <PageInfo
             slug={slug}
