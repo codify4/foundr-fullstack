@@ -40,7 +40,7 @@ function IntialForm() {
     return (
         <div className="flex flex-col items-center justify-center w-full bg-white">
             <form 
-                className="space-y-5"
+                className="space-y-5 w-full"
                 action={handleAction}
             >
                 <div>
@@ -86,9 +86,11 @@ function IntialForm() {
                         rows={5}
                     />
                 </div>
-                <Button type="submit" disabled={isSubmitting} className='hover:bg-secondary'>
-                    {isSubmitting ? 'Creating...' : 'Create Page'}
-                </Button>
+                <div className="w-full flex items-center justify-center">
+                    <Button type="submit" disabled={isSubmitting} className='w-full inline-flex items-center justify-center whitespace-nowrap rounded-md focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 bg-black text-white shadow hover:bg-primary h-9 px-4 py-2 group relative gap-2 overflow-hidden tracking-tighter transform-gpu ring-offset-current transition-all duration-300 ease-out hover:ring-2 hover:ring-primary hover:ring-offset-2'>
+                        {isSubmitting ? 'Creating...' : 'Create Page'}
+                    </Button>
+                </div>
             </form>
         </div>
     )
