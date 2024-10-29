@@ -8,10 +8,10 @@ export const page = pgTable('page', {
     id: serial('id').primaryKey(),
     createdAt: timestamp('created_at').defaultNow(),
     updatedAt: timestamp('updated_at').defaultNow(),
-    image: text('image').notNull().default('https://avatars.githubusercontent.com/u/10199165?v=4'),
-    name: text('name').notNull().default('Foundr'),
-    bio: text('bio').notNull().default('I am a tech founder'),
-    pageSlug: text('page_slug').notNull().unique().default('foundr'),
+    image: text('image'),
+    name: text('name').notNull(),
+    bio: text('bio').notNull(),
+    pageSlug: text('page_slug').notNull().unique(),
     userId: text('user_id').notNull().references(() => users.id),
 });
 
