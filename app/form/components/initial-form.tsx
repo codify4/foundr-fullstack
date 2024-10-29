@@ -1,13 +1,12 @@
 'use client'
 
-import { createPage } from "@/actions/page-actions"
+import { createPageAndRedirect } from "@/actions/page-actions"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
 import { InsertPage } from "@/db/schemas/page-schema"
 import { getAuthenticatedUser } from "@/lib/get-session"
-import { redirect } from "next/navigation"
 import { useState } from "react"
 
 function IntialForm() {
@@ -31,9 +30,7 @@ function IntialForm() {
         }
     
         try {
-            await createPage(pageData)
-            setIsSubmitting(false)
-            redirect('/dashboard')
+            await createPageAndRedirect(pageData)
         } catch (error) {
             console.error('Error creating/updating page:', error)
             setIsSubmitting(false)

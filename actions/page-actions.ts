@@ -5,6 +5,7 @@ import { page, InsertPage, SelectPage } from '@/db/schemas/page-schema';
 import { db } from '@/db/drizzle';
 import { auth } from '@/auth';
 import { revalidatePath } from 'next/cache';
+import { redirect } from 'next/navigation';
 
 export async function getPageIdForUser(): Promise<number | null> {
   const session = await auth();
@@ -88,4 +89,9 @@ export async function getPageBySlug(slug: string) {
   .from(page)
   .where(eq(page.pageSlug, slug));
   return foundPage;
+}
+
+export async function createPageAndRedirect(pageData: Omit<InsertPage, 'id' | 'createdAt' | 'updatedAt'>) {
+  await createPage(pageData)
+  redirect('/dashboard') // This will work because it's a server action
 }
