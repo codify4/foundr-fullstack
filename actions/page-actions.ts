@@ -26,7 +26,7 @@ export async function getPageIdForUser(): Promise<number | null> {
   }
 }
 
-export async function getImage() {
+export async function getAvatar() {
   const image = await db.select().from(images).limit(1);
   return image[0];
 }
