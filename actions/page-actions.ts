@@ -1,7 +1,7 @@
 'use server'
 
 import { eq } from 'drizzle-orm';
-import { page, InsertPage, SelectPage } from '@/db/schemas/page-schema';
+import { page, InsertPage, SelectPage, images } from '@/db/schemas/page-schema';
 import { db } from '@/db/drizzle';
 import { auth } from '@/auth';
 import { revalidatePath } from 'next/cache';
@@ -24,6 +24,11 @@ export async function getPageIdForUser(): Promise<number | null> {
     console.error('Error getting page ID for user:', error);
     throw error;
   }
+}
+
+export async function getImage() {
+  const image = await db.select().from(images).limit(1);
+  return image[0];
 }
 
 export async function createPage(pageData: Omit<InsertPage, 'id' | 'createdAt' | 'updatedAt'>): Promise<SelectPage> {

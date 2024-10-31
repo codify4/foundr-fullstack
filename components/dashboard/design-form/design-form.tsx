@@ -8,11 +8,11 @@ import { SelectProject, SelectSocial } from "@/db/schemas/page-schema"
 type DesignFormProps = {
   slug: string;
   name: string;
-  image: string;
+  image?: string;
   bio: string;
   setSlug: React.Dispatch<React.SetStateAction<string>>;
   setName: React.Dispatch<React.SetStateAction<string>>;
-  setImage: React.Dispatch<React.SetStateAction<string>>;
+  setImage?: React.Dispatch<React.SetStateAction<string>>;
   setBio: React.Dispatch<React.SetStateAction<string>>;
   projects: SelectProject[];
   socials: SelectSocial[];

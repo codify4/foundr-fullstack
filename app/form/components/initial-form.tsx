@@ -7,12 +7,13 @@ import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
 import { InsertPage } from "@/db/schemas/page-schema"
 import { getAuthenticatedUser } from "@/lib/get-session"
+import { UploadButton } from "@/lib/uploadthing"
+import { revalidatePath } from "next/cache"
 import { useState } from "react"
 
 function IntialForm() {
     const [slug, setSlug] = useState('')
     const [name, setName] = useState('')
-    const [image, setImage] = useState('')
     const [bio, setBio] = useState('')
     const [isSubmitting, setIsSubmitting] = useState(false)
 
@@ -24,7 +25,6 @@ function IntialForm() {
         const pageData: Omit<InsertPage, 'id' | 'createdAt' | 'updatedAt'> = {
             pageSlug: formData.get('slug') as string,
             name: formData.get('name') as string,
-            image: formData.get('image') as string,
             bio: formData.get('bio') as string,
             userId: userId
         }
@@ -42,7 +42,14 @@ function IntialForm() {
             <form 
                 className="space-y-5 w-full"
                 action={handleAction}
-            >
+            >   
+                <UploadButton 
+                    endpoint="imageUploader"
+                    onClientUploadComplete={() => {
+                      revalidatePath('/form')
+                    }}
+                    className="w-full bg-primary text-white rounded-lg py-2 px-4 text-sm font-medium"
+                />
                 <div>
                     <Label htmlFor="slug" className="text-sm font-medium">foundr.lol/</Label>
                     <Input
@@ -65,7 +72,7 @@ function IntialForm() {
                         className="mt-1"
                     />
                 </div>
-                <div>
+                {/* <div>
                     <Label htmlFor="image" className="text-sm font-medium">Avatar URL</Label>
                     <Input
                         id="image"
@@ -74,7 +81,7 @@ function IntialForm() {
                         onChange={(e) => setImage(e.target.value)}
                         className="mt-1"
                     />
-                </div>
+                </div> */}
                 <div>
                     <Label htmlFor="bio" className="text-sm font-medium">Bio</Label>
                     <Textarea

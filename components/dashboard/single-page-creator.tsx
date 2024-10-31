@@ -11,7 +11,7 @@ export function SinglePageCreator({ initialSocials, initialProjects, initialPage
 
   const [slug, setSlug] = useState(initialPageInfo.pageSlug)
   const [name, setName] = useState(initialPageInfo.name)
-  const [image, setImage] = useState(initialPageInfo.image)
+  //const [image, setImage] = useState(initialPageInfo.image)
   const [bio, setBio] = useState(initialPageInfo.bio)
 
   const [projects, setProjects] = useState<SelectProject[]>(initialProjects)
@@ -41,11 +41,11 @@ export function SinglePageCreator({ initialSocials, initialProjects, initialPage
       <DesignForm
         slug={slug}
         name={name}
-        image={image}
+        //image={image}
         bio={bio}
         setSlug={setSlug}
         setName={setName}
-        setImage={setImage}
+        //setImage={setImage}
         setBio={setBio}
         projects={projects}
         socials={socials}
@@ -64,7 +64,7 @@ export function SinglePageCreator({ initialSocials, initialProjects, initialPage
       {/* Right side - Preview */}
       <Preview 
         name={name}
-        avatarUrl={image}
+        //avatarUrl={image}
         bio={bio}
         projects={projects}
         socials={socials}

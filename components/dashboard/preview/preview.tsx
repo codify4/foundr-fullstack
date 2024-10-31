@@ -6,7 +6,7 @@ import { Project, Social } from "@/types/page-types";
 type PreviewProps = {
     name: string;
     bio: string;
-    avatarUrl: string;
+    avatarUrl?: string;
     socials: Social[];
     projects: Project[];
     isDesktopPreview: boolean;
@@ -45,7 +45,7 @@ const Preview = ({ name, avatarUrl, bio, projects, socials, isDesktopPreview, se
                 >
                     <div className="p-8">
                         <Image
-                            src={avatarUrl}
+                            src={avatarUrl || '/icon.png'}
                             alt="Avatar"
                             width={130}
                             height={130}

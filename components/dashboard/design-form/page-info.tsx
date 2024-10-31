@@ -13,11 +13,11 @@ import { getAuthenticatedUser } from '@/lib/get-session'
 type PageInfoProps = {
   slug: string;
   name: string;
-  image: string;
+  image?: string;
   bio: string;
   setSlug: React.Dispatch<React.SetStateAction<string>>;
   setName: React.Dispatch<React.SetStateAction<string>>;
-  setImage: React.Dispatch<React.SetStateAction<string>>;
+  setImage?: React.Dispatch<React.SetStateAction<string>>;
   setBio: React.Dispatch<React.SetStateAction<string>>;
 }
 
@@ -33,7 +33,6 @@ const PageInfo = ({ slug, name, image, bio, setSlug, setName, setImage, setBio }
     const pageData: Omit<InsertPage, 'id' | 'createdAt' | 'updatedAt'> = {
       pageSlug: formData.get('slug') as string,
       name: formData.get('name') as string,
-      image: formData.get('image') as string,
       bio: formData.get('bio') as string,
       userId: userId
     }
@@ -77,7 +76,7 @@ const PageInfo = ({ slug, name, image, bio, setSlug, setName, setImage, setBio }
           className="mt-1"
         />
       </div>
-      <div>
+      {/* <div>
         <Label htmlFor="image" className="text-sm font-medium">Avatar URL</Label>
         <Input
           id="image"
@@ -86,7 +85,7 @@ const PageInfo = ({ slug, name, image, bio, setSlug, setName, setImage, setBio }
           onChange={(e) => setImage(e.target.value)}
           className="mt-1"
         />
-      </div>
+      </div> */}
       <div>
         <Label htmlFor="bio" className="text-sm font-medium">Bio</Label>
         <Textarea
