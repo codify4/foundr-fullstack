@@ -10,7 +10,7 @@ import { InsertPage } from '@/db/schemas/page-schema'
 import { redirect } from 'next/navigation'
 import { getAuthenticatedUser } from '@/lib/get-session'
 import { revalidatePath } from 'next/cache'
-import { UploadButton } from '@/lib/uploadthing'
+import { UploadButton, UploadDropzone } from '@/lib/uploadthing'
 
 type PageInfoProps = {
   slug: string;
@@ -57,6 +57,22 @@ const PageInfo = ({ slug, name, image, bio, setSlug, setName, setImage, setBio }
       action={handleAction}
     >
       <div>
+        <Label htmlFor="image" className="text-sm font-medium">Avatar URL</Label>
+        <UploadDropzone 
+          endpoint="imageUploader"
+          onClientUploadComplete={(res) => {
+            if (res && res[0]) {
+              setImage(res[0].url);
+              console.log("Upload Completed");
+            }
+          }}
+          onUploadError={(error: Error) => {
+            console.error(`ERROR! ${error.message}`);
+          }}
+          className="w-full border-2 text-white rounded-lg py-2 px-4 text-sm font-medium"
+        />
+      </div>
+      <div>
         <Label htmlFor="slug" className="text-sm font-medium">foundr.lol/</Label>
         <Input
           id="slug"
@@ -76,22 +92,6 @@ const PageInfo = ({ slug, name, image, bio, setSlug, setName, setImage, setBio }
           onChange={(e) => setName(e.target.value)}
           autoComplete="off"
           className="mt-1"
-        />
-      </div>
-      <div>
-        <Label htmlFor="image" className="text-sm font-medium">Avatar URL</Label>
-        <UploadButton 
-          endpoint="imageUploader"
-          onClientUploadComplete={(res) => {
-            if (res && res[0]) {
-              setImage(res[0].url);
-              console.log("Upload Completed");
-            }
-          }}
-          onUploadError={(error: Error) => {
-            console.error(`ERROR! ${error.message}`);
-          }}
-          className="w-full bg-primary text-white rounded-lg py-2 px-4 text-sm font-medium"
         />
       </div>
       <div>
