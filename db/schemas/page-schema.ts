@@ -81,7 +81,9 @@ export const projectRelations = relations(project, ({ one }) => ({
 export type SelectPage = InferSelectModel<typeof page>;
 export type SelectProject = InferSelectModel<typeof project>;
 export type SelectSocial = InferSelectModel<typeof socialLink>;
+export type SelectImage = InferSelectModel<typeof images>;
 
 export type InsertPage = InferInsertModel<typeof page>;
 export type InsertProject = InferInsertModel<typeof project>;
 export type InsertSocial = InferInsertModel<typeof socialLink>;
+export type InsertImage = InferInsertModel<typeof images>;
