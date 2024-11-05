@@ -35,7 +35,9 @@ export function SinglePageCreator({ initialSocials, initialProjects, initialPage
   return (
     <div className="flex flex-col lg:flex-row w-full lg:h-screen p-5 lg:p-0 bg-white dark:bg-neutral-900 text-black dark:text-white border">
       {/* Sidebar */}
-      <Sidebar />
+      <Sidebar 
+        slug={slug}
+      />
 
       {/* Left side - Input form */}
       <DesignForm

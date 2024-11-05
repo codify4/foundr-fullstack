@@ -1,6 +1,6 @@
 'use client'
 
-import { BarChart, Menu, Palette, Settings } from "lucide-react"
+import { BarChart, Menu, Palette, Settings, Clipboard, ClipboardCheck, SearchCheck } from "lucide-react"
 import { ThemeToggle } from "./theme-toggle"
 import {
     Sheet,
@@ -10,50 +10,97 @@ import {
 import { Button } from "../ui/button"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
+import { Card, CardDescription, CardHeader } from "../ui/card"
+import { copyTextToClipboard } from "@/lib/copy-to-clipboard"
+import { useState } from "react"
 
-const Sidebar = () => {
+const Sidebar = ({ slug }: { slug?: string }) => {
     const pathname = usePathname();
+
+    const [isCopied, setIsCopied] = useState(false);
     
+    const handleCopyClick = () => {
+        copyTextToClipboard(`https://www.foundr.vercel.app/${slug}`)
+            .then(() => {
+                setIsCopied(true);
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+    }
     return (
         <>
             <div className="hidden lg:flex w-64 py-3 bg-white dark:bg-neutral-900 text-black dark:text-white border-r z-10 text-sm">
-                <nav className="flex flex-col items-start px-7 py-4 space-y-2">
-                    <div className="flex flex-col">
-                        <Link
-                            className={`w-full flex items-center text-left text-md py-3 rounded-md transition-colors ${
-                                pathname === '/dashboard'
-                                ? 'bg-gray-50 dark:bg-neutral-900 text-black dark:text-white font-medium'
-                                : 'text-neutral-500 dark:text-white w-full flex items-center text-left text-md py-3 rounded-md transition-colors'
-                            }`}
-                            href={`/dashboard`}
-                        >   
-                            <Palette className="inline-block w-5 h-5 mr-2" />
-                            <span>Design</span>
-                        </Link>
-                        <Link
-                            className={`w-full flex items-center text-left text-md py-3 rounded-md transition-colors ${
-                                pathname === '/dashboard/analytics'
-                                ? 'bg-gray-50 dark:bg-neutral-900 text-black dark:text-white font-medium'
-                                : 'text-neutral-500 dark:text-white hover:text-black dark:hover:dark:hover:text-neutral-300'
-                            }`}
-                            href={`/dashboard/analytics`}
-                        >   
-                            <BarChart className="inline-block w-5 h-5 mr-2" />
-                            <span>Analytics</span>
-                        </Link>
-                        <Link
-                            className={`w-full flex items-center text-left text-md py-3 rounded-md transition-colors ${
-                                pathname === '/dashboard/settings'
-                                ? 'bg-gray-50 dark:bg-neutral-900 text-black dark:text-white font-medium'
-                                : 'text-neutral-500 dark:text-white hover:text-black dark:hover:dark:hover:text-neutral-300'
-                            }`}
-                            href={`/dashboard/settings`}
-                        >
-                            <Settings className="inline-block w-5 h-5 mr-2" />
-                            <span>Settings</span>
-                        </Link>
+                <nav className="flex flex-col items-start justify-between px-3 py-4 space-y-2">
+                    <div className="flex flex-col px-2">
+                        <div className="flex flex-col w-full">
+                            <Link
+                                className={`w-full flex items-center text-left text-md py-3 rounded-md transition-colors ${
+                                    pathname === '/dashboard'
+                                    ? 'bg-gray-50 dark:bg-neutral-900 text-black dark:text-white font-medium'
+                                    : 'text-neutral-500 dark:text-white w-full flex items-center text-left text-md py-3 rounded-md transition-colors'
+                                }`}
+                                href={`/dashboard`}
+                            >   
+                                <Palette className="inline-block w-5 h-5 mr-2" />
+                                <span>Design</span>
+                            </Link>
+                            <Link
+                                className={`w-full flex items-center text-left text-md py-3 rounded-md transition-colors ${
+                                    pathname === '/dashboard/analytics'
+                                    ? 'bg-gray-50 dark:bg-neutral-900 text-black dark:text-white font-medium'
+                                    : 'text-neutral-500 dark:text-white hover:text-black dark:hover:dark:hover:text-neutral-300'
+                                }`}
+                                href={`/dashboard/analytics`}
+                            >   
+                                <BarChart className="inline-block w-5 h-5 mr-2" />
+                                <span>Analytics</span>
+                            </Link>
+                            <Link
+                                className={`w-full flex items-center text-left text-md py-3 rounded-md transition-colors ${
+                                    pathname === '/dashboard/settings'
+                                    ? 'bg-gray-50 dark:bg-neutral-900 text-black dark:text-white font-medium'
+                                    : 'text-neutral-500 dark:text-white hover:text-black dark:hover:dark:hover:text-neutral-300'
+                                }`}
+                                href={`/dashboard/settings`}
+                            >
+                                <Settings className="inline-block w-5 h-5 mr-2" />
+                                <span>Settings</span>
+                            </Link>
+                        </div>
+                        <ThemeToggle />
                     </div>
-                    <ThemeToggle />
+
+                    <div>
+                        <Card className="flex flex-col items-center justify-center gap-2 w-full bg-white py-4 px-2 rounded-lg">
+                            <div className="flex flex-col items-start justify-center px-3">
+                                <CardHeader className="font-bold text-base p-0">Published Page</CardHeader>
+                                <CardDescription>Check out the page you just created!</CardDescription>
+                            </div>
+                            <Link
+                                href={`/${slug}`}
+                                className="w-full flex items-center justify-center"
+                            >
+                                <Button className="w-11/12 bg-black hover:bg-primary">
+                                    <SearchCheck className="size-5 mr-1"/>
+                                    Check out
+                                </Button>
+                            </Link>
+                            <Button onClick={handleCopyClick} className="w-11/12 bg-black hover:bg-primary">
+                                {isCopied ? (
+                                    <span className="flex flex-row items-center gap-1">
+                                        <ClipboardCheck size={16} />
+                                        Copied
+                                    </span>
+                                ) : (
+                                    <span className="flex flex-row items-center gap-1">
+                                        <Clipboard size={16} />
+                                        Copy Link
+                                    </span>
+                                )}
+                            </Button>
+                        </Card>
+                    </div>
                 </nav>
             </div>
 

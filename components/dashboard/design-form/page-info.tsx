@@ -5,12 +5,11 @@ import { Label } from "@/components/ui/label"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { Button } from "@/components/ui/button"
-import { getPageIdForUser, createPage, updatePage } from '@/actions/page-actions'
+import { getPageIdForUser, updatePage } from '@/actions/page-actions'
 import { InsertPage } from '@/db/schemas/page-schema'
 import { redirect } from 'next/navigation'
 import { getAuthenticatedUser } from '@/lib/get-session'
-import { revalidatePath } from 'next/cache'
-import { UploadButton, UploadDropzone } from '@/lib/uploadthing'
+import { UploadDropzone } from '@/lib/uploadthing'
 
 type PageInfoProps = {
   slug: string;
