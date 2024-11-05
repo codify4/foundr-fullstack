@@ -9,15 +9,17 @@ import { getPageIdForUser, createPage, updatePage } from '@/actions/page-actions
 import { InsertPage } from '@/db/schemas/page-schema'
 import { redirect } from 'next/navigation'
 import { getAuthenticatedUser } from '@/lib/get-session'
+import { revalidatePath } from 'next/cache'
+import { UploadButton } from '@/lib/uploadthing'
 
 type PageInfoProps = {
   slug: string;
   name: string;
-  image?: string;
+  image: string;
   bio: string;
   setSlug: React.Dispatch<React.SetStateAction<string>>;
   setName: React.Dispatch<React.SetStateAction<string>>;
-  setImage?: React.Dispatch<React.SetStateAction<string>>;
+  setImage: React.Dispatch<React.SetStateAction<string>>;
   setBio: React.Dispatch<React.SetStateAction<string>>;
 }
 
@@ -76,16 +78,22 @@ const PageInfo = ({ slug, name, image, bio, setSlug, setName, setImage, setBio }
           className="mt-1"
         />
       </div>
-      {/* <div>
+      <div>
         <Label htmlFor="image" className="text-sm font-medium">Avatar URL</Label>
-        <Input
-          id="image"
-          name="image"
-          value={image}
-          onChange={(e) => setImage(e.target.value)}
-          className="mt-1"
+        <UploadButton 
+          endpoint="imageUploader"
+          onClientUploadComplete={(res) => {
+            if (res && res[0]) {
+              setImage(res[0].url);
+              console.log("Upload Completed");
+            }
+          }}
+          onUploadError={(error: Error) => {
+            console.error(`ERROR! ${error.message}`);
+          }}
+          className="w-full bg-primary text-white rounded-lg py-2 px-4 text-sm font-medium"
         />
-      </div> */}
+      </div>
       <div>
         <Label htmlFor="bio" className="text-sm font-medium">Bio</Label>
         <Textarea
