@@ -33,6 +33,7 @@ const DeleteProject = ({ id }: { id: number }) => {
                     deleteProject(id)
                     redirect('/dashboard')
                 }}
+                className="self-end w-full"
             >
                 <Button 
                     type="submit"

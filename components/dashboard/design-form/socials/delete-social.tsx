@@ -34,6 +34,7 @@ const DeleteProject = ({ id }: { id: number }) => {
                     deleteSocialLink(id)
                     redirect('/dashboard')
                 }}
+                className="self-end w-full"
             >
                 <Button 
                     type="submit"
