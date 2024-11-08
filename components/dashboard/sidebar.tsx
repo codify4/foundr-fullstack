@@ -32,10 +32,10 @@ const Sidebar = ({ slug }: { slug?: string }) => {
         <>
             <div className="hidden lg:flex w-64 py-3 bg-white dark:bg-neutral-900 text-black dark:text-white border-r z-10 text-sm">
                 <nav className="flex flex-col items-start justify-between px-3 py-4 space-y-2">
-                    <div className="flex flex-col px-2">
-                        <div className="flex flex-col w-full">
+                    <div className="flex flex-col px-2 w-full">
+                        <div className="flex flex-col w-full mb-1">
                             <Link
-                                className={`w-full flex items-center text-left text-md py-3 rounded-md transition-colors ${
+                                className={`flex items-center text-left text-md px-1 py-3 rounded-md transition-colors ${
                                     pathname === '/dashboard'
                                     ? 'bg-gray-50 dark:bg-neutral-900 text-black dark:text-white font-medium'
                                     : 'text-neutral-500 dark:text-white w-full flex items-center text-left text-md py-3 rounded-md transition-colors'
@@ -46,7 +46,7 @@ const Sidebar = ({ slug }: { slug?: string }) => {
                                 <span>Design</span>
                             </Link>
                             <Link
-                                className={`w-full flex items-center text-left text-md py-3 rounded-md transition-colors ${
+                                className={`flex items-center text-left text-md px-1 py-3 rounded-md transition-colors ${
                                     pathname === '/dashboard/analytics'
                                     ? 'bg-gray-50 dark:bg-neutral-900 text-black dark:text-white font-medium'
                                     : 'text-neutral-500 dark:text-white hover:text-black dark:hover:dark:hover:text-neutral-300'
@@ -57,7 +57,7 @@ const Sidebar = ({ slug }: { slug?: string }) => {
                                 <span>Analytics</span>
                             </Link>
                             <Link
-                                className={`w-full flex items-center text-left text-md py-3 rounded-md transition-colors ${
+                                className={`flex items-center text-left text-md px-1 py-3 rounded-md transition-colors ${
                                     pathname === '/dashboard/settings'
                                     ? 'bg-gray-50 dark:bg-neutral-900 text-black dark:text-white font-medium'
                                     : 'text-neutral-500 dark:text-white hover:text-black dark:hover:dark:hover:text-neutral-300'
