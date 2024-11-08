@@ -100,3 +100,14 @@ export async function createPageAndRedirect(pageData: Omit<InsertPage, 'id' | 'c
   await createPage(pageData)
   redirect('/dashboard') // This will work because it's a server action
 }
+
+export async function getSlug() {
+  const pageId = await getPageIdForUser();
+  if (!pageId) {
+    throw new Error('No page ID found');
+  }
+
+  const [foundPage] = await db.select().from(page).where(eq(page.id, pageId));
+  
+  return foundPage.pageSlug;
+}

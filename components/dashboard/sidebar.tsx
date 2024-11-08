@@ -80,6 +80,7 @@ const Sidebar = ({ slug }: { slug?: string }) => {
                             <Link
                                 href={`/${slug}`}
                                 className="w-full flex items-center justify-center"
+                                target="_blank"
                             >
                                 <Button className="w-11/12 bg-black hover:bg-primary">
                                     <SearchCheck className="size-5 mr-1"/>
