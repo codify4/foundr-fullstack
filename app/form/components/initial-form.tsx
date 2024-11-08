@@ -7,7 +7,7 @@ import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
 import { InsertPage } from "@/db/schemas/page-schema"
 import { getAuthenticatedUser } from "@/lib/get-session"
-import { UploadButton } from "@/lib/uploadthing"
+import { UploadDropzone } from "@/lib/uploadthing"
 import { revalidatePath } from "next/cache"
 import { useState } from "react"
 
@@ -43,12 +43,12 @@ function IntialForm() {
                 className="space-y-5 w-full"
                 action={handleAction}
             >   
-                <UploadButton 
+                <UploadDropzone 
                     endpoint="imageUploader"
                     onClientUploadComplete={() => {
                       revalidatePath('/form')
                     }}
-                    className="w-full bg-primary text-white rounded-lg py-2 px-4 text-sm font-medium"
+                    className="w-full border-2 text-white rounded-lg py-2 px-4 text-sm font-medium"
                 />
                 <div>
                     <Label htmlFor="slug" className="text-sm font-medium">foundr.lol/</Label>
