@@ -5,13 +5,13 @@ import Sidebar from './sidebar'
 import DesignForm from './design-form/design-form'
 import Preview from './preview/preview'
 import { Project, Social } from '@/types/page-types'
-import { SelectPage, SelectProject, SelectSocial } from '@/db/schemas/page-schema'
+import { SelectPage, SelectProject, SelectSocial, SelectImage } from '@/db/schemas/page-schema'
 
 export function SinglePageCreator({ initialSocials, initialProjects, initialPageInfo }: { initialSocials: SelectSocial[], initialProjects: SelectProject[], initialPageInfo: SelectPage }) {
 
   const [slug, setSlug] = useState(initialPageInfo.pageSlug)
   const [name, setName] = useState(initialPageInfo.name)
-  const [image, setImage] = useState('');
+  const [image, setImage] = useState<SelectImage['url']>('');
   const [bio, setBio] = useState(initialPageInfo.bio)
 
   const [projects, setProjects] = useState<SelectProject[]>(initialProjects)

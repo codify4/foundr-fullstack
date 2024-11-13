@@ -2,17 +2,17 @@ import PageInfo from "./page-info"
 import ProjectForm from "./projects/project-form"
 import { Project, Social } from "@/types/page-types"
 import SocialForm from "./socials/socials-form"
-import { SelectProject, SelectSocial } from "@/db/schemas/page-schema"
+import { SelectProject, SelectSocial, SelectImage } from "@/db/schemas/page-schema"
 
 
 type DesignFormProps = {
   slug: string;
   name: string;
-  image: string;
+  image: SelectImage['url'];
   bio: string;
   setSlug: React.Dispatch<React.SetStateAction<string>>;
   setName: React.Dispatch<React.SetStateAction<string>>;
-  setImage: React.Dispatch<React.SetStateAction<string>>;
+  setImage: React.Dispatch<React.SetStateAction<SelectImage['url']>>;
   setBio: React.Dispatch<React.SetStateAction<string>>;
   projects: SelectProject[];
   socials: SelectSocial[];

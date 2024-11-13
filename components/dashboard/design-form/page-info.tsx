@@ -6,19 +6,19 @@ import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { Button } from "@/components/ui/button"
 import { getPageIdForUser, updatePage } from '@/actions/page-actions'
-import { InsertPage } from '@/db/schemas/page-schema'
+import { InsertPage, SelectImage } from '@/db/schemas/page-schema'
 import { redirect } from 'next/navigation'
 import { getAuthenticatedUser } from '@/lib/get-session'
 import { UploadDropzone } from '@/lib/uploadthing'
 
 type PageInfoProps = {
   slug: string;
-  name: string;
+  name: SelectImage['url'];
   image: string;
   bio: string;
   setSlug: React.Dispatch<React.SetStateAction<string>>;
   setName: React.Dispatch<React.SetStateAction<string>>;
-  setImage: React.Dispatch<React.SetStateAction<string>>;
+  setImage: React.Dispatch<React.SetStateAction<SelectImage['url']>>;
   setBio: React.Dispatch<React.SetStateAction<string>>;
 }
 

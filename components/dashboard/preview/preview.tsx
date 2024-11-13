@@ -2,11 +2,12 @@ import { Github, Twitter, Linkedin, Instagram, Facebook, LinkIcon, DollarSign } 
 import { Switch } from "@/components/ui/switch"
 import Image from "next/image"
 import { Project, Social } from "@/types/page-types";
+import { SelectImage } from "@/db/schemas/page-schema";
 
 type PreviewProps = {
     name: string;
     bio: string;
-    avatarUrl?: string;
+    avatarUrl: SelectImage['url'];
     socials: Social[];
     projects: Project[];
     isDesktopPreview: boolean;
