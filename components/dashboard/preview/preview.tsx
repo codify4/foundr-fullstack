@@ -45,13 +45,15 @@ const Preview = ({ name, avatarUrl, bio, projects, socials, isDesktopPreview, se
                     className={`bg-white dark:bg-neutral-900 text-black dark:text-white rounded-xl border overflow-hidden transition-all duration-300 ${isDesktopPreview ? 'w-[1024px]' : 'w-[375px]'}`}
                 >
                     <div className="p-8">
-                        <Image
-                            src={avatarUrl || '/icon.png'}
-                            alt="Avatar"
-                            width={130}
-                            height={130}
-                            className="w-32 h-32 rounded-full mx-auto mb-4"
-                        />
+                        <div className="relative w-32 h-32 mx-auto mb-4">
+                            <Image
+                                src={avatarUrl || '/icon.png'}
+                                alt={`${name}'s avatar`}
+                                fill
+                                className="rounded-full object-cover"
+                                priority
+                            />
+                        </div>
                         <h1 className="text-3xl font-bold text-center mb-2">{name}</h1>
                         <p className="text-center text-gray-700 dark:text-white whitespace-pre-wrap mb-4">{bio}</p>
                         <div className="flex justify-center items-center space-x-4 mb-8">

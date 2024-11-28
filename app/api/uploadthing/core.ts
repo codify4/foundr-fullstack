@@ -4,6 +4,8 @@ import { images } from "@/db/schemas/page-schema";
 import { getAuthenticatedUser } from "@/lib/get-session";
 import { createUploadthing, type FileRouter } from "uploadthing/next";
 import { UploadThingError } from "uploadthing/server";
+import { revalidatePath } from "next/cache";
+import { eq } from "drizzle-orm";
 
 const f = createUploadthing();
 
@@ -25,21 +27,48 @@ export const ourFileRouter = {
     .onUploadComplete(async ({ metadata, file }) => {
       // This code RUNS ON YOUR SERVER after upload
       console.log("Upload complete for userId:", metadata.userId);
-
       console.log("file url", file.url);
 
-      const pageId = await getPageIdForUser();
-      if (!pageId) {
-        throw new Error('No page ID found for user');
-      }
-      
-      await db.insert(images).values({
-        name: file.name,
-        url: file.url,
-        pageId: pageId,
-      })
+      try {
+        const pageId = await getPageIdForUser();
+        if (!pageId) {
+          throw new Error('No page ID found for user');
+        }
 
-      // Whatever is returned here is sent to the clientside `onClientUploadComplete` callback
+        // Check for existing image
+        const existingImage = await db
+          .select()
+          .from(images)
+          .where(eq(images.pageId, pageId));
+
+        if (existingImage.length > 0) {
+          // Update existing image
+          await db
+            .update(images)
+            .set({
+              url: file.url,
+              name: file.name,
+              updatedAt: new Date(),
+            })
+            .where(eq(images.id, existingImage[0].id));
+        } else {
+          // Insert new image
+          await db.insert(images).values({
+            name: file.name,
+            url: file.url,
+            pageId: pageId,
+          });
+        }
+
+        // Revalidate the dashboard page to show updated image
+        revalidatePath('/dashboard');
+        
+        console.log('Successfully updated image in database');
+      } catch (error) {
+        console.error('Error updating image in database:', error);
+        throw error;
+      }
+
       return { uploadedBy: metadata.userId };
     }),
 } satisfies FileRouter;

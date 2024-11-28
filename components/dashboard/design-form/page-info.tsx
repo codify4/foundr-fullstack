@@ -10,21 +10,22 @@ import { InsertPage, SelectImage } from '@/db/schemas/page-schema'
 import { redirect } from 'next/navigation'
 import { getAuthenticatedUser } from '@/lib/get-session'
 import { UploadDropzone } from '@/lib/uploadthing'
+import { useRouter } from 'next/navigation'
 
 type PageInfoProps = {
   slug: string;
-  name: SelectImage['url'];
+  name: string;
   image: string;
   bio: string;
   setSlug: React.Dispatch<React.SetStateAction<string>>;
   setName: React.Dispatch<React.SetStateAction<string>>;
-  setImage: React.Dispatch<React.SetStateAction<SelectImage['url']>>;
+  setImage: React.Dispatch<React.SetStateAction<string>>;
   setBio: React.Dispatch<React.SetStateAction<string>>;
 }
 
 const PageInfo = ({ slug, name, image, bio, setSlug, setName, setImage, setBio }: PageInfoProps) => {
-
   const [isSubmitting, setIsSubmitting] = useState(false)
+  const router = useRouter()
 
   const handleAction = async (formData: FormData) => {
     const user = await getAuthenticatedUser();
@@ -41,7 +42,10 @@ const PageInfo = ({ slug, name, image, bio, setSlug, setName, setImage, setBio }
     try {
       const pageId = await getPageIdForUser()
       
-      if (pageId) await updatePage(pageId, pageData)
+      if (pageId) {
+        await updatePage(pageId, pageData)
+        console.log('Page updated successfully')
+      }
       setIsSubmitting(false)
       redirect('/dashboard')
     } catch (error) {
@@ -56,19 +60,37 @@ const PageInfo = ({ slug, name, image, bio, setSlug, setName, setImage, setBio }
       action={handleAction}
     >
       <div>
-        <Label htmlFor="image" className="text-sm font-medium">Avatar URL</Label>
+        <Label htmlFor="image" className="text-sm font-medium">Profile Image</Label>
+        {image && (
+          <div className="mt-2 mb-4">
+            <img 
+              src={image} 
+              alt="Profile" 
+              className="w-24 h-24 rounded-full object-cover border-2 border-gray-200"
+            />
+          </div>
+        )}
         <UploadDropzone 
           endpoint="imageUploader"
           onClientUploadComplete={(res) => {
             if (res && res[0]) {
-              setImage(res[0].url);
-              console.log("Upload Completed");
+              const uploadedUrl = res[0].url;
+              setImage(uploadedUrl);
+              router.refresh(); // Refresh the page to show updated image
+              console.log("Upload completed:", uploadedUrl);
             }
           }}
           onUploadError={(error: Error) => {
-            console.error(`ERROR! ${error.message}`);
+            console.error(`Upload failed: ${error.message}`);
           }}
-          className="w-full border-2 text-white rounded-lg py-2 px-4 text-sm font-medium"
+          onUploadBegin={() => {
+            console.log("Upload starting...");
+          }}
+          appearance={{
+            container: "mt-2 w-full",
+            button: "ut-uploading:cursor-not-allowed bg-black px-5 rounded-lg hover:bg-gray-900 ut-uploading:bg-gray-600",
+            allowedContent: "text-sm text-gray-600 dark:text-gray-400",
+          }}
         />
       </div>
       <div>

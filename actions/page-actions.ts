@@ -1,7 +1,7 @@
 'use server'
 
 import { eq } from 'drizzle-orm';
-import { page, InsertPage, SelectPage, images } from '@/db/schemas/page-schema';
+import { page, InsertPage, SelectPage, images, SelectImage } from '@/db/schemas/page-schema';
 import { db } from '@/db/drizzle';
 import { auth } from '@/auth';
 import { revalidatePath } from 'next/cache';
@@ -22,6 +22,44 @@ export async function getPageIdForUser(): Promise<number | null> {
     return result.length > 0 ? result[0].id : null;
   } catch (error) {
     console.error('Error getting page ID for user:', error);
+    throw error;
+  }
+}
+
+export type PageWithImage = SelectPage & {
+  image: SelectImage
+}
+
+export async function getPageWithImage(userId: string): Promise<PageWithImage | null> {
+  try {
+    const result = await db
+      .select({
+        page: page,
+        image: images
+      })
+      .from(page)
+      .leftJoin(images, eq(images.pageId, page.id))
+      .where(eq(page.userId, userId))
+      .limit(1);
+
+    if (result.length === 0) return null;
+
+    const pageData = result[0].page;
+    const imageData = result[0].image || {
+      id: 0,
+      name: 'default',
+      url: '/foundr.png',
+      pageId: pageData.id,
+      createdAt: new Date(),
+      updatedAt: new Date(),
+    };
+
+    return {
+      ...pageData,
+      image: imageData
+    };
+  } catch (error) {
+    console.error('Error getting page with image:', error);
     throw error;
   }
 }
@@ -54,32 +92,25 @@ export async function createPage(pageData: Omit<InsertPage, 'id' | 'createdAt' |
 }
 
 export async function updatePage(pageId: number, pageData: Partial<Omit<InsertPage, 'id' | 'createdAt' | 'updatedAt'>>): Promise<SelectPage | null> {
-  const session = await auth();
-
-  if (!session || !session.user) {
-    throw new Error('You must be logged in to update a page');
-  }
-
-  const userId = session.user.id;
-
-  if (!userId || !pageData) {
+  if (!pageId || !pageData) {
     throw new Error('Missing required fields');
   }
 
   try {
-    const [updatedPage] = await db.update(page)
-      .set({ ...pageData, updatedAt: new Date() })
+    const [updatedPage] = await db
+      .update(page)
+      .set({
+        ...pageData,
+        updatedAt: new Date(),
+      })
       .where(eq(page.id, pageId))
       .returning();
     
-    if (updatedPage) {
-      revalidatePath(`/${updatedPage.pageSlug}`);
-    }
-
-    return updatedPage || null;
+    revalidatePath('/dashboard');
+    return updatedPage;
   } catch (error) {
     console.error('Error updating page:', error);
-    throw error;
+    return null;
   }
 }
 
@@ -89,11 +120,27 @@ export async function getPageById(id: number) {
 }
 
 export async function getPageBySlug(slug: string) {
-  const [foundPage] = await db
-  .select()
-  .from(page)
-  .where(eq(page.pageSlug, slug));
-  return foundPage;
+  try {
+    const result = await db
+      .select({
+        page: page,
+        image: images
+      })
+      .from(page)
+      .leftJoin(images, eq(page.id, images.pageId))
+      .where(eq(page.pageSlug, slug))
+      .limit(1);
+
+    if (result.length === 0) return null;
+
+    return {
+      ...result[0].page,
+      image: result[0].image
+    };
+  } catch (error) {
+    console.error('Error getting page by slug:', error);
+    return null;
+  }
 }
 
 export async function createPageAndRedirect(pageData: Omit<InsertPage, 'id' | 'createdAt' | 'updatedAt'>) {
@@ -110,4 +157,39 @@ export async function getSlug() {
   const [foundPage] = await db.select().from(page).where(eq(page.id, pageId));
   
   return foundPage.pageSlug;
+}
+
+export async function updatePageImage(pageId: number, imageUrl: string, imageName: string) {
+  try {
+    // First, try to find an existing image for this page
+    const existingImage = await db
+      .select()
+      .from(images)
+      .where(eq(images.pageId, pageId))
+      .limit(1);
+
+    if (existingImage.length > 0) {
+      // Update existing image
+      await db
+        .update(images)
+        .set({
+          url: imageUrl,
+          name: imageName,
+          updatedAt: new Date(),
+        })
+        .where(eq(images.id, existingImage[0].id));
+    } else {
+      // Create new image
+      await db.insert(images).values({
+        url: imageUrl,
+        name: imageName,
+        pageId: pageId,
+      });
+    }
+
+    revalidatePath('/dashboard');
+  } catch (error) {
+    console.error('Error updating page image:', error);
+    throw error;
+  }
 }

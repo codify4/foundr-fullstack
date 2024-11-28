@@ -6,12 +6,20 @@ import DesignForm from './design-form/design-form'
 import Preview from './preview/preview'
 import { Project, Social } from '@/types/page-types'
 import { SelectPage, SelectProject, SelectSocial, SelectImage } from '@/db/schemas/page-schema'
+import { PageWithImage } from '@/actions/page-actions'
 
-export function SinglePageCreator({ initialSocials, initialProjects, initialPageInfo }: { initialSocials: SelectSocial[], initialProjects: SelectProject[], initialPageInfo: SelectPage }) {
-
+export function SinglePageCreator({ 
+  initialSocials, 
+  initialProjects, 
+  initialPageInfo 
+}: { 
+  initialSocials: SelectSocial[], 
+  initialProjects: SelectProject[], 
+  initialPageInfo: PageWithImage
+}) {
   const [slug, setSlug] = useState(initialPageInfo.pageSlug)
   const [name, setName] = useState(initialPageInfo.name)
-  const [image, setImage] = useState<SelectImage['url']>('');
+  const [image, setImage] = useState<string>(initialPageInfo.image.url)
   const [bio, setBio] = useState(initialPageInfo.bio)
 
   const [projects, setProjects] = useState<SelectProject[]>(initialProjects)
@@ -53,12 +61,12 @@ export function SinglePageCreator({ initialSocials, initialProjects, initialPage
         socials={socials}
         newProject={newProject}
         newSocial={newSocial}
+        setNewProject={setNewProject}
+        setNewSocial={setNewSocial}
         isProjectDialogOpen={isProjectDialogOpen}
         isSocialDialogOpen={isSocialDialogOpen}
         setIsProjectDialogOpen={setIsProjectDialogOpen}
         setIsSocialDialogOpen={setIsSocialDialogOpen}
-        setNewProject={setNewProject}
-        setNewSocial={setNewSocial}
         setProjects={setProjects}
         setSocials={setSocials}
       />
@@ -66,16 +74,16 @@ export function SinglePageCreator({ initialSocials, initialProjects, initialPage
       {/* Right side - Preview */}
       <Preview 
         name={name}
-        avatarUrl={image}
         bio={bio}
+        avatarUrl={image}
         projects={projects}
         socials={socials}
         isDesktopPreview={isDesktopPreview}
+        setIsDesktopPreview={setIsDesktopPreview}
         isProjectDialogOpen={isProjectDialogOpen}
         isSocialDialogOpen={isSocialDialogOpen}
         setIsProjectDialogOpen={setIsProjectDialogOpen}
         setIsSocialDialogOpen={setIsSocialDialogOpen}
-        setIsDesktopPreview={setIsDesktopPreview}
       />
     </div>
   )

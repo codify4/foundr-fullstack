@@ -21,10 +21,6 @@ export const pageRelations = relations(page, ({ many, one }) => ({
         fields: [page.userId],
         references: [users.id],
     }),
-    image: one(images, {
-        fields: [page.id],
-        references: [images.id],
-    }),
 }));
 
 export const images = pgTable("image", {
@@ -42,7 +38,6 @@ export const imagesRelations = relations(images, ({ one }) => ({
         references: [page.id],
     }),
 }));
-
 
 export const socialLink = pgTable('social_link', {
     id: serial('id').primaryKey(),

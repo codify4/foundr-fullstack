@@ -8,11 +8,11 @@ import { SelectProject, SelectSocial, SelectImage } from "@/db/schemas/page-sche
 type DesignFormProps = {
   slug: string;
   name: string;
-  image: SelectImage['url'];
+  image: string;
   bio: string;
   setSlug: React.Dispatch<React.SetStateAction<string>>;
   setName: React.Dispatch<React.SetStateAction<string>>;
-  setImage: React.Dispatch<React.SetStateAction<SelectImage['url']>>;
+  setImage: React.Dispatch<React.SetStateAction<string>>;
   setBio: React.Dispatch<React.SetStateAction<string>>;
   projects: SelectProject[];
   socials: SelectSocial[];
@@ -51,38 +51,38 @@ const DesignForm = ({
   setSocials
 }: DesignFormProps) => {
 
-
   return (
-      <div className="w-full lg:w-2/5 p-4 md:p-8 overflow-auto overflow-y-scroll no-scrollbar">
-        <h1 className="text-xl lg:text-2xl font-bold mb-6">Design</h1>
-        <div className="space-y-4">
-          <PageInfo
-            slug={slug}
-            name={name}
-            image={image}
-            bio={bio}
-            setSlug={setSlug}
-            setName={setName}
-            setImage={setImage} 
-            setBio={setBio}
-          />
-          <SocialForm
-            socials={socials}
-            setSocials={setSocials}
-            newSocial={newSocial}
-            setNewSocial={setNewSocial}
-            isSocialDialogOpen={isSocialDialogOpen}
-            setIsSocialDialogOpen={setIsSocialDialogOpen}
-          />
-          <ProjectForm 
-            open={isProjectDialogOpen} 
-            setOpen={setIsProjectDialogOpen}
-            projects={projects}
-            setProjects={setProjects}
-            newProject={newProject}
-            setNewProject={setNewProject}
-          />
-        </div>
+    <div className="w-full lg:w-2/5 p-4 md:p-8 overflow-auto overflow-y-scroll no-scrollbar">
+      <div className="space-y-6">
+        <PageInfo
+          slug={slug}
+          name={name}
+          image={image}
+          bio={bio}
+          setSlug={setSlug}
+          setName={setName}
+          setImage={setImage} 
+          setBio={setBio}
+        />
+        
+        <ProjectForm 
+          projects={projects}
+          newProject={newProject}
+          open={isProjectDialogOpen}
+          setOpen={setIsProjectDialogOpen}
+          setNewProject={setNewProject}
+          setProjects={setProjects}
+        />
+
+        <SocialForm
+          socials={socials}
+          newSocial={newSocial}
+          isSocialDialogOpen={isSocialDialogOpen}
+          setIsSocialDialogOpen={setIsSocialDialogOpen}
+          setNewSocial={setNewSocial}
+          setSocials={setSocials}
+        />
+      </div>
     </div>
   )
 }
