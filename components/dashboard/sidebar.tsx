@@ -72,7 +72,7 @@ const Sidebar = ({ slug }: { slug?: string }) => {
                     </div>
 
                     <div>
-                        <Card className="flex flex-col items-center justify-center gap-2 w-full bg-white dark:bg-neutral-950 text-black dark:text-white py-4 px-2 rounded-lg border-0">
+                        <Card className="flex flex-col items-center justify-center gap-2 w-full bg-white dark:bg-neutral-950 text-black dark:text-white py-4 px-2 rounded-lg dark:border-0">
                             <div className="flex flex-col items-start justify-center px-3">
                                 <CardHeader className="font-bold text-base p-0">Published Page</CardHeader>
                                 <CardDescription>Check out the page you just created!</CardDescription>
