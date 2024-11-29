@@ -1,6 +1,6 @@
 import { getSocialLinksByPageId } from '@/actions/socials-actions'
 import { getProjectsByPageId } from '@/actions/project-actions'
-import { getPageWithImage } from '@/actions/page-actions'
+import { getPage } from '@/actions/page-actions'
 import { SinglePageCreator } from './single-page-creator'
 import { redirect } from 'next/navigation'
 import { SelectPage, SelectProject, SelectSocial } from '@/db/schemas/page-schema'
@@ -12,7 +12,7 @@ export default async function SinglePageWrapper() {
     redirect('/signin')
   }
 
-  const pageInfo = await getPageWithImage(session.user.id)
+  const pageInfo = await getPage(session.user.id)
   if (pageInfo === null) {
     return <div>Page not found</div>
   }

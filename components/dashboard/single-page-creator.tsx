@@ -5,8 +5,7 @@ import Sidebar from './sidebar'
 import DesignForm from './design-form/design-form'
 import Preview from './preview/preview'
 import { Project, Social } from '@/types/page-types'
-import { SelectPage, SelectProject, SelectSocial, SelectImage } from '@/db/schemas/page-schema'
-import { PageWithImage } from '@/actions/page-actions'
+import { SelectPage, SelectProject, SelectSocial } from '@/db/schemas/page-schema'
 
 export function SinglePageCreator({ 
   initialSocials, 
@@ -15,11 +14,10 @@ export function SinglePageCreator({
 }: { 
   initialSocials: SelectSocial[], 
   initialProjects: SelectProject[], 
-  initialPageInfo: PageWithImage
+  initialPageInfo: SelectPage
 }) {
   const [slug, setSlug] = useState(initialPageInfo.pageSlug)
   const [name, setName] = useState(initialPageInfo.name)
-  const [image, setImage] = useState<string>(initialPageInfo.image.url)
   const [bio, setBio] = useState(initialPageInfo.bio)
 
   const [projects, setProjects] = useState<SelectProject[]>(initialProjects)
@@ -51,11 +49,9 @@ export function SinglePageCreator({
       <DesignForm
         slug={slug}
         name={name}
-        image={image}
         bio={bio}
         setSlug={setSlug}
         setName={setName}
-        setImage={setImage}
         setBio={setBio}
         projects={projects}
         socials={socials}
@@ -75,7 +71,6 @@ export function SinglePageCreator({
       <Preview 
         name={name}
         bio={bio}
-        avatarUrl={image}
         projects={projects}
         socials={socials}
         isDesktopPreview={isDesktopPreview}

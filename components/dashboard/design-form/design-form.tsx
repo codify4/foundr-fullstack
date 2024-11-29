@@ -2,17 +2,15 @@ import PageInfo from "./page-info"
 import ProjectForm from "./projects/project-form"
 import { Project, Social } from "@/types/page-types"
 import SocialForm from "./socials/socials-form"
-import { SelectProject, SelectSocial, SelectImage } from "@/db/schemas/page-schema"
+import { SelectProject, SelectSocial } from "@/db/schemas/page-schema"
 
 
 type DesignFormProps = {
   slug: string;
   name: string;
-  image: string;
   bio: string;
   setSlug: React.Dispatch<React.SetStateAction<string>>;
   setName: React.Dispatch<React.SetStateAction<string>>;
-  setImage: React.Dispatch<React.SetStateAction<string>>;
   setBio: React.Dispatch<React.SetStateAction<string>>;
   projects: SelectProject[];
   socials: SelectSocial[];
@@ -31,11 +29,9 @@ type DesignFormProps = {
 const DesignForm = ({
   slug,
   name,
-  image,
   bio,
   setSlug,
   setName,
-  setImage,
   setBio,
   projects, 
   socials, 
@@ -50,21 +46,17 @@ const DesignForm = ({
   setProjects,
   setSocials
 }: DesignFormProps) => {
-
   return (
     <div className="w-full lg:w-2/5 p-4 md:p-8 overflow-auto overflow-y-scroll no-scrollbar">
       <div className="space-y-6">
-        <PageInfo
+        <PageInfo 
           slug={slug}
           name={name}
-          image={image}
           bio={bio}
           setSlug={setSlug}
           setName={setName}
-          setImage={setImage} 
           setBio={setBio}
         />
-        
         <ProjectForm 
           projects={projects}
           newProject={newProject}
@@ -73,8 +65,7 @@ const DesignForm = ({
           setNewProject={setNewProject}
           setProjects={setProjects}
         />
-
-        <SocialForm
+        <SocialForm 
           socials={socials}
           newSocial={newSocial}
           isSocialDialogOpen={isSocialDialogOpen}

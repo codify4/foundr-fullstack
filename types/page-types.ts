@@ -15,7 +15,6 @@ export interface Social {
 export type Page = {
     slug: string;
     name: string;
-    image: string;
     bio: string;
     projects: Project[];
     socials: Social[];

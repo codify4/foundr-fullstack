@@ -1,17 +1,13 @@
-import Image from 'next/image'
 import { Github, Twitter, Linkedin, Instagram, Facebook, LinkIcon, DollarSign } from 'lucide-react'
 import { getPageBySlug } from '@/actions/page-actions'
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
-import { SelectPage } from '@/db/schemas/page-schema'
 import Link from 'next/link'
 import { getProjectByPageSlug } from '@/actions/project-actions'
 import { getSocialLinkByPageSlug } from '@/actions/socials-actions'
-import { Project, Social } from '@/types/page-types'
 import { Suspense } from 'react'
 
-
-const socialIcons: { [key: string]: React.ComponentType } = {
+const socialIcons = {
   github: Github,
   twitter: Twitter,
   linkedin: Linkedin,
@@ -28,11 +24,11 @@ export default async function Page({ params }: { params: { slug: string } }) {
 }
 
 async function SlugPage({ slug }: { slug: string }) {
-  const pageInfo: SelectPage = await getPageBySlug(slug);
-  const projects: Project[] = await getProjectByPageSlug(slug);
-  const socials: Social[] = await getSocialLinkByPageSlug(slug);
+  const pageInfo = await getPageBySlug(slug);
+  const projects = await getProjectByPageSlug(slug);
+  const socials = await getSocialLinkByPageSlug(slug);
 
-  if (!pageInfo && !projects && !socials) {
+  if (!pageInfo) {
     return (
       <div className='flex flex-col items-center justify-center h-screen'>
         <h1>Page not found</h1>
@@ -42,70 +38,74 @@ async function SlugPage({ slug }: { slug: string }) {
   }
 
   return (
-    <div className="container mx-auto px-4 py-8">
-      <Card className="max-w-2xl mx-auto">
-        <CardHeader className="text-center">
-          <div className="mb-4">
-            <Image
-              src={'/icon.png'}
-              alt="avatar"
-              width={130}
-              height={130}
-              className="rounded-full mx-auto"
-            />
-          </div>
-          <CardTitle className="text-3xl font-bold">{pageInfo?.name}</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <p className="text-center text-muted-foreground whitespace-pre-wrap mb-6">{pageInfo?.bio}</p>
-          
-          <div className="flex justify-center items-center space-x-4 mb-8">
-            {socials?.map((social) => {
-              const IconComponent = socialIcons[social.type as keyof typeof socialIcons]
-              return IconComponent ? (
-                <Link
-                  key={social.link}
-                  href={social.link || '#'}
-                  target="_blank"
-                  className="text-primary hover:text-primary transition-colors"
-                >
-                  <IconComponent />
-                </Link>
-              ) : null
-            })}
-          </div>
+    <Card className="min-h-screen bg-background py-8 px-4">
+      <div className="w-11/12 lg:w-2/5 mx-auto">
+        <CardContent className="bg-white dark:bg-neutral-900 text-black dark:text-white rounded-xl border overflow-hidden">
+          <div className="py-5">
+            <div className="text-center mb-8">
+              <CardTitle className="text-2xl font-bold mb-2">{pageInfo.name}</CardTitle>
+              <p className="text-gray-600 dark:text-gray-400">{pageInfo.bio}</p>
+            </div>
 
-          <h2 className="text-2xl font-semibold mb-4">Projects</h2>
-          <div className="space-y-6">
-            {projects?.map((project) => (
-              <Card key={project.name}>
-                <CardHeader>
-                  <CardTitle>{project.name}</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-muted-foreground mb-4">{project.oneLiner}</p>
-                  <div className="flex items-center justify-between">
-                    <Button variant="outline" asChild>
-                      <Link 
-                        href={project.url || '#'} 
-                        target="_blank" 
-                        className="flex items-center"
+            {/* Socials */}
+            {socials && socials.length > 0 && (
+              <div className="mb-8">
+                <h2 className="text-xl font-semibold mb-4">Connect with me</h2>
+                <div className="flex flex-wrap gap-4">
+                  {socials.map((social, index) => {
+                    const Icon = socialIcons[social.type.toLowerCase() as keyof typeof socialIcons]
+                    return (
+                      <Link
+                        key={index}
+                        href={social.link}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-center space-x-2 p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-neutral-800"
                       >
-                        <LinkIcon className="h-4 w-4 mr-2" />
-                        View Project
+                        {Icon && <Icon className="w-5 h-5" />}
+                        <span>{social.type}</span>
                       </Link>
-                    </Button>
-                    <div className="flex items-center text-green-600">
-                      <DollarSign className="h-4 w-4 mr-1" />
-                      <span>{project.mrr}</span>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-            ))}
+                    )
+                  })}
+                </div>
+              </div>
+            )}
+
+            {/* Projects */}
+            {projects && projects.length > 0 && (
+              <div>
+                <h2 className="text-xl font-semibold mb-4">My Projects</h2>
+                <div className="space-y-4">
+                  {projects.map((project, index) => (
+                    <a
+                      key={index}
+                      href={project.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="block p-4 rounded-lg border hover:border-gray-400 dark:hover:border-gray-600"
+                    >
+                      <div className="flex justify-between items-start">
+                        <div>
+                          <h3 className="font-medium">{project.name}</h3>
+                          <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">
+                            {project.oneLiner}
+                          </p>
+                        </div>
+                        {project.mrr && (
+                          <div className="flex items-center text-green-600">
+                            <DollarSign className="h-4 w-4 mr-1" />
+                            <span>{project.mrr}</span>
+                          </div>
+                        )}
+                      </div>
+                    </a>
+                  ))}
+                </div>
+              </div>
+            )}
           </div>
         </CardContent>
-      </Card>
-    </div>
+      </div>
+    </Card>
   )
 }

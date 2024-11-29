@@ -1,13 +1,10 @@
 import { Github, Twitter, Linkedin, Instagram, Facebook, LinkIcon, DollarSign } from "lucide-react"
 import { Switch } from "@/components/ui/switch"
-import Image from "next/image"
 import { Project, Social } from "@/types/page-types";
-import { SelectImage } from "@/db/schemas/page-schema";
 
 type PreviewProps = {
     name: string;
     bio: string;
-    avatarUrl: SelectImage['url'];
     socials: Social[];
     projects: Project[];
     isDesktopPreview: boolean;
@@ -26,7 +23,7 @@ const socialIcons = {
     facebook: Facebook,
 }
 
-const Preview = ({ name, avatarUrl, bio, projects, socials, isDesktopPreview, setIsDesktopPreview }: PreviewProps) => {
+const Preview = ({ name, bio, projects, socials, isDesktopPreview, setIsDesktopPreview }: PreviewProps) => {
     return (
         <div className="w-full lg:w-1/2 p-8 overflow-auto text-black dark:text-white">
             <div className="flex justify-between items-center mb-4">
@@ -45,63 +42,70 @@ const Preview = ({ name, avatarUrl, bio, projects, socials, isDesktopPreview, se
                     className={`bg-white dark:bg-neutral-900 text-black dark:text-white rounded-xl border overflow-hidden transition-all duration-300 ${isDesktopPreview ? 'w-[1024px]' : 'w-[375px]'}`}
                 >
                     <div className="p-8">
-                        <div className="relative w-32 h-32 mx-auto mb-4">
-                            <Image
-                                src={avatarUrl || '/icon.png'}
-                                alt={`${name}'s avatar`}
-                                fill
-                                className="rounded-full object-cover"
-                                priority
-                            />
+                        <div className="text-center mb-8">
+                            <h1 className="text-2xl font-bold mb-2">{name}</h1>
+                            <p className="text-gray-600 dark:text-gray-400">{bio}</p>
                         </div>
-                        <h1 className="text-3xl font-bold text-center mb-2">{name}</h1>
-                        <p className="text-center text-gray-700 dark:text-white whitespace-pre-wrap mb-4">{bio}</p>
-                        <div className="flex justify-center items-center space-x-4 mb-8">
-                            {socials?.map((social, index) => {
-                                const IconComponent = socialIcons[social.type as keyof typeof socialIcons]
-                                return (
-                                    <a
-                                        key={index}
-                                        href={social.link}
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                        className="text-blue-500 hover:text-blue-700"
-                                    >
-                                        <IconComponent className="w-6 h-6" />
-                                    </a>
-                                )
-                            })}
-                        </div>
-                        <div className="mb-8">
-                            <div className="flex justify-between items-center mb-4">
-                                <h2 className="text-2xl font-semibold">Projects</h2>
-                            </div>
-                            <ul className="space-y-6">
-                                {projects?.map((project, index) => (
-                                    <li key={index} className="border border-gray-200 rounded-lg p-6 shadow-md hover:shadow-lg transition-shadow duration-300">
-                                        <h3 className="text-xl font-semibold mb-2">
-                                            {project.name}
-                                        </h3>
-                                        <p className="text-gray-700 mb-3">{project.oneLiner}</p>
-                                        <div className="flex items-center justify-between mt-4">
-                                            <a 
-                                                href={project.url} 
-                                                target="_blank" 
-                                                rel="noopener noreferrer" 
-                                                className="text-blue-500 hover:text-blue-700 flex items-center"
+
+                        {/* Socials */}
+                        {socials.length > 0 && (
+                            <div className="mb-8">
+                                <h2 className="text-xl font-semibold mb-4">Connect with me</h2>
+                                <div className="flex flex-wrap gap-4">
+                                    {socials.map((social, index) => {
+                                        const Icon = socialIcons[social.type.toLowerCase() as keyof typeof socialIcons]
+                                        return (
+                                            <a
+                                                key={index}
+                                                href={social.link}
+                                                target="_blank"
+                                                rel="noopener noreferrer"
+                                                className="flex items-center space-x-2 p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-neutral-800"
                                             >
-                                                <LinkIcon className="h-4 w-4 mr-1" />
-                                                View Project
+                                                {Icon && <Icon className="w-5 h-5" />}
+                                                <span>{social.type}</span>
                                             </a>
-                                            <div className="flex items-center text-green-600">
-                                                <DollarSign className="h-4 w-4 mr-1" />
-                                                <span>{project.mrr}</span>
+                                        )
+                                    })}
+                                </div>
+                            </div>
+                        )}
+
+                        {/* Projects */}
+                        {projects.length > 0 && (
+                            <div>
+                                <h2 className="text-xl font-semibold mb-4">My Projects</h2>
+                                <div className="space-y-4">
+                                    {projects.map((project, index) => (
+                                        <a
+                                            key={index}
+                                            href={project.url}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            className="block p-4 rounded-lg border hover:border-gray-400 dark:hover:border-gray-600"
+                                        >
+                                            <div className="flex justify-between items-start">
+                                                <div>
+                                                    <h3 className="font-medium">{project.name}</h3>
+                                                    <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">
+                                                        {project.oneLiner}
+                                                    </p>
+                                                </div>
+                                                <div className="flex items-center space-x-2 text-sm text-gray-600 dark:text-gray-400">
+                                                    {project.mrr && (
+                                                        <>
+                                                            <DollarSign className="w-4 h-4" />
+                                                            <span>{project.mrr}/mo</span>
+                                                        </>
+                                                    )}
+                                                    <LinkIcon className="w-4 h-4" />
+                                                </div>
                                             </div>
-                                        </div>
-                                    </li>
-                                ))}
-                            </ul>
-                        </div>
+                                        </a>
+                                    ))}
+                                </div>
+                            </div>
+                        )}
                     </div>
                 </div>
             </div>
