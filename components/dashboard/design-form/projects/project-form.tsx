@@ -60,7 +60,7 @@ const ProjectForm = ({ open, setOpen, projects, setProjects, newProject, setNewP
             <Label htmlFor="projects" className="text-sm font-medium mr-5">Projects</Label>
             <Dialog open={open} onOpenChange={setOpen}>
                 <DialogTrigger asChild>
-                    <Button className="mt-1 bg-primary hover:bg-secondary dark:bg-secondary dark:hover:bg-primary text-white">Add Project</Button>
+                    <Button className="mt-1 bg-primary hover:bg-secondary dark:bg-secondary dark:hover:bg-primary text-white rounded-lg">Add Project</Button>
                 </DialogTrigger>
                 <DialogContent className='w-11/12 rounded-lg bg-white dark:bg-neutral-900 text-black dark:text-white'>
                     <DialogHeader>
@@ -122,7 +122,7 @@ const ProjectForm = ({ open, setOpen, projects, setProjects, newProject, setNewP
                         </div>
                         <Button 
                             type="submit"
-                            className="bg-primary hover:bg-secondary text-white"
+                            className="bg-primary hover:bg-secondary text-white w-full rounded-lg"
                             disabled={isSubmitting}
                         >
                             {isSubmitting ? 'Adding...' : 'Add Project'}

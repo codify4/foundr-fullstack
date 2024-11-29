@@ -92,7 +92,7 @@ const PageInfo = ({ slug, name, bio, setSlug, setName, setBio }: PageInfoProps) 
         <input type="hidden" name="bio" value={bio} />
         <Button 
           type="submit" 
-          className="w-full bg-primary hover:bg-secondary rounded-lg"
+          className="w-full bg-primary hover:bg-secondary rounded-lg dark:text-white"
           disabled={isSubmitting}
         >
           {isSubmitting ? 'Saving...' : 'Save Changes'}

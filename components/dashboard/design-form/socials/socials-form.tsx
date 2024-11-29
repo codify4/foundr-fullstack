@@ -55,7 +55,7 @@ const SocialForm = ({ socials, setSocials, newSocial, setNewSocial, isSocialDial
             <Label htmlFor="socials" className="text-sm font-medium mr-5">Social Media</Label>
             <Dialog open={isSocialDialogOpen} onOpenChange={setIsSocialDialogOpen}>
                 <DialogTrigger asChild>
-                    <Button className="mt-1 bg-primary hover:bg-secondary dark:bg-secondary dark:hover:bg-primary text-white">Add Social Media</Button>
+                    <Button className="mt-1 bg-primary hover:bg-secondary dark:bg-secondary dark:hover:bg-primary text-white rounded-lg">Add Social Media</Button>
                 </DialogTrigger>
                 <DialogContent className='w-11/12 rounded-lg bg-white dark:bg-neutral-900 text-black dark:text-white'>
                     <DialogHeader>
@@ -96,7 +96,7 @@ const SocialForm = ({ socials, setSocials, newSocial, setNewSocial, isSocialDial
                         </div>
                         <Button 
                             type="submit" 
-                            className="bg-primary hover:bg-secondary dark:bg-secondary dark:hover:bg-primary text-white"
+                            className="bg-primary hover:bg-secondary dark:bg-secondary dark:hover:bg-primary text-white w-full rounded-lg"
                             disabled={isSubmitting}
                         >
                             {isSubmitting ? 'Adding...' : 'Add Social Media'}
