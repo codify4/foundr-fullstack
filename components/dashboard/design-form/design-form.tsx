@@ -5,7 +5,6 @@ import ProjectForm from "./projects/project-form"
 import { Project, Social } from "@/types/page-types"
 import SocialForm from "./socials/socials-form"
 import { SelectProject, SelectSocial } from "@/db/schemas/page-schema"
-import { useState } from 'react'
 
 type DesignFormProps = {
   slug: string;
@@ -52,8 +51,6 @@ const DesignForm = ({
   setProjects,
   setSocials
 }: DesignFormProps) => {
-  const [localAvatar, setLocalAvatar] = useState(avatar)
-
   return (
     <div className="w-full lg:w-2/5 p-4 md:p-8 overflow-auto overflow-y-scroll no-scrollbar">
       <div className="space-y-6">
@@ -61,11 +58,11 @@ const DesignForm = ({
           slug={slug}
           name={name}
           bio={bio}
-          avatar={localAvatar}
+          avatar={avatar}
           setSlug={setSlug}
           setName={setName}
           setBio={setBio}
-          setAvatar={setLocalAvatar}
+          setAvatar={setAvatar}
         />
         <ProjectForm 
           projects={projects}
