@@ -25,24 +25,30 @@ const AvatarSelector = ({ onAvatarSelect, defaultSelected }: AvatarSelectorProps
   return (
     <Carousel
       opts={{
-        align: "start",
+        align: "center",
       }}
-      className="w-full"
+      className="w-full max-w-[600px]"
     >
-      <CarouselContent className="w-11/12">
+      <CarouselContent className="-ml-2 md:-ml-4 py-5 px-5">
         {avatars.map(avatar => (
-          <CarouselItem key={avatar.title} className="md:basis-1/2 lg:basis-1/3">
-            <AvatarCard
-              url={avatar.url} 
-              title={avatar.title}
-              isSelected={selectedAvatar === avatar.url}
-              onSelect={() => handleSelect(avatar.url)}
-            />
+          <CarouselItem key={avatar.title} className="pl-2 md:pl-4 basis-1/2 lg:basis-1/2 xl:">
+            <div className="flex justify-center">
+              <div className="w-full max-w-[200px]">
+                <AvatarCard
+                  url={avatar.url} 
+                  title={avatar.title}
+                  isSelected={selectedAvatar === avatar.url}
+                  onSelect={() => handleSelect(avatar.url)}
+                />
+              </div>
+            </div>
           </CarouselItem>
         ))}
       </CarouselContent>
-      <CarouselPrevious />
-      <CarouselNext />
+      <div className="flex items-center justify-center gap-2 mt-2">
+        <CarouselPrevious className="static translate-y-0" />
+        <CarouselNext className="static translate-y-0" />
+      </div>
     </Carousel>
   )
 }

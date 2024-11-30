@@ -13,21 +13,22 @@ const AvatarCard = ({ url, title, isSelected, onSelect }: AvatarCardProps) => {
   return (
     <Card 
       className={cn(
-        "dark:bg-neutral-800 bg-white shadow-lg rounded-xl cursor-pointer transition-all duration-200",
-        "hover:scale-105",
-        isSelected && "ring-2 ring-black scale-105"
+        "dark:bg-neutral-800/50 bg-white/50 backdrop-blur-sm shadow-lg rounded-xl cursor-pointer transition-all duration-200 w-full",
+        "hover:scale-105 hover:shadow-xl p-1",
+        isSelected && "ring-2 ring-black dark:ring-primary-foreground scale-105"
       )}
       onClick={onSelect}
     >
-      <div className="flex flex-col items-center gap-2 p-4">
-        <Image 
-          src={url} 
-          alt={title} 
-          width={100} 
-          height={100} 
-          className="rounded-full"
-        />
-        <p className="font-medium">{title}</p>
+      <div className="flex flex-col items-center justify-between gap-3 py-5 px-3">
+        <div className="relative w-16 h-16 md:w-20 md:h-20">
+          <Image 
+            src={url} 
+            alt={title} 
+            fill
+            className="rounded-full object-cover"
+          />
+        </div>
+        <p className="font-medium text-sm">{title}</p>
       </div>
     </Card>
   )

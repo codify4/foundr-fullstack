@@ -5,7 +5,7 @@ export const avatars = [
     },
     {
         title: 'Avatar 2',
-        url: '/gradient-ph.png'
+        url: '/linkedin.svg'
     },
     {
         title: 'Avatar 3',
