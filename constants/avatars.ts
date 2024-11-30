@@ -1,18 +1,34 @@
 export const avatars = [
     {
-        title: 'Avatar 1',
-        url: '/foundr.png'
+        title: 'Bulb',
+        url: '/avatars/bulb.jpg'
     },
     {
-        title: 'Avatar 2',
-        url: '/linkedin.svg'
+        title: 'City',
+        url: '/avatars/city.jpg'
     },
     {
-        title: 'Avatar 3',
-        url: '/logo-black.png'
+        title: 'Coffee',
+        url: '/avatars/coffe.jpg'
     },
     {
-        title: 'Avatar 4',
-        url: '/instagram.svg'
+        title: 'Fenkis',
+        url: '/avatars/fenkis.jpg'
+    },
+    {
+        title: 'Hex',
+        url: '/avatars/hex.jpg'
+    },
+    {
+        title: 'Infinite',
+        url: '/avatars/infinite (1).jpg'
+    },
+    {
+        title: 'Spaceship',
+        url: '/avatars/spaceship.jpg'
+    },
+    {
+        title: 'Waves',
+        url: '/avatars/waves.jpg'
     }
 ];
