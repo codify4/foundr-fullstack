@@ -1,17 +1,21 @@
+'use client'
+
 import PageInfo from "./page-info"
 import ProjectForm from "./projects/project-form"
 import { Project, Social } from "@/types/page-types"
 import SocialForm from "./socials/socials-form"
 import { SelectProject, SelectSocial } from "@/db/schemas/page-schema"
-
+import { useState } from 'react'
 
 type DesignFormProps = {
   slug: string;
   name: string;
   bio: string;
+  avatar: string;
   setSlug: React.Dispatch<React.SetStateAction<string>>;
   setName: React.Dispatch<React.SetStateAction<string>>;
   setBio: React.Dispatch<React.SetStateAction<string>>;
+  setAvatar: React.Dispatch<React.SetStateAction<string>>;
   projects: SelectProject[];
   socials: SelectSocial[];
   newProject: Project;
@@ -30,9 +34,11 @@ const DesignForm = ({
   slug,
   name,
   bio,
+  avatar,
   setSlug,
   setName,
   setBio,
+  setAvatar,
   projects, 
   socials, 
   newProject, 
@@ -46,6 +52,8 @@ const DesignForm = ({
   setProjects,
   setSocials
 }: DesignFormProps) => {
+  const [localAvatar, setLocalAvatar] = useState(avatar)
+
   return (
     <div className="w-full lg:w-2/5 p-4 md:p-8 overflow-auto overflow-y-scroll no-scrollbar">
       <div className="space-y-6">
@@ -53,9 +61,11 @@ const DesignForm = ({
           slug={slug}
           name={name}
           bio={bio}
+          avatar={localAvatar}
           setSlug={setSlug}
           setName={setName}
           setBio={setBio}
+          setAvatar={setLocalAvatar}
         />
         <ProjectForm 
           projects={projects}

@@ -1,0 +1,1 @@
+ALTER TABLE "page" ADD COLUMN "avatar" text;

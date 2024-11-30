@@ -9,21 +9,21 @@ import { getPageIdForUser, updatePage } from '@/actions/page-actions'
 import { InsertPage } from '@/db/schemas/page-schema'
 import { redirect } from 'next/navigation'
 import { getAuthenticatedUser } from '@/lib/get-session'
-import { useRouter } from 'next/navigation'
 import AvatarSelector from './avatars/avatar-selector'
 
 type PageInfoProps = {
   slug: string;
   name: string;
   bio: string;
+  avatar: string;
   setSlug: React.Dispatch<React.SetStateAction<string>>;
   setName: React.Dispatch<React.SetStateAction<string>>;
   setBio: React.Dispatch<React.SetStateAction<string>>;
+  setAvatar: React.Dispatch<React.SetStateAction<string>>;
 }
 
-const PageInfo = ({ slug, name, bio, setSlug, setName, setBio }: PageInfoProps) => {
+const PageInfo = ({ slug, name, bio, avatar, setSlug, setName, setBio, setAvatar }: PageInfoProps) => {
   const [isSubmitting, setIsSubmitting] = useState(false)
-  const router = useRouter()
 
   const handleAction = async (formData: FormData) => {
     const user = await getAuthenticatedUser();
@@ -34,6 +34,7 @@ const PageInfo = ({ slug, name, bio, setSlug, setName, setBio }: PageInfoProps) 
       pageSlug: formData.get('slug') as string,
       name: formData.get('name') as string,
       bio: formData.get('bio') as string,
+      avatar: avatar,
       userId: userId
     }
 
@@ -54,7 +55,16 @@ const PageInfo = ({ slug, name, bio, setSlug, setName, setBio }: PageInfoProps) 
 
   return (
     <div className="space-y-4">
-      <AvatarSelector />
+      <div>
+        <Label>Avatar</Label>
+        <div className="mt-2">
+          <AvatarSelector 
+            onAvatarSelect={setAvatar} 
+            defaultSelected={avatar} 
+          />
+        </div>
+      </div>
+
       <div>
         <Label htmlFor="name">Name</Label>
         <Input

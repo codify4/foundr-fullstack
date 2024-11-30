@@ -1,6 +1,9 @@
+'use client'
+
 import { Github, Twitter, Linkedin, Instagram, Facebook, LinkIcon, DollarSign } from "lucide-react"
 import { Switch } from "@/components/ui/switch"
 import { Project, Social } from "@/types/page-types";
+import Image from "next/image";
 
 type PreviewProps = {
     name: string;
@@ -13,6 +16,7 @@ type PreviewProps = {
     setIsProjectDialogOpen: React.Dispatch<React.SetStateAction<boolean>>;
     setIsSocialDialogOpen: React.Dispatch<React.SetStateAction<boolean>>;
     setIsDesktopPreview: React.Dispatch<React.SetStateAction<boolean>>;
+    avatar?: string;
 }
 
 const socialIcons = {
@@ -23,7 +27,7 @@ const socialIcons = {
     facebook: Facebook,
 }
 
-const Preview = ({ name, bio, projects, socials, isDesktopPreview, setIsDesktopPreview }: PreviewProps) => {
+const Preview = ({ name, bio, projects, socials, isDesktopPreview, setIsDesktopPreview, avatar }: PreviewProps) => {
     return (
         <div className="w-full lg:w-1/2 p-4 overflow-auto text-black dark:text-white">
             <div className="flex justify-between items-center mb-4">
@@ -43,6 +47,17 @@ const Preview = ({ name, bio, projects, socials, isDesktopPreview, setIsDesktopP
                 >
                     <div className="p-8">
                         <div className="text-center mb-8">
+                            {avatar && (
+                                <div className="mb-4 flex justify-center">
+                                    <Image 
+                                        src={avatar} 
+                                        alt={name} 
+                                        width={100} 
+                                        height={100}
+                                        className="rounded-full"
+                                    />
+                                </div>
+                            )}
                             <h1 className="text-2xl font-bold mb-2">{name}</h1>
                             <p className="text-gray-600 dark:text-gray-400">{bio}</p>
                         </div>

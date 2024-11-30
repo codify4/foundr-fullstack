@@ -19,6 +19,7 @@ export function SinglePageCreator({
   const [slug, setSlug] = useState(initialPageInfo.pageSlug)
   const [name, setName] = useState(initialPageInfo.name)
   const [bio, setBio] = useState(initialPageInfo.bio)
+  const [avatar, setAvatar] = useState(initialPageInfo.avatar || '')
 
   const [projects, setProjects] = useState<SelectProject[]>(initialProjects)
   const [socials, setSocials] = useState<SelectSocial[]>(initialSocials)
@@ -50,9 +51,11 @@ export function SinglePageCreator({
         slug={slug}
         name={name}
         bio={bio}
+        avatar={avatar}
         setSlug={setSlug}
         setName={setName}
         setBio={setBio}
+        setAvatar={setAvatar}
         projects={projects}
         socials={socials}
         newProject={newProject}
@@ -71,6 +74,7 @@ export function SinglePageCreator({
       <Preview 
         name={name}
         bio={bio}
+        avatar={avatar}
         projects={projects}
         socials={socials}
         isDesktopPreview={isDesktopPreview}

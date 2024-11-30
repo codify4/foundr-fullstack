@@ -12,6 +12,7 @@ export const page = pgTable('page', {
     bio: text('bio').notNull(),
     pageSlug: text('page_slug').notNull().unique(),
     userId: text('user_id').notNull().references(() => users.id),
+    avatar: text('avatar'),
 });
 
 export const pageRelations = relations(page, ({ many, one }) => ({
