@@ -10,6 +10,7 @@ import { InsertPage } from '@/db/schemas/page-schema'
 import { redirect } from 'next/navigation'
 import { getAuthenticatedUser } from '@/lib/get-session'
 import { useRouter } from 'next/navigation'
+import AvatarSelector from './avatars/avatar-selector'
 
 type PageInfoProps = {
   slug: string;
@@ -53,6 +54,7 @@ const PageInfo = ({ slug, name, bio, setSlug, setName, setBio }: PageInfoProps) 
 
   return (
     <div className="space-y-4">
+      <AvatarSelector />
       <div>
         <Label htmlFor="name">Name</Label>
         <Input
