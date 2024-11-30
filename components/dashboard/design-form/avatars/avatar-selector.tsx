@@ -31,7 +31,7 @@ const AvatarSelector = ({ onAvatarSelect, defaultSelected }: AvatarSelectorProps
     >
       <CarouselContent className="-ml-2 md:-ml-4 py-5 px-5">
         {avatars.map(avatar => (
-          <CarouselItem key={avatar.title} className="pl-2 md:pl-4 basis-1/2 lg:basis-1/2 xl:">
+          <CarouselItem key={avatar.title} className="pl-2 md:pl-4 basis-1/2 lg:basis-1/2 xl:basis-1/3">
             <div className="flex justify-center">
               <div className="w-full max-w-[200px]">
                 <AvatarCard
