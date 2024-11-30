@@ -1,18 +1,18 @@
 export const avatars = [
     {
-        title: 'Bulb',
+        title: 'Light Bulb',
         url: '/avatars/bulb.jpg'
     },
     {
-        title: 'City',
+        title: 'Cyber City',
         url: '/avatars/city.jpg'
     },
     {
-        title: 'Coffee',
+        title: 'Chill',
         url: '/avatars/coffe.jpg'
     },
     {
-        title: 'Fenkis',
+        title: 'Phoenix',
         url: '/avatars/fenkis.jpg'
     },
     {
@@ -20,7 +20,7 @@ export const avatars = [
         url: '/avatars/hex.jpg'
     },
     {
-        title: 'Infinite',
+        title: 'Infinity',
         url: '/avatars/infinite (1).jpg'
     },
     {
