@@ -25,6 +25,7 @@ function IntialForm() {
             pageSlug: formData.get('slug') as string,
             name: formData.get('name') as string,
             bio: formData.get('bio') as string,
+            avatar: '',
             userId: userId
         }
     
