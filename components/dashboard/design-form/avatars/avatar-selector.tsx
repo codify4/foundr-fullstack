@@ -10,10 +10,10 @@ interface AvatarSelectorProps {
 }
 
 const AvatarSelector = ({ onAvatarSelect, defaultSelected }: AvatarSelectorProps) => {
-  const [selectedAvatar, setSelectedAvatar] = useState<string | null>(defaultSelected || null)
+  const [selectedAvatar, setSelectedAvatar] = useState<string>(defaultSelected || "")
 
   useEffect(() => {
-    setSelectedAvatar(defaultSelected || null)
+    setSelectedAvatar(defaultSelected || "")
   }, [defaultSelected])
 
   const handleSelect = (url: string) => {

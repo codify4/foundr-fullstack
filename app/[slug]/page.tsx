@@ -6,6 +6,7 @@ import Link from 'next/link'
 import { getProjectByPageSlug } from '@/actions/project-actions'
 import { getSocialLinkByPageSlug } from '@/actions/socials-actions'
 import { Suspense } from 'react'
+import Image from 'next/image'
 
 const socialIcons = {
   github: Github,
@@ -42,6 +43,13 @@ async function SlugPage({ slug }: { slug: string }) {
       <div className="w-11/12 lg:w-2/5 mx-auto">
         <CardContent className="bg-white dark:bg-neutral-900 text-black dark:text-white rounded-xl border overflow-hidden">
           <div className="py-5">
+            <Image 
+              src={pageInfo.avatar} 
+              alt={pageInfo.name}
+              width={150} 
+              height={150} 
+              className="rounded-full mx-auto"
+            />
             <div className="text-center mb-8">
               <CardTitle className="text-2xl font-bold mb-2">{pageInfo.name}</CardTitle>
               <p className="text-gray-600 dark:text-gray-400">{pageInfo.bio}</p>

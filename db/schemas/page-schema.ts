@@ -10,9 +10,10 @@ export const page = pgTable('page', {
     updatedAt: timestamp('updated_at').defaultNow(),
     name: text('name').notNull(),
     bio: text('bio').notNull(),
+    avatar: text('avatar').notNull(),
     pageSlug: text('page_slug').notNull().unique(),
     userId: text('user_id').notNull().references(() => users.id),
-    avatar: text('avatar'),
+    
 });
 
 export const pageRelations = relations(page, ({ many, one }) => ({
