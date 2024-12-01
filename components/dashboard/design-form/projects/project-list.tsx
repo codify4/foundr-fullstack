@@ -1,8 +1,7 @@
 import { SelectProject } from "@/db/schemas/page-schema"
 import DeleteProject from "./delete-project"
-import EditProject from "./edit-project"
 import { ExternalLink, DollarSign } from "lucide-react"
-import { Button } from "@/components/ui/button"
+import Link from "next/link"
 
 const ProjectList = ({ projects }: { projects: SelectProject[] }) => {
   if (!projects?.length) {
@@ -24,14 +23,14 @@ const ProjectList = ({ projects }: { projects: SelectProject[] }) => {
             <div className="space-y-1 flex-1">
               <div className="flex items-center gap-2">
                 <h3 className="font-medium">{project.name}</h3>
-                <a 
+                <Link 
                   href={project.url} 
                   target="_blank" 
                   rel="noopener noreferrer"
                   className="text-muted-foreground hover:text-foreground"
                 >
                   <ExternalLink className="h-4 w-4" />
-                </a>
+                </Link>
               </div>
               <p className="text-sm text-muted-foreground line-clamp-2">{project.oneLiner}</p>
               {project.mrr && (
@@ -41,7 +40,7 @@ const ProjectList = ({ projects }: { projects: SelectProject[] }) => {
                 </div>
               )}
             </div>
-            <div className="flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+            <div className="flex items-center sm:opacity-0 sm:group-hover:opacity-100 transition-opacity">
               <DeleteProject id={project.id} />
             </div>
           </div>

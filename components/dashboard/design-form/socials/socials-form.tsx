@@ -108,7 +108,7 @@ const SocialForm = ({ socials, setSocials, newSocial, setNewSocial, isSocialDial
                         </div>
                         <Button 
                             type="submit" 
-                            className="w-full bg-primary hover:bg-primary/90 text-white"
+                            className="w-full bg-black hover:bg-secondary text-white"
                             disabled={isSubmitting}
                         >
                             {isSubmitting ? 'Adding Link...' : 'Add Social Link'}

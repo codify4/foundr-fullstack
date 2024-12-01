@@ -1,6 +1,7 @@
 import { SelectSocial } from "@/db/schemas/page-schema"
 import DeleteSocial from "./delete-social"
 import { Github, Twitter, Linkedin, Instagram, Facebook, ExternalLink } from "lucide-react"
+import Link from "next/link"
 
 const SocialIcons: Record<string, React.ComponentType<any>> = {
     github: Github,
@@ -37,7 +38,7 @@ const SocialsList = ({ socials }: { socials: SelectSocial[] }) => {
                                     <div className="font-medium capitalize">
                                         {social.type}
                                     </div>
-                                    <a 
+                                    <Link 
                                         href={social.link}
                                         target="_blank"
                                         rel="noopener noreferrer"
@@ -45,10 +46,10 @@ const SocialsList = ({ socials }: { socials: SelectSocial[] }) => {
                                     >
                                         View Profile
                                         <ExternalLink className="h-3 w-3" />
-                                    </a>
+                                    </Link>
                                 </div>
                             </div>
-                            <div className="opacity-0 group-hover:opacity-100 transition-opacity">
+                            <div className="sm:opacity-0 sm:group-hover:opacity-100 transition-opacity">
                                 <DeleteSocial id={social.id} />
                             </div>
                         </div>
