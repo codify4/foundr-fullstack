@@ -1,21 +1,20 @@
 'use client'
 
 import { Github, Twitter, Linkedin, Instagram, Facebook, LinkIcon, DollarSign } from "lucide-react"
-import { Switch } from "@/components/ui/switch"
 import { Project, Social } from "@/types/page-types";
 import Image from "next/image";
+import { Device, DeviceSwitch } from "./device-switch"
+import { useState } from "react";
 
 type PreviewProps = {
     name: string;
     bio: string;
     socials: Social[];
     projects: Project[];
-    isDesktopPreview: boolean;
     isProjectDialogOpen: boolean;
     isSocialDialogOpen: boolean;
     setIsProjectDialogOpen: React.Dispatch<React.SetStateAction<boolean>>;
     setIsSocialDialogOpen: React.Dispatch<React.SetStateAction<boolean>>;
-    setIsDesktopPreview: React.Dispatch<React.SetStateAction<boolean>>;
     avatar?: string;
 }
 
@@ -27,23 +26,29 @@ const socialIcons = {
     facebook: Facebook,
 }
 
-const Preview = ({ name, bio, projects, socials, isDesktopPreview, setIsDesktopPreview, avatar }: PreviewProps) => {
+const Preview = ({ name, bio, projects, socials, avatar }: PreviewProps) => {
+    const [device, setDevice] = useState<Device>('desktop')
+
+    const getPreviewWidth = () => {
+        switch (device) {
+            case 'mobile':
+                return 'w-[375px]'
+            case 'desktop':
+                return 'w-[1024px]'
+        }
+    }
+
     return (
         <div className="w-full lg:w-1/2 p-4 overflow-auto text-black dark:text-white">
             <div className="flex justify-between items-center mb-4">
                 <h2 className="text-xl font-semibold">Preview</h2>
-                <div className="hidden md:flex items-center space-x-2">
-                    <span className="text-sm text-gray-600 dark:text-white">Mobile</span>
-                        <Switch
-                            checked={isDesktopPreview}
-                            onCheckedChange={setIsDesktopPreview}
-                        />
-                    <span className="text-sm text-gray-600 dark:text-white">Desktop</span>
+                <div className="hidden md:block">
+                    <DeviceSwitch device={device} setDevice={setDevice} />
                 </div>
             </div>
-            <div className="flex justify-center ">
+            <div className="flex justify-center items-start">
                 <div 
-                    className={`bg-white dark:bg-neutral-900 text-black dark:text-white rounded-xl border overflow-hidden transition-all duration-300 ${isDesktopPreview ? 'w-[1024px]' : 'w-[375px]'}`}
+                    className={`bg-white dark:bg-neutral-900 text-black dark:text-white rounded-xl border overflow-hidden transition-all duration-300 ${getPreviewWidth()}`}
                 >
                     <div className="p-8">
                         <div className="text-center mb-8">
@@ -78,7 +83,7 @@ const Preview = ({ name, bio, projects, socials, isDesktopPreview, setIsDesktopP
                                                 className="flex items-center space-x-2 p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-neutral-800"
                                             >
                                                 {Icon && <Icon className="w-5 h-5" />}
-                                                <span>{social.type}</span>
+                                                <span>{social.type.charAt(0).toUpperCase() + social.type.slice(1)}</span>
                                             </a>
                                         )
                                     })}

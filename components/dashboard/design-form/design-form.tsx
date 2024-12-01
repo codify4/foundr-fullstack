@@ -53,6 +53,7 @@ const DesignForm = ({
 }: DesignFormProps) => {
   return (
     <div className="w-full lg:w-2/5 p-4 md:p-8 overflow-auto overflow-y-scroll no-scrollbar">
+      <h2 className="text-xl font-semibold mb-3">Design</h2>
       <div className="space-y-6">
         <PageInfo 
           slug={slug}

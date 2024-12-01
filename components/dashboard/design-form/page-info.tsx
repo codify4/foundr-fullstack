@@ -56,7 +56,6 @@ const PageInfo = ({ slug, name, bio, avatar, setSlug, setName, setBio, setAvatar
   return (
     <div className="space-y-4">
       <div>
-        <Label>Avatar</Label>
         <AvatarSelector 
           onAvatarSelect={setAvatar} 
           defaultSelected={avatar} 
