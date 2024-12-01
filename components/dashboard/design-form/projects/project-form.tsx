@@ -66,7 +66,7 @@ const ProjectForm = ({ open, setOpen, projects, setProjects, newProject, setNewP
             
             <Dialog open={open} onOpenChange={setOpen}>
                 <DialogTrigger asChild>
-                    <Button className="mt-4 w-full bg-black hover:bg-secondary text-white">
+                    <Button className="mt-4 w-full bg-black hover:bg-secondary rounded-lg text-white">
                         Add New Project
                     </Button>
                 </DialogTrigger>

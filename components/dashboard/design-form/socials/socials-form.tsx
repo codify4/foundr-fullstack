@@ -61,7 +61,7 @@ const SocialForm = ({ socials, setSocials, newSocial, setNewSocial, isSocialDial
             
             <Dialog open={isSocialDialogOpen} onOpenChange={setIsSocialDialogOpen}>
                 <DialogTrigger asChild>
-                    <Button className="mt-4 w-full bg-black hover:bg-secondary text-white">
+                    <Button className="mt-4 w-full bg-black hover:bg-secondary rounded-lg text-white">
                         Add Social Media Link
                     </Button>
                 </DialogTrigger>

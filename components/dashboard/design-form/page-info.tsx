@@ -118,7 +118,7 @@ const PageInfo = ({ slug, name, bio, avatar, setSlug, setName, setBio, setAvatar
         <Button 
           type="submit" 
           disabled={isSubmitting}
-          className="w-full bg-black hover:bg-secondary"
+          className="w-full bg-black hover:bg-secondary rounded-lg text-white"
         >
           {isSubmitting ? 'Saving...' : 'Save Changes'}
         </Button>
