@@ -5,6 +5,7 @@ import { Project, Social } from "@/types/page-types";
 import Image from "next/image";
 import { Device, DeviceSwitch } from "./device-switch"
 import { useState } from "react";
+import Link from "next/link";
 
 type PreviewProps = {
     name: string;
@@ -78,7 +79,7 @@ const Preview = ({ name, bio, projects, socials, avatar }: PreviewProps) => {
                                     {socials.map((social, index) => {
                                         const Icon = socialIcons[social.type.toLowerCase() as keyof typeof socialIcons]
                                         return (
-                                            <a
+                                            <Link
                                                 key={index}
                                                 href={social.link}
                                                 target="_blank"
@@ -87,7 +88,7 @@ const Preview = ({ name, bio, projects, socials, avatar }: PreviewProps) => {
                                             >
                                                 {Icon && <Icon className="w-5 h-5 group-hover:scale-110 transition-transform duration-200" />}
                                                 <span className="font-medium">{social.type.charAt(0).toUpperCase() + social.type.slice(1)}</span>
-                                            </a>
+                                            </Link>
                                         )
                                     })}
                                 </div>
@@ -100,7 +101,7 @@ const Preview = ({ name, bio, projects, socials, avatar }: PreviewProps) => {
                                 <h2 className="text-2xl font-bold mb-6 text-center">My Projects</h2>
                                 <div className="space-y-4">
                                     {projects.map((project, index) => (
-                                        <a
+                                        <Link
                                             key={index}
                                             href={project.url}
                                             target="_blank"
@@ -124,7 +125,7 @@ const Preview = ({ name, bio, projects, socials, avatar }: PreviewProps) => {
                                                     <LinkIcon className="w-4 h-4 group-hover:rotate-12 transition-transform duration-200" />
                                                 </div>
                                             </div>
-                                        </a>
+                                        </Link>
                                     ))}
                                 </div>
                             </div>
