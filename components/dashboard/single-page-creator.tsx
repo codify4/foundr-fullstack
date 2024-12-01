@@ -77,8 +77,6 @@ export function SinglePageCreator({
         avatar={avatar}
         projects={projects}
         socials={socials}
-        isDesktopPreview={isDesktopPreview}
-        setIsDesktopPreview={setIsDesktopPreview}
         isProjectDialogOpen={isProjectDialogOpen}
         isSocialDialogOpen={isSocialDialogOpen}
         setIsProjectDialogOpen={setIsProjectDialogOpen}
