@@ -13,6 +13,7 @@ import { usePathname } from "next/navigation"
 import { Card, CardDescription, CardHeader } from "../ui/card"
 import { copyTextToClipboard } from "@/lib/copy-to-clipboard"
 import { useState } from "react"
+import Image from "next/image"
 
 const Sidebar = ({ slug }: { slug?: string }) => {
     const pathname = usePathname();
@@ -31,75 +32,85 @@ const Sidebar = ({ slug }: { slug?: string }) => {
     return (
         <>
             <div className="hidden lg:flex w-64 py-3 bg-white dark:bg-neutral-900 text-black dark:text-white border-r z-10 text-sm">
-                <nav className="flex flex-col items-start justify-between px-3 py-4 space-y-2">
-                    <div className="flex flex-col px-2 w-full">
-                        <div className="flex flex-col w-full mb-1">
+                <nav className="flex flex-col items-start justify-between px-3 py-2 space-y-4 w-full">
+                    <div className="flex flex-col px-2 w-full space-y-4">
+                        <div className="flex flex-col w-full space-y-1">
                             <Link
-                                className={`flex items-center text-left text-md px-1 py-3 rounded-md transition-colors ${
+                                className={`flex items-center text-left px-3 py-2.5 rounded-lg transition-all duration-200 ${
                                     pathname === '/dashboard'
-                                    ? 'bg-gray-50 dark:bg-neutral-900 text-black dark:text-white font-medium'
-                                    : 'text-neutral-500 dark:text-white w-full flex items-center text-left text-md py-3 rounded-md transition-colors'
+                                    ? 'bg-gray-100 dark:bg-neutral-800 text-black dark:text-white font-medium shadow-sm'
+                                    : 'text-neutral-600 dark:text-neutral-300 hover:bg-gray-50 dark:hover:bg-neutral-800 hover:text-black dark:hover:text-white'
                                 }`}
                                 href={`/dashboard`}
                             >   
-                                <Palette className="inline-block w-5 h-5 mr-2" />
-                                <span>Design</span>
+                                <Palette className="inline-block w-4 h-4 mr-3" />
+                                <span className="font-medium">Design</span>
                             </Link>
                             <Link
-                                className={`flex items-center text-left text-md px-1 py-3 rounded-md transition-colors ${
+                                className={`flex items-center text-left px-3 py-2.5 rounded-lg transition-all duration-200 ${
                                     pathname === '/dashboard/analytics'
-                                    ? 'bg-gray-50 dark:bg-neutral-900 text-black dark:text-white font-medium'
-                                    : 'text-neutral-500 dark:text-white hover:text-black dark:hover:dark:hover:text-neutral-300'
+                                    ? 'bg-gray-100 dark:bg-neutral-800 text-black dark:text-white font-medium shadow-sm'
+                                    : 'text-neutral-600 dark:text-neutral-300 hover:bg-gray-50 dark:hover:bg-neutral-800 hover:text-black dark:hover:text-white'
                                 }`}
                                 href={`/dashboard/analytics`}
                             >   
-                                <BarChart className="inline-block w-5 h-5 mr-2" />
-                                <span>Analytics</span>
+                                <BarChart className="inline-block w-4 h-4 mr-3" />
+                                <span className="font-medium">Analytics</span>
                             </Link>
                             <Link
-                                className={`flex items-center text-left text-md px-1 py-3 rounded-md transition-colors ${
+                                className={`flex items-center text-left px-3 py-2.5 rounded-lg transition-all duration-200 ${
                                     pathname === '/dashboard/settings'
-                                    ? 'bg-gray-50 dark:bg-neutral-900 text-black dark:text-white font-medium'
-                                    : 'text-neutral-500 dark:text-white hover:text-black dark:hover:dark:hover:text-neutral-300'
+                                    ? 'bg-gray-100 dark:bg-neutral-800 text-black dark:text-white font-medium shadow-sm'
+                                    : 'text-neutral-600 dark:text-neutral-300 hover:bg-gray-50 dark:hover:bg-neutral-800 hover:text-black dark:hover:text-white'
                                 }`}
                                 href={`/dashboard/settings`}
                             >
-                                <Settings className="inline-block w-5 h-5 mr-2" />
-                                <span>Settings</span>
+                                <Settings className="inline-block w-4 h-4 mr-3" />
+                                <span className="font-medium">Settings</span>
                             </Link>
                         </div>
-                        <ThemeToggle />
+                        <div>
+                            <ThemeToggle />
+                        </div>
                     </div>
 
-                    <div>
-                        <Card className="flex flex-col items-center justify-center gap-2 w-full bg-white dark:bg-neutral-950 text-black dark:text-white py-4 px-2 rounded-lg dark:border-0">
-                            <div className="flex flex-col items-start justify-center px-3">
-                                <CardHeader className="font-bold text-base p-0">Published Page</CardHeader>
-                                <CardDescription>Check out the page you just created!</CardDescription>
+                    <div className="w-full px-2">
+                        <Card className="overflow-hidden border dark:border-neutral-800 bg-white dark:bg-neutral-950 text-black dark:text-white rounded-xl">
+                            <div className="p-4 space-y-4">
+                                <div className="space-y-1.5">
+                                    <CardHeader className="font-semibold text-base p-0">Published Page</CardHeader>
+                                    <CardDescription className="text-sm text-neutral-500 dark:text-neutral-400">Check out your published page!</CardDescription>
+                                </div>
+                                <div className="space-y-2">
+                                    <Link
+                                        href={`/${slug}`}
+                                        className="w-full block"
+                                        target="_blank"
+                                    >
+                                        <Button className="w-full bg-black dark:bg-primary hover:bg-secondary dark:hover:bg-secondary dark:hover:text-white text-white rounded-lg">
+                                            <SearchCheck className="size-4 mr-2"/>
+                                            View Page
+                                        </Button>
+                                    </Link>
+                                    <Button
+                                        variant="outline"
+                                        onClick={handleCopyClick} 
+                                        className="w-full bg-neutral-100 hover:bg-neutral-200 dark:bg-neutral-800 dark:hover:bg-neutral-700 text-black dark:text-white rounded-lg"
+                                    >
+                                        {isCopied ? (
+                                            <span className="flex items-center gap-2">
+                                                <ClipboardCheck size={14} />
+                                                Copied!
+                                            </span>
+                                        ) : (
+                                            <span className="flex items-center gap-2">
+                                                <Clipboard size={14} />
+                                                Copy Link
+                                            </span>
+                                        )}
+                                    </Button>
+                                </div>
                             </div>
-                            <Link
-                                href={`/${slug}`}
-                                className="w-full flex items-center justify-center"
-                                target="_blank"
-                            >
-                                <Button className="w-11/12 bg-black dark:bg-primary dark:hover:bg-secondary dark:text-white rounded-lg hover:bg-primary">
-                                    <SearchCheck className="size-5 mr-1"/>
-                                    Check out
-                                </Button>
-                            </Link>
-                            <Button onClick={handleCopyClick} className="w-11/12 bg-black dark:bg-primary dark:hover:bg-secondary dark:text-white rounded-lg hover:bg-primary">
-                                {isCopied ? (
-                                    <span className="flex flex-row items-center gap-1">
-                                        <ClipboardCheck size={16} />
-                                        Copied
-                                    </span>
-                                ) : (
-                                    <span className="flex flex-row items-center gap-1">
-                                        <Clipboard size={16} />
-                                        Copy Link
-                                    </span>
-                                )}
-                            </Button>
                         </Card>
                     </div>
                 </nav>
@@ -108,45 +119,49 @@ const Sidebar = ({ slug }: { slug?: string }) => {
             <div className="flex lg:hidden flex-row items-center justify-between">
                 <Sheet>
                     <SheetTrigger asChild>
-                        <Button size="icon" className="flex lg:hidden bg-white dark:bg-neutral-900 text-black dark:text-white border hover:bg-gray-50">
-                            <Menu className="size-5" />
+                        <Button size="icon" className="flex lg:hidden bg-white dark:bg-neutral-900 text-black dark:text-white border hover:bg-gray-50 transition-colors">
+                            <Menu className="size-4" />
                         </Button>
                     </SheetTrigger>
-                    <SheetContent side="left" className="bg-white dark:bg-neutral-900 text-black dark:text-white">
-                        <nav className="py-4 space-y-2">
-                            <div className="flex flex-col">
+                    <SheetContent side="left" className="bg-white dark:bg-neutral-900 text-black dark:text-white p-4">
+                        <nav className="py-4 space-y-4">
+                            <div className="flex items-center gap-2 mb-4">
+                                <Image src="/foundr.png" width={28} height={28} alt="Foundr" className="rounded-lg" />
+                                <span className="font-semibold text-lg">Foundr</span>
+                            </div>
+                            <div className="flex flex-col space-y-1">
                                 <Link
-                                    className={`w-full text-left text-md px-4 py-3 rounded-md transition-colors cursor-pointer ${
+                                    className={`w-full text-left px-3 py-2.5 rounded-lg transition-all duration-200 ${
                                         pathname === '/dashboard'
-                                        ? 'bg-gray-50 dark:bg-neutral-800 text-black dark:text-white font-medium'
-                                        : 'text-neutral-500 hover:text-black dark:hover:bg-neutral-800'
+                                        ? 'bg-gray-100 dark:bg-neutral-800 text-black dark:text-white font-medium shadow-sm'
+                                        : 'text-neutral-600 dark:text-neutral-300 hover:bg-gray-50 dark:hover:bg-neutral-800 hover:text-black dark:hover:text-white'
                                     }`}
                                     href={`/dashboard`}
                                 >   
-                                    <Palette className="inline-block w-5 h-5 mr-2" />
-                                    Design
+                                    <Palette className="inline-block w-4 h-4 mr-3" />
+                                    <span className="font-medium">Design</span>
                                 </Link>
                                 <Link
-                                    className={`w-full text-left text-md px-4 py-3 rounded-md transition-colors ${
+                                    className={`w-full text-left px-3 py-2.5 rounded-lg transition-all duration-200 ${
                                         pathname === '/dashboard/analytics'
-                                        ? 'bg-gray-50 dark:bg-neutral-800 text-black dark:text-white font-medium'
-                                        : 'text-neutral-500 hover:text-black dark:hover:bg-neutral-800'
+                                        ? 'bg-gray-100 dark:bg-neutral-800 text-black dark:text-white font-medium shadow-sm'
+                                        : 'text-neutral-600 dark:text-neutral-300 hover:bg-gray-50 dark:hover:bg-neutral-800 hover:text-black dark:hover:text-white'
                                     }`}
                                     href={`/dashboard/analytics`}
                                 >   
-                                    <BarChart className="inline-block w-5 h-5 mr-2" />
-                                    Analytics
+                                    <BarChart className="inline-block w-4 h-4 mr-3" />
+                                    <span className="font-medium">Analytics</span>
                                 </Link>
                                 <Link
-                                    className={`w-full text-left text-md px-4 py-3 rounded-md transition-colors ${
+                                    className={`w-full text-left px-3 py-2.5 rounded-lg transition-all duration-200 ${
                                         pathname === '/dashboard/settings'
-                                        ? 'bg-gray-50 dark:bg-neutral-800 text-black dark:text-white font-medium'
-                                        : 'text-neutral-500 hover:text-black dark:hover:bg-neutral-800'
+                                        ? 'bg-gray-100 dark:bg-neutral-800 text-black dark:text-white font-medium shadow-sm'
+                                        : 'text-neutral-600 dark:text-neutral-300 hover:bg-gray-50 dark:hover:bg-neutral-800 hover:text-black dark:hover:text-white'
                                     }`}
                                     href={`/dashboard/settings`}
                                 >
-                                    <Settings className="inline-block w-5 h-5 mr-2" />
-                                    Settings
+                                    <Settings className="inline-block w-4 h-4 mr-3" />
+                                    <span className="font-medium">Settings</span>
                                 </Link>
                             </div>
                             <ThemeToggle />
@@ -156,15 +171,16 @@ const Sidebar = ({ slug }: { slug?: string }) => {
 
                 <Link
                     href={`/${slug}`}
-                    className="flex items-center justify-center "
+                    className="flex items-center justify-center"
                     target="_blank"
                 >
-                    <Button className="bg-black hover:bg-primary">
-                        <SearchCheck className="size-5 mr-1"/>
-                        Check out
+                    <Button className="bg-black hover:opacity-90 transition-opacity">
+                        <SearchCheck className="size-4 mr-2"/>
+                        View Page
                     </Button>
                 </Link>
             </div>
+            
         </>
         
     )
