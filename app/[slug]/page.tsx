@@ -8,6 +8,10 @@ import { getSocialLinkByPageSlug } from '@/actions/socials-actions'
 import { Suspense } from 'react'
 import Image from 'next/image'
 
+// Prevent caching of this page
+export const dynamic = 'force-dynamic'
+export const revalidate = 0
+
 const socialIcons = {
   github: Github,
   twitter: Twitter,

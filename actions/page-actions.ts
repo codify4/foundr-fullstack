@@ -62,7 +62,13 @@ export async function updatePage(
       .set(pageData)
       .where(eq(page.id, pageId))
       .returning();
+    
+    // Revalidate both dashboard and the specific page
     revalidatePath('/dashboard');
+    if (result[0]?.pageSlug) {
+      revalidatePath(`/${result[0].pageSlug}`);
+    }
+    
     return result[0];
   } catch (error) {
     console.error('Error updating page:', error);
