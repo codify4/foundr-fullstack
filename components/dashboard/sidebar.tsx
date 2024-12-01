@@ -174,7 +174,7 @@ const Sidebar = ({ slug }: { slug?: string }) => {
                     className="flex items-center justify-center"
                     target="_blank"
                 >
-                    <Button className="bg-black hover:opacity-90 transition-opacity">
+                    <Button className="bg-black hover:bg-primary transition-opacity">
                         <SearchCheck className="size-4 mr-2"/>
                         View Page
                     </Button>

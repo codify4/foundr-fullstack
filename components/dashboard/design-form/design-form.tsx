@@ -52,7 +52,7 @@ const DesignForm = ({
   setSocials
 }: DesignFormProps) => {
   return (
-    <div className="w-full lg:w-2/5 p-4 md:p-8 overflow-auto overflow-y-scroll no-scrollbar">
+    <div className="w-full lg:w-2/5 py-4 lg:p-8 overflow-auto overflow-y-scroll no-scrollbar">
       <div className="mb-8">
         <h2 className="text-2xl font-bold mb-2">Design Your Page</h2>
         <p className="text-muted-foreground">Customize how your page looks and what content it displays.</p>

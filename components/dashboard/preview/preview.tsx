@@ -40,7 +40,7 @@ const Preview = ({ name, bio, projects, socials, avatar }: PreviewProps) => {
     }
 
     return (
-        <div className="w-full lg:w-1/2 p-4 overflow-auto text-black dark:text-white">
+        <div className="w-full lg:w-1/2 py-4 overflow-auto text-black dark:text-white">
             <div className="flex justify-between items-center mb-6">
                 <h2 className="text-2xl font-bold">Preview</h2>
                 <div className="hidden md:block">
