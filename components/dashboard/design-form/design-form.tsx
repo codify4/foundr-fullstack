@@ -53,34 +53,43 @@ const DesignForm = ({
 }: DesignFormProps) => {
   return (
     <div className="w-full lg:w-2/5 p-4 md:p-8 overflow-auto overflow-y-scroll no-scrollbar">
-      <h2 className="text-xl font-semibold mb-3">Design</h2>
-      <div className="space-y-6">
-        <PageInfo 
-          slug={slug}
-          name={name}
-          bio={bio}
-          avatar={avatar}
-          setSlug={setSlug}
-          setName={setName}
-          setBio={setBio}
-          setAvatar={setAvatar}
-        />
-        <ProjectForm 
-          projects={projects}
-          newProject={newProject}
-          open={isProjectDialogOpen}
-          setOpen={setIsProjectDialogOpen}
-          setNewProject={setNewProject}
-          setProjects={setProjects}
-        />
-        <SocialForm 
-          socials={socials}
-          newSocial={newSocial}
-          isSocialDialogOpen={isSocialDialogOpen}
-          setIsSocialDialogOpen={setIsSocialDialogOpen}
-          setNewSocial={setNewSocial}
-          setSocials={setSocials}
-        />
+      <div className="mb-8">
+        <h2 className="text-2xl font-bold mb-2">Design Your Page</h2>
+        <p className="text-muted-foreground">Customize how your page looks and what content it displays.</p>
+      </div>
+      <div className="space-y-8">
+        <div className="bg-card rounded-lg p-6 border shadow-sm">
+          <PageInfo 
+            slug={slug}
+            name={name}
+            bio={bio}
+            avatar={avatar}
+            setSlug={setSlug}
+            setName={setName}
+            setBio={setBio}
+            setAvatar={setAvatar}
+          />
+        </div>
+        <div className="bg-card rounded-lg p-6 border shadow-sm">
+          <ProjectForm 
+            projects={projects}
+            newProject={newProject}
+            open={isProjectDialogOpen}
+            setOpen={setIsProjectDialogOpen}
+            setNewProject={setNewProject}
+            setProjects={setProjects}
+          />
+        </div>
+        <div className="bg-card rounded-lg p-6 border shadow-sm">
+          <SocialForm 
+            socials={socials}
+            newSocial={newSocial}
+            isSocialDialogOpen={isSocialDialogOpen}
+            setIsSocialDialogOpen={setIsSocialDialogOpen}
+            setNewSocial={setNewSocial}
+            setSocials={setSocials}
+          />
+        </div>
       </div>
     </div>
   )

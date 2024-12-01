@@ -52,29 +52,38 @@ const SocialForm = ({ socials, setSocials, newSocial, setNewSocial, isSocialDial
     
     return (
         <div>
-            <Label htmlFor="socials" className="text-sm font-medium mr-5">Social Media</Label>
+            <div className="space-y-2 mb-4">
+                <Label htmlFor="socials" className="text-lg font-semibold">Social Media</Label>
+                <p className="text-sm text-muted-foreground">Connect with your audience across platforms.</p>
+            </div>
+
+            <SocialsList socials={socials} />
+            
             <Dialog open={isSocialDialogOpen} onOpenChange={setIsSocialDialogOpen}>
                 <DialogTrigger asChild>
-                    <Button className="mt-1 bg-primary hover:bg-secondary dark:bg-secondary dark:hover:bg-primary text-white rounded-lg">Add Social Media</Button>
+                    <Button className="mt-4 w-full bg-black hover:bg-secondary text-white">
+                        Add Social Media Link
+                    </Button>
                 </DialogTrigger>
-                <DialogContent className='w-11/12 rounded-lg bg-white dark:bg-neutral-900 text-black dark:text-white'>
+                <DialogContent className='sm:max-w-[500px] rounded-lg bg-background'>
                     <DialogHeader>
-                        <DialogTitle>Add Social Media Link</DialogTitle>
+                        <DialogTitle className="text-xl font-semibold">Add Social Media Link</DialogTitle>
+                        <p className="text-sm text-muted-foreground">Connect your social media profiles.</p>
                     </DialogHeader>
                     <form 
-                        className="space-y-4"
+                        className="space-y-6 py-4"
                         action={handleCreateSocialLink}
                     >
-                        <div>
+                        <div className="space-y-2">
                             <Label htmlFor="socialPlatform" className="text-sm font-medium">Platform</Label>
                             <Select
                                 onValueChange={(value) => setNewSocial({...newSocial, type: value})}
                                 value={newSocial.type}
                             >
-                                <SelectTrigger>
-                                    <SelectValue placeholder="Select platform" />
+                                <SelectTrigger className="w-full">
+                                    <SelectValue placeholder="Choose a platform" />
                                 </SelectTrigger>
-                                <SelectContent className="bg-white dark:bg-neutral-900 text-black dark:text-white">
+                                <SelectContent className="bg-background">
                                     <SelectItem value="github">GitHub</SelectItem>
                                     <SelectItem value="twitter">Twitter</SelectItem>
                                     <SelectItem value="linkedin">LinkedIn</SelectItem>
@@ -82,29 +91,31 @@ const SocialForm = ({ socials, setSocials, newSocial, setNewSocial, isSocialDial
                                     <SelectItem value="facebook">Facebook</SelectItem>
                                 </SelectContent>
                             </Select>
+                            <p className="text-xs text-muted-foreground">Select which social media platform to link.</p>
                         </div>
-                        <div>
-                            <Label htmlFor="socialUrl" className="text-sm font-medium">URL</Label>
+                        <div className="space-y-2">
+                            <Label htmlFor="socialUrl" className="text-sm font-medium">Profile URL</Label>
                             <Input
                                 autoComplete="off"
                                 id="socialUrl"
                                 value={newSocial.link}
                                 onChange={(e) => setNewSocial({...newSocial, link: e.target.value})}
-                                className="mt-1"
+                                className="w-full"
+                                placeholder="https://"
                                 required
                             />
+                            <p className="text-xs text-muted-foreground">Enter the full URL to your social media profile.</p>
                         </div>
                         <Button 
                             type="submit" 
-                            className="bg-primary hover:bg-secondary dark:bg-secondary dark:hover:bg-primary text-white w-full rounded-lg"
+                            className="w-full bg-primary hover:bg-primary/90 text-white"
                             disabled={isSubmitting}
                         >
-                            {isSubmitting ? 'Adding...' : 'Add Social Media'}
+                            {isSubmitting ? 'Adding Link...' : 'Add Social Link'}
                         </Button>
                     </form>
                 </DialogContent>
             </Dialog>
-            <SocialsList socials={socials} />
         </div>
     )
 }

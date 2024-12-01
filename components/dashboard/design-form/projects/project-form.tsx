@@ -57,81 +57,90 @@ const ProjectForm = ({ open, setOpen, projects, setProjects, newProject, setNewP
 
     return (
         <div>
-            <Label htmlFor="projects" className="text-sm font-medium mr-5">Projects</Label>
+            <div className="space-y-2 mb-4">
+                <Label htmlFor="projects" className="text-lg font-semibold">Projects</Label>
+                <p className="text-sm text-muted-foreground">Showcase your work and achievements.</p>
+            </div>
+
+            <ProjectList projects={projects} />
+            
             <Dialog open={open} onOpenChange={setOpen}>
                 <DialogTrigger asChild>
-                    <Button className="mt-1 bg-primary hover:bg-secondary dark:bg-secondary dark:hover:bg-primary text-white rounded-lg">Add Project</Button>
+                    <Button className="mt-4 w-full bg-black hover:bg-secondary text-white">
+                        Add New Project
+                    </Button>
                 </DialogTrigger>
-                <DialogContent className='w-11/12 rounded-lg bg-white dark:bg-neutral-900 text-black dark:text-white'>
+                <DialogContent className='sm:max-w-[500px] rounded-lg bg-background'>
                     <DialogHeader>
-                        <DialogTitle>Add New Project</DialogTitle>
+                        <DialogTitle className="text-xl font-semibold">Add New Project</DialogTitle>
+                        <p className="text-sm text-muted-foreground">Share details about your project with visitors.</p>
                     </DialogHeader>
                     <form 
-                        className="space-y-4"
+                        className="space-y-6 py-4"
                         action={handleCreateProject}
                     >
-                        <div>
+                        <div className="space-y-2">
                             <Label htmlFor="name" className="text-sm font-medium">Project Name</Label>
                             <Input
                                 id="name"
                                 name="name"
                                 value={newProject.name}
                                 onChange={(e) => setNewProject({...newProject, name: e.target.value})}
-                                className="mt-1"
+                                className="w-full"
+                                placeholder="Enter project name"
                                 required
                                 autoComplete='off'
                             />
                         </div>
-                        <div>
-                            <Label htmlFor="url" className="text-sm font-medium">Project Url</Label>
+                        <div className="space-y-2">
+                            <Label htmlFor="url" className="text-sm font-medium">Project URL</Label>
                             <Input
                                 id="url"
                                 name="url"
                                 value={newProject.url}
                                 onChange={(e) => setNewProject({...newProject, url: e.target.value})}
-                                className="mt-1"
+                                className="w-full"
+                                placeholder="https://"
                                 required
                                 autoComplete='off'
                             />
+                            <p className="text-xs text-muted-foreground">Link to your project's website or repository.</p>
                         </div>
-                        <div>
-                            <Label htmlFor="oneLiner" className="text-sm font-medium">Project One Liner</Label>
+                        <div className="space-y-2">
+                            <Label htmlFor="oneLiner" className="text-sm font-medium">Project Description</Label>
                             <Textarea
                                 id="oneLiner"
                                 name="oneLiner"
                                 value={newProject.oneLiner}
                                 onChange={(e) => setNewProject({...newProject, oneLiner: e.target.value})}
-                                className="mt-1"
-                                rows={3}
+                                className="w-full min-h-[80px]"
+                                placeholder="Brief description of your project"
                                 required
-                                autoComplete='off'
                             />
                         </div>
-                        <div>
-                            <Label htmlFor="mrr" className="text-sm font-medium">Total MRR</Label>
+                        <div className="space-y-2">
+                            <Label htmlFor="mrr" className="text-sm font-medium">Monthly Revenue</Label>
                             <Input
                                 id="mrr"
                                 name="mrr"
-                                type="number"
                                 value={newProject.mrr}
                                 onChange={(e) => setNewProject({...newProject, mrr: e.target.value})}
-                                className="mt-1"
-                                required
+                                className="w-full"
+                                placeholder="$0"
                                 autoComplete='off'
                             />
+                            <p className="text-xs text-muted-foreground">Share your project's monthly recurring revenue.</p>
                         </div>
                         <Button 
-                            type="submit"
-                            className="bg-primary hover:bg-secondary text-white w-full rounded-lg"
+                            type="submit" 
+                            className="w-full bg-primary hover:bg-primary/90 text-white"
                             disabled={isSubmitting}
                         >
-                            {isSubmitting ? 'Adding...' : 'Add Project'}
+                            {isSubmitting ? 'Adding Project...' : 'Add Project'}
                         </Button>
                     </form>
                 </DialogContent>
             </Dialog>
-
-            <ProjectList projects={projects} />
         </div>
     )
 }
