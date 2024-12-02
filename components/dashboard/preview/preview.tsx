@@ -1,6 +1,7 @@
 'use client'
 
 import { Github, Twitter, Linkedin, Instagram, Facebook, LinkIcon, DollarSign } from "lucide-react"
+import { BsTwitterX } from "react-icons/bs";
 import { Project, Social } from "@/types/page-types";
 import Image from "next/image";
 import { Device, DeviceSwitch } from "./device-switch"
@@ -21,7 +22,7 @@ type PreviewProps = {
 
 const socialIcons = {
     github: Github,
-    twitter: Twitter,
+    twitter: BsTwitterX,
     linkedin: Linkedin,
     instagram: Instagram,
     facebook: Facebook,
@@ -87,7 +88,12 @@ const Preview = ({ name, bio, projects, socials, avatar }: PreviewProps) => {
                                                 className="flex items-center space-x-3 p-3 rounded-xl hover:bg-gray-50 dark:hover:bg-neutral-800 border border-transparent hover:border-gray-200 dark:hover:border-neutral-700 transition-all duration-200 group"
                                             >
                                                 {Icon && <Icon className="w-5 h-5 group-hover:scale-110 transition-transform duration-200" />}
-                                                <span className="font-medium">{social.type.charAt(0).toUpperCase() + social.type.slice(1)}</span>
+                                                <span className="font-medium">
+                                                    {social.type.toLowerCase() === 'twitter' 
+                                                        ? 'X (Twitter)'
+                                                        : social.type.charAt(0).toUpperCase() + social.type.slice(1)
+                                                    }
+                                                </span>
                                             </Link>
                                         )
                                     })}
@@ -110,7 +116,7 @@ const Preview = ({ name, bio, projects, socials, avatar }: PreviewProps) => {
                                         >
                                             <div className="flex justify-between items-start gap-4">
                                                 <div className="flex-1">
-                                                    <h3 className="text-xl font-semibold group-hover:text-blue-700 transition-colors duration-200">{project.name}</h3>
+                                                    <h3 className="text-xl font-semibold text-blue-700 transition-colors duration-200">{project.name}</h3>
                                                     <p className="text-gray-600 dark:text-gray-400 mt-2 line-clamp-2">
                                                         {project.oneLiner}
                                                     </p>

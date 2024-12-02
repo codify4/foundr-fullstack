@@ -83,7 +83,12 @@ async function SlugPage({ slug }: { slug: string }) {
                       className="flex items-center space-x-3 p-3 rounded-xl hover:bg-gray-50 dark:hover:bg-neutral-800 border border-transparent hover:border-gray-200 dark:hover:border-neutral-700 transition-all duration-200 group"
                     >
                       {Icon && <Icon className="w-5 h-5 group-hover:scale-110 transition-transform duration-200" />}
-                      <span className="font-medium">{social.type.charAt(0).toUpperCase() + social.type.slice(1)}</span>
+                      <span className="font-medium">
+                        {social.type.toLowerCase() === 'twitter'
+                            ? 'X (Twitter)'
+                            : social.type.charAt(0).toUpperCase() + social.type.slice(1)
+                        }
+                      </span>
                     </Link>
                   )
                 })}
