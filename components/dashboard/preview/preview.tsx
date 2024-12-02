@@ -51,12 +51,12 @@ const Preview = ({ name, bio, projects, socials, avatar }: PreviewProps) => {
                 <div 
                     className={`bg-white dark:bg-neutral-900 text-black dark:text-white rounded-2xl border shadow-lg backdrop-blur-sm transition-all duration-300 ${getPreviewWidth()}`}
                 >
-                    <div className="p-8 md:p-12">
+                    <div className="p-8">
                         <div className="text-center mb-12">
                             {avatar && (
                                 <div className="mb-6 flex justify-center">
                                     <div className="relative">
-                                        <div className="absolute -inset-0.5 bg-gradient-to-r from-pink-500 to-purple-500 rounded-full blur opacity-75 group-hover:opacity-100 transition duration-1000 group-hover:duration-200 animate-tilt"></div>
+                                        <div className="absolute -inset-0.5 bg-gradient-to-r from-primary to-blue-800 rounded-full blur opacity-75 group-hover:opacity-100 transition duration-1000 group-hover:duration-200 animate-tilt"></div>
                                         <Image 
                                             src={avatar} 
                                             alt={name} 
@@ -67,7 +67,7 @@ const Preview = ({ name, bio, projects, socials, avatar }: PreviewProps) => {
                                     </div>
                                 </div>
                             )}
-                            <h1 className="text-3xl font-bold mb-3 bg-gradient-to-r from-pink-500 to-purple-500 inline-block text-transparent bg-clip-text">{name}</h1>
+                            <h1 className="text-3xl font-bold mb-3 bg-gradient-to-r from-blue-400 to-blue-900 inline-block text-transparent bg-clip-text">{name}</h1>
                             <p className="text-gray-600 dark:text-gray-400 text-lg max-w-2xl mx-auto">{bio}</p>
                         </div>
 
@@ -110,7 +110,7 @@ const Preview = ({ name, bio, projects, socials, avatar }: PreviewProps) => {
                                         >
                                             <div className="flex justify-between items-start gap-4">
                                                 <div className="flex-1">
-                                                    <h3 className="text-xl font-semibold group-hover:text-pink-500 transition-colors duration-200">{project.name}</h3>
+                                                    <h3 className="text-xl font-semibold group-hover:text-blue-700 transition-colors duration-200">{project.name}</h3>
                                                     <p className="text-gray-600 dark:text-gray-400 mt-2 line-clamp-2">
                                                         {project.oneLiner}
                                                     </p>
