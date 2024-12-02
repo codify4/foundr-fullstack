@@ -2,10 +2,15 @@ import Link from "next/link"
 import { Card, CardContent } from "@/components/ui/card"
 import { SignOut } from "./sign-out"
 import { auth } from "@/auth"
-import { redirect } from "next/navigation";
+import { redirect } from "next/navigation"
+import { Badge } from "../ui/badge"
+import { getSlug } from "@/actions/page-actions"
+
+export const dynamic = 'force-dynamic'
 
 export async function SettingsPage() {
   const session = await auth();
+  const slug = await getSlug();
   const user = session?.user;
 
   if (!user) redirect("/signin");
@@ -13,45 +18,53 @@ export async function SettingsPage() {
   const isPublished = true;
 
   return (
-    <div className="w-full md:w-1/2 mx-auto my-2 p-6 space-y-8">
-      <h1 className="text-3xl font-bold">Settings</h1>
-      <Card className="dark:bg-neutral-800">
-        <CardContent className="p-6 space-y-4">
-          <div>
-            <h2 className="text-sm font-medium text-muted-foreground">Name</h2>
-            <p className="text-lg font-semibold">{user?.name || "User"}</p>
-          </div>
-          
-          <div>
-            <h2 className="text-sm font-medium text-muted-foreground">Email</h2>
-            <p className="text-lg">{user?.email || "email@example.com"}</p>
-          </div>
-        </CardContent>
-      </Card>
-      
-      <div>
-        <h2 className="text-2xl font-bold mb-4">Status</h2>
-        
-        <Card className="dark:bg-neutral-800">
-          <CardContent className="p-6">
-            <div className="flex items-center justify-between">
-              <Link href="/foundr/me" className="text-lg font-semibold hover:underline">
-                foundr/me
-              </Link>
-              <span 
-                className={`px-3 py-1 rounded-full text-sm font-medium ${
-                  isPublished ? 'bg-blue-100 text-blue-800' : 'bg-gray-100 text-gray-800'
-                }`}
-                aria-label={isPublished ? "Published" : "Not Published"}
-              >
-                {isPublished ? 'Published' : 'Not Published'}
-              </span>
+    <div className="w-1/3 mx-auto py-6">
+      <div className="mb-8">
+        <h1 className="text-2xl font-semibold mb-1">Settings</h1>
+        <p className="text-muted-foreground">Manage your account settings and profile</p>
+      </div>
+
+      <div className="space-y-6">
+        <Card className="shadow-md">
+          <CardContent className="pt-6">
+            <div className="grid gap-6">
+              <div>
+                <h2 className="font-medium mb-2">Account Information</h2>
+                <div className="grid gap-4">
+                  <div>
+                    <div className="text-sm text-muted-foreground">Name</div>
+                    <div className="flex items-center justify-between">
+                      <div>{user?.name || "User"}</div>
+                    </div>
+                  </div>
+                  <div>
+                    <div className="text-sm text-muted-foreground">Email</div>
+                    <div className="flex items-center justify-between">
+                      <div>{user?.email || "email@example.com"}</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div>
+                <h2 className="font-medium mb-2">Profile</h2>
+                <div className="flex items-center justify-between">
+                  <Link href={`https://foundr.vercel.app/${slug}`} target="_blank" className="text-sm hover:text-primary">
+                    foundr.me
+                  </Link>
+                  <Badge variant="outline" className="text-sm text-white bg-primary">
+                    {isPublished ? 'Published' : 'Not Published'}
+                  </Badge>
+                </div>
+              </div>
             </div>
           </CardContent>
         </Card>
+
+        <div className="pt-4">
+          <SignOut />
+        </div>
       </div>
-      
-      <SignOut />
     </div>
   )
 }
