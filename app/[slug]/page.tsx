@@ -71,7 +71,7 @@ async function SlugPage({ slug }: { slug: string }) {
           {socials && socials.length > 0 && (
             <div className="mb-12">
               <h2 className="text-2xl font-bold mb-6 text-center">Connect with me</h2>
-              <div className="flex flex-wrap justify-center gap-4">
+              <div className="flex flex-wrap justify-center gap-x-3">
                 {socials.map((social, index) => {
                   const Icon = socialIcons[social.type.toLowerCase() as keyof typeof socialIcons]
                   return (
