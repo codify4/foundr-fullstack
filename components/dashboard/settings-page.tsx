@@ -18,7 +18,7 @@ export async function SettingsPage() {
   const isPublished = true;
 
   return (
-    <div className="w-1/3 mx-auto py-6">
+    <div className="w-full lg:w-2/5 mx-auto py-6">
       <div className="mb-8">
         <h1 className="text-2xl font-semibold mb-1">Settings</h1>
         <p className="text-muted-foreground">Manage your account settings and profile</p>
