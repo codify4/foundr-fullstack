@@ -1,12 +1,14 @@
 'use client'
 
-import { Github, Twitter, Linkedin, Instagram, Facebook, LinkIcon, DollarSign } from "lucide-react"
+import { Github, Linkedin, Instagram, Facebook, LinkIcon, DollarSign } from "lucide-react"
 import { BsTwitterX } from "react-icons/bs";
 import { Project, Social } from "@/types/page-types";
 import Image from "next/image";
 import { Device, DeviceSwitch } from "./device-switch"
 import { useState } from "react";
 import Link from "next/link";
+import GitHubCalendar from 'react-github-calendar';
+
 
 type PreviewProps = {
     name: string;
@@ -136,6 +138,11 @@ const Preview = ({ name, bio, projects, socials, avatar }: PreviewProps) => {
                                 </div>
                             </div>
                         )}
+
+                        <div className="mt-10">
+                        <h2 className="text-2xl font-bold mb-6 text-center">Github Graph</h2>
+                            <GitHubCalendar username="codify4" />
+                        </div>
                     </div>
                 </div>
             </div>

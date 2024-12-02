@@ -5,6 +5,7 @@ import ProjectForm from "./projects/project-form"
 import { Project, Social } from "@/types/page-types"
 import SocialForm from "./socials/socials-form"
 import { SelectProject, SelectSocial } from "@/db/schemas/page-schema"
+import GithubSection from "./github-section"
 
 type DesignFormProps = {
   slug: string;
@@ -90,6 +91,8 @@ const DesignForm = ({
             setSocials={setSocials}
           />
         </div>
+
+        <GithubSection />
       </div>
     </div>
   )
