@@ -4,6 +4,7 @@ import { useState } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { Button } from '../ui/button'
+import { Popover, PopoverContent, PopoverTrigger } from '../ui/popover'
 
 const TopNav = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -19,37 +20,36 @@ const TopNav = () => {
             </Link>
           </div>
           <Link href="signin">
-            <Button variant="outline" className='hidden text-primary hover:text-primary md:flex md:items-center md:justify-center px-5 py-2 rounded-md'>Sign In</Button>
+            <Button variant="default" className='hidden text-white hover:bg-secondary md:flex md:items-center md:justify-center px-5 py-2 rounded-lg'>Sign In</Button>
           </Link>
-          <div className="md:hidden">
-            <Button
-              variant="outline"
-              onClick={() => setIsOpen(!isOpen)}
-              className="inline-flex items-center justify-center p-2 rounded-md"
-            >
-              <span className="sr-only">Open main menu</span>
-              {isOpen ? (
-                <svg className="block h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
-                </svg>
-              ) : (
-                <svg className="block h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16" />
-                </svg>
-              )}
-            </Button>
-          </div>
+          {/* <Popover>
+            <PopoverTrigger asChild>
+              <Button
+                variant="ghost"
+                onClick={() => setIsOpen(!isOpen)}
+                className="md:hidden inline-flex items-center text-primary justify-center p-2 rounded-md"
+              >
+                <span className="sr-only">Open main menu</span>
+                {isOpen ? (
+                  <svg className="block h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
+                  </svg>
+                ) : (
+                  <svg className="block h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16" />
+                  </svg>
+                )}
+              </Button>
+            </PopoverTrigger>
+            <PopoverContent className="bg-white w-40">
+              <div className="flex flex-col items-center justify-center">
+                <Link href="#features" className="px-3 py-2 rounded-md">Features</Link>
+                <Link href="#pricing" className="px-3 py-2 rounded-md">Pricing</Link>
+              </div>
+            </PopoverContent>
+          </Popover> */}
         </div>
       </div>
-      {isOpen && (
-        <div className="md:hidden ">
-          <div className="flex flex-col items-center justify-center px-2 pt-2 pb-3 space-y-1 sm:px-3">
-            <Link href="#features" className=" px-3 py-2 rounded-md">Features</Link>
-            <Link href="#pricing" className=" px-3 py-2 rounded-md">Pricing</Link>
-          </div>
-
-        </div>
-      )}
     </nav>
   )
 }
