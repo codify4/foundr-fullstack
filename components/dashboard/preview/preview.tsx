@@ -45,7 +45,7 @@ const Preview = ({ name, bio, projects, socials, avatar }: PreviewProps) => {
     }
 
     return (
-        <div className="w-full lg:w-1/2 py-4 lg:px-4 xl:px-0 overflow-auto text-black dark:text-white">
+        <div className="w-full lg:w-1/2 py-4 lg:px-4 xl:px-0 overflow-auto text-black dark:text-white no-scrollbar">
             <div className="flex justify-between items-center mb-6">
                 <h2 className="text-2xl font-bold">Preview</h2>
                 <div className="hidden md:block">
@@ -174,7 +174,7 @@ const Preview = ({ name, bio, projects, socials, avatar }: PreviewProps) => {
                                 "block py-6 px- rounded-xl border hover:border-gray-300 dark:hover:border-gray-600 transition-all duration-200 hover:shadow-md bg-gray-50 dark:bg-neutral-800/50 group",
                                 device === 'desktop' ? 'max-w-3xl mx-auto' : ''
                             )}>
-                                <div className="flex justify-center">
+                                <div className="flex justify-center px-3">
                                     <GitHubCalendar 
                                         username="codify4" 
                                         fontSize={device === 'desktop' ? 14 : 12}
