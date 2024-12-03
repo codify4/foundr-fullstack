@@ -171,10 +171,10 @@ const Preview = ({ name, bio, projects, socials, avatar }: PreviewProps) => {
                                 device === 'desktop' ? 'text-3xl' : 'text-2xl'
                             )}>Github Activity</h2>
                             <div className={cn(
-                                "flex items-center justify-center p-6 rounded-xl border bg-gray-50 dark:bg-neutral-800/50",
+                                "block py-6 px- rounded-xl border hover:border-gray-300 dark:hover:border-gray-600 transition-all duration-200 hover:shadow-md bg-gray-50 dark:bg-neutral-800/50 group",
                                 device === 'desktop' ? 'max-w-3xl mx-auto' : ''
                             )}>
-                                <div className="w-full">
+                                <div className="flex justify-center">
                                     <GitHubCalendar 
                                         username="codify4" 
                                         fontSize={device === 'desktop' ? 14 : 12}

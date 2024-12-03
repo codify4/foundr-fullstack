@@ -9,8 +9,7 @@ import { getSocialLinkByPageSlug } from '@/actions/socials-actions'
 import { Suspense } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
-import GitHubCalendar from 'react-github-calendar'
-import { selectLastElevenYear } from '@/lib/github-date'
+import { GithubCalendarWrapper } from '@/components/github-calendar'
 
 const socialIcons = {
   github: Github,
@@ -44,8 +43,8 @@ async function SlugPage({ slug }: { slug: string }) {
 
   return (
     <div className="min-h-screen bg-background py-8 px-4">
-      <div className="w-11/12 lg:w-1/2 mx-auto">
-        <div className="bg-white dark:bg-neutral-900 text-black dark:text-white rounded-2xl border shadow-lg backdrop-blur-sm p-8 md:p-12">
+      <div className="w-11/12 lg:w-2/3 xl:w-6/12 2xl:w-5/12 mx-auto">
+        <div className="bg-white dark:bg-neutral-900 text-black dark:text-white rounded-2xl border shadow-lg backdrop-blur-sm py-8 px-4 md:p-12">
           <div className="text-center mb-12">
             {pageInfo.avatar && (
               <div className="mb-6 flex justify-center">
@@ -136,18 +135,9 @@ async function SlugPage({ slug }: { slug: string }) {
             </div>
           )}
           <div className="mt-10">
-              <h2 className={"font-bold mb-6 text-center"}>Github Activity</h2>
-              <div className={"flex items-center justify-center py-6 px-3 rounded-xl border bg-gray-50 dark:bg-neutral-800/50"}>
-                  <div>
-                      <GitHubCalendar 
-                          username="codify4" 
-                          fontSize={12}
-                          blockSize={10}
-                          blockMargin={4}
-                          colorScheme={"light"}
-                          hideTotalCount
-                      />
-                  </div>
+              <h2 className={"font-bold mb-6 text-center text-2xl"}>Github Activity</h2>
+              <div className={"block py-6 px-3 rounded-xl border hover:border-gray-300 dark:hover:border-gray-600 transition-all duration-200 hover:shadow-md bg-gray-50 dark:bg-neutral-800/50 group"}>
+                  <GithubCalendarWrapper />
               </div>
           </div>
         </div>
