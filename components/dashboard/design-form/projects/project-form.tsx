@@ -70,7 +70,7 @@ const ProjectForm = ({ open, setOpen, projects, setProjects, newProject, setNewP
                         Add New Project
                     </Button>
                 </DialogTrigger>
-                <DialogContent className='sm:max-w-[500px] rounded-lg bg-background'>
+                <DialogContent className='w-11/12 sm:w-full rounded-lg bg-background'>
                     <DialogHeader>
                         <DialogTitle className="text-xl font-semibold">Add New Project</DialogTitle>
                         <p className="text-sm text-muted-foreground">Share details about your project with visitors.</p>

@@ -65,7 +65,7 @@ const SocialForm = ({ socials, setSocials, newSocial, setNewSocial, isSocialDial
                         Add Social Media Link
                     </Button>
                 </DialogTrigger>
-                <DialogContent className='sm:max-w-[500px] rounded-lg bg-background'>
+                <DialogContent className='w-11/12 sm:w-full rounded-lg bg-background'>
                     <DialogHeader>
                         <DialogTitle className="text-xl font-semibold">Add Social Media Link</DialogTitle>
                         <p className="text-sm text-muted-foreground">Connect your social media profiles.</p>
