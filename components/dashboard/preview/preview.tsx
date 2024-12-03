@@ -9,6 +9,7 @@ import { useState } from "react";
 import Link from "next/link";
 import GitHubCalendar from 'react-github-calendar';
 import { cn } from "@/lib/utils";
+import { selectLastElevenYear, selectLastSixYear } from "@/lib/github-date";
 
 
 type PreviewProps = {
@@ -51,12 +52,12 @@ const Preview = ({ name, bio, projects, socials, avatar }: PreviewProps) => {
                     <DeviceSwitch device={device} setDevice={setDevice} />
                 </div>
             </div>
-            <div className="flex justify-center items-start">
+            <div className="flex justify-center items-start w-full">
                 <div 
                     className={`bg-white dark:bg-neutral-900 text-black dark:text-white rounded-2xl border shadow-lg backdrop-blur-sm transition-all duration-300 ${getPreviewWidth()}`}
                 >
-                    <div className={cn("p-8", device === 'desktop' ? 'max-w-4xl mx-auto' : '')}>
-                        <div className={cn("text-center mb-12", device === 'desktop' ? 'max-w-2xl mx-auto' : '')}>
+                    <div className={cn("py-8 px-4 xl:px-8", device === 'desktop' ? 'w-full mx-auto' : '')}>
+                        <div className={cn("text-center mb-12", device === 'desktop' ? 'w-full mx-auto' : '')}>
                             {avatar && (
                                 <div className="mb-6 flex justify-center">
                                     <div className="relative">
@@ -170,15 +171,18 @@ const Preview = ({ name, bio, projects, socials, avatar }: PreviewProps) => {
                                 device === 'desktop' ? 'text-3xl' : 'text-2xl'
                             )}>Github Activity</h2>
                             <div className={cn(
-                                "p-6 rounded-xl border bg-gray-50 dark:bg-neutral-800/50",
+                                "flex items-center justify-center p-6 rounded-xl border bg-gray-50 dark:bg-neutral-800/50",
                                 device === 'desktop' ? 'max-w-3xl mx-auto' : ''
                             )}>
-                                <div className="overflow-x-auto">
+                                <div className="w-full">
                                     <GitHubCalendar 
                                         username="codify4" 
                                         fontSize={device === 'desktop' ? 14 : 12}
                                         blockSize={device === 'desktop' ? 10 : 8}
                                         blockMargin={4}
+                                        colorScheme={"light"}
+                                        hideTotalCount
+                                        transformData={device === 'desktop' ? selectLastElevenYear : selectLastSixYear}
                                     />
                                 </div>
                             </div>
