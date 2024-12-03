@@ -9,6 +9,8 @@ import { getSocialLinkByPageSlug } from '@/actions/socials-actions'
 import { Suspense } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
+import GitHubCalendar from 'react-github-calendar'
+import { selectLastElevenYear } from '@/lib/github-date'
 
 const socialIcons = {
   github: Github,
@@ -42,7 +44,7 @@ async function SlugPage({ slug }: { slug: string }) {
 
   return (
     <div className="min-h-screen bg-background py-8 px-4">
-      <div className="w-11/12 lg:w-[1024px] mx-auto">
+      <div className="w-11/12 lg:w-1/2 mx-auto">
         <div className="bg-white dark:bg-neutral-900 text-black dark:text-white rounded-2xl border shadow-lg backdrop-blur-sm p-8 md:p-12">
           <div className="text-center mb-12">
             {pageInfo.avatar && (
@@ -133,6 +135,21 @@ async function SlugPage({ slug }: { slug: string }) {
               </div>
             </div>
           )}
+          <div className="mt-10">
+              <h2 className={"font-bold mb-6 text-center"}>Github Activity</h2>
+              <div className={"flex items-center justify-center py-6 px-3 rounded-xl border bg-gray-50 dark:bg-neutral-800/50"}>
+                  <div>
+                      <GitHubCalendar 
+                          username="codify4" 
+                          fontSize={12}
+                          blockSize={10}
+                          blockMargin={4}
+                          colorScheme={"light"}
+                          hideTotalCount
+                      />
+                  </div>
+              </div>
+          </div>
         </div>
       </div>
     </div>
