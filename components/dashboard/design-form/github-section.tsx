@@ -1,34 +1,17 @@
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
-import {
-    Select,
-    SelectContent,
-    SelectItem,
-    SelectTrigger,
-    SelectValue,
-} from "@/components/ui/select"
-  
-const themes = [
-    {
-        light: ["hsl(0, 0%, 92%)", "rebeccapurple"],
-        dark: ["hsl(0, 0%, 22%)", "hsl(225,92%,77%)"],
-    },
-    {
-        light: ["hsl(240, 100%, 95%)", "hsl(340, 100%, 50%)"],
-        dark: ["hsl(240, 100%, 15%)", "hsl(340, 100%, 40%)"],
-    },
-] as const;
-  
-
-type ThemeKeys = keyof typeof themes[number];
+import { useState } from "react"
+import { ThemeSelector } from "./github-select"
 
 type GithubSectionProps = {
     username: string;
-    theme: ThemeKeys;
+    theme: string;
 };
 
 const GithubSection = () => {
+    const [theme, setTheme] = useState('light')
+
     return ( 
         <div className="space-y-6">
             <div className="space-y-2">
@@ -42,16 +25,7 @@ const GithubSection = () => {
                 </div>
                 <div>
                     <Label htmlFor="theme" className="mb-2">Color Theme</Label>
-                    <Select name="theme" defaultValue="light">
-                        <SelectTrigger>
-                            <SelectValue placeholder="Theme" />
-                        </SelectTrigger>
-                        <SelectContent>
-                            <SelectItem value="light">Light</SelectItem>
-                            <SelectItem value="dark">Dark</SelectItem>
-                            <SelectItem value="system">System</SelectItem>
-                        </SelectContent>
-                    </Select>
+                    <ThemeSelector value={theme} onChange={setTheme} />
                 </div>
                 <Button 
                     type="submit" 
