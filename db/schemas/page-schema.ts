@@ -19,6 +19,7 @@ export const page = pgTable('page', {
 export const pageRelations = relations(page, ({ many, one }) => ({
     socials: many(socialLink),
     projects: many(project),
+    githubCalendar: one(githubCalendar),
     user: one(users, {
         fields: [page.userId],
         references: [users.id],
@@ -59,10 +60,28 @@ export const projectRelations = relations(project, ({ one }) => ({
     }),
 }));
 
+export const githubCalendar = pgTable('github_calendar', {
+    id: serial('id').primaryKey(),
+    createdAt: timestamp('created_at').defaultNow(),
+    updatedAt: timestamp('updated_at').defaultNow(),
+    username: varchar('username').notNull(),
+    theme: varchar('theme').notNull().default('light'),
+    pageId: integer('page_id').notNull().references(() => page.id, { onDelete: 'cascade' }),
+});
+
+export const githubCalendarRelations = relations(githubCalendar, ({ one }) => ({
+    page: one(page, {
+        fields: [githubCalendar.pageId],
+        references: [page.id],
+    }),
+}));
+
 export type SelectPage = InferSelectModel<typeof page>;
 export type SelectProject = InferSelectModel<typeof project>;
 export type SelectSocial = InferSelectModel<typeof socialLink>;
+export type SelectGithubCalendar = InferSelectModel<typeof githubCalendar>;
 
 export type InsertPage = InferInsertModel<typeof page>;
 export type InsertProject = InferInsertModel<typeof project>;
 export type InsertSocial = InferInsertModel<typeof socialLink>;
+export type InsertGithubCalendar = InferInsertModel<typeof githubCalendar>;
