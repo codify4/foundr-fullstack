@@ -1,7 +1,7 @@
 'use server'
 
 import { eq } from 'drizzle-orm';
-import { page, InsertPage, SelectPage } from '@/db/schemas/page-schema';
+import { page, InsertPage, SelectPage, githubCalendar, InsertGithubCalendar, SelectGithubCalendar } from '@/db/schemas/page-schema';
 import { db } from '@/db/drizzle';
 import { auth } from '@/auth';
 import { revalidatePath } from 'next/cache';
@@ -115,4 +115,60 @@ export async function getSlug() {
 
   const pageResult = await db.select().from(page).where(eq(page.userId, userId));
   return pageResult[0]?.pageSlug;
+}
+
+export async function getGithubCalendar(pageId: number): Promise<SelectGithubCalendar | null> {
+  try {
+    const result = await db
+      .select()
+      .from(githubCalendar)
+      .where(eq(githubCalendar.pageId, pageId))
+      .limit(1);
+
+    return result.length > 0 ? result[0] : null;
+  } catch (error) {
+    console.error('Error getting github calendar:', error);
+    throw error;
+  }
+}
+
+export async function upsertGithubCalendar(
+  pageId: number, 
+  data: { username: string; theme: string }
+): Promise<SelectGithubCalendar> {
+  try {
+    const existing = await getGithubCalendar(pageId);
+    
+    if (existing) {
+      const [updated] = await db
+        .update(githubCalendar)
+        .set({ ...data, updatedAt: new Date() })
+        .where(eq(githubCalendar.pageId, pageId))
+        .returning();
+      revalidatePath('/dashboard');
+      return updated;
+    }
+
+    const [created] = await db
+      .insert(githubCalendar)
+      .values({ ...data, pageId })
+      .returning();
+    revalidatePath('/dashboard');
+    return created;
+  } catch (error) {
+    console.error('Error upserting github calendar:', error);
+    throw error;
+  }
+}
+
+export async function deleteGithubCalendar(pageId: number): Promise<void> {
+  try {
+    await db
+      .delete(githubCalendar)
+      .where(eq(githubCalendar.pageId, pageId));
+    revalidatePath('/dashboard');
+  } catch (error) {
+    console.error('Error deleting github calendar:', error);
+    throw error;
+  }
 }

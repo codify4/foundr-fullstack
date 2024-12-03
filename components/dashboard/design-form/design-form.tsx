@@ -91,8 +91,10 @@ const DesignForm = ({
             setSocials={setSocials}
           />
         </div>
-
-        <GithubSection />
+        
+        <div className="bg-card rounded-lg p-6 border shadow-sm">
+          <GithubSection />
+        </div>
       </div>
     </div>
   )
