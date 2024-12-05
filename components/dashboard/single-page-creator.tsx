@@ -6,6 +6,7 @@ import DesignForm from './design-form/design-form'
 import Preview from './preview/preview'
 import { Project, Social } from '@/types/page-types'
 import { SelectPage, SelectProject, SelectSocial } from '@/db/schemas/page-schema'
+import { ThemeInput } from '@/types/theme-type'
 
 export function SinglePageCreator({ 
   initialSocials, 
@@ -35,7 +36,9 @@ export function SinglePageCreator({
     link: ''
   })
 
-  const [isDesktopPreview, setIsDesktopPreview] = useState(true)
+  const [username, setUsername] = useState('');
+  const [theme, setTheme] = useState<ThemeInput | undefined>();
+
   const [isProjectDialogOpen, setIsProjectDialogOpen] = useState(false)
   const [isSocialDialogOpen, setIsSocialDialogOpen] = useState(false)
 
@@ -68,6 +71,10 @@ export function SinglePageCreator({
         setIsSocialDialogOpen={setIsSocialDialogOpen}
         setProjects={setProjects}
         setSocials={setSocials}
+        username={username}
+        setUsername={setUsername}
+        theme={theme}
+        setTheme={setTheme}
       />
 
       {/* Right side - Preview */}
@@ -81,6 +88,8 @@ export function SinglePageCreator({
         isSocialDialogOpen={isSocialDialogOpen}
         setIsProjectDialogOpen={setIsProjectDialogOpen}
         setIsSocialDialogOpen={setIsSocialDialogOpen}
+        username={username}
+        theme={theme}
       />
     </div>
   )

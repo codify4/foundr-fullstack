@@ -10,6 +10,7 @@ import Link from "next/link";
 import GitHubCalendar from 'react-github-calendar';
 import { cn } from "@/lib/utils";
 import { selectLastElevenYear, selectLastSixYear } from "@/lib/github-date";
+import { ThemeInput } from "@/types/theme-type";
 
 
 type PreviewProps = {
@@ -22,6 +23,8 @@ type PreviewProps = {
     setIsProjectDialogOpen: React.Dispatch<React.SetStateAction<boolean>>;
     setIsSocialDialogOpen: React.Dispatch<React.SetStateAction<boolean>>;
     avatar?: string;
+    username: string;
+    theme: ThemeInput | undefined;
 }
 
 const socialIcons = {
@@ -32,7 +35,7 @@ const socialIcons = {
     facebook: Facebook,
 }
 
-const Preview = ({ name, bio, projects, socials, avatar }: PreviewProps) => {
+const Preview = ({ name, bio, projects, socials, avatar, username, theme }: PreviewProps) => {
     const [device, setDevice] = useState<Device>('desktop')
 
     const getPreviewWidth = () => {
@@ -176,13 +179,14 @@ const Preview = ({ name, bio, projects, socials, avatar }: PreviewProps) => {
                             )}>
                                 <div className="flex justify-center px-3">
                                     <GitHubCalendar 
-                                        username="codify4" 
+                                        username={username} 
                                         fontSize={device === 'desktop' ? 14 : 12}
                                         blockSize={device === 'desktop' ? 10 : 8}
                                         blockMargin={4}
                                         colorScheme={"light"}
                                         hideTotalCount
                                         transformData={device === 'desktop' ? selectLastElevenYear : selectLastSixYear}
+                                        theme={theme}
                                     />
                                 </div>
                             </div>

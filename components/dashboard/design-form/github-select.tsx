@@ -9,38 +9,89 @@ import {
 } from "@/components/ui/popover"
 import { Check, ChevronDown } from "lucide-react"
 import { cn } from "@/lib/utils"
-import { useState } from "react"
+import { ThemeInput } from "@/types/theme-type"
 
-const themes = [
+export const themes = [
     {
-        id: 'light',
-        name: 'Light',
-        colors: ["hsl(0, 0%, 92%)", "rebeccapurple"],
+        id: 'github',
+        name: 'GitHub',
+        colors: ["#ebedf0", "#40c463"],
+        value: {
+            light: ["#ebedf0", "#9be9a8", "#40c463", "#30a14e", "#216e39"],
+            dark: undefined
+        } satisfies ThemeInput
     },
     {
-        id: 'dark',
-        name: 'Dark',
-        colors: ["hsl(0, 0%, 22%)", "hsl(225,92%,77%)"],
+        id: 'purple',
+        name: 'Purple',
+        colors: ["#f5f3ff", "#7c3aed"],
+        value: {
+            light: ["#f5f3ff", "#ddd6fe", "#a78bfa", "#7c3aed", "#5b21b6"],
+            dark: undefined
+        } satisfies ThemeInput
     },
+    {
+        id: 'crimson',
+        name: 'Crimson',
+        colors: ["#fef2f2", "#dc2626"],
+        value: {
+            light: ["#fef2f2", "#fecaca", "#f87171", "#dc2626", "#991b1b"],
+            dark: undefined
+        } satisfies ThemeInput
+    },
+    {
+        id: 'ocean',
+        name: 'Ocean',
+        colors: ["hsl(200, 65%, 95%)", "hsl(200, 85%, 45%)"],
+        value: {
+            light: ["hsl(200, 65%, 95%)", "hsl(200, 75%, 65%)", "hsl(200, 85%, 45%)", "hsl(200, 85%, 35%)", "hsl(200, 85%, 25%)"],
+            dark: undefined
+        } satisfies ThemeInput
+    },
+    {
+        id: 'sunset',
+        name: 'Sunset',
+        colors: ["hsl(40, 80%, 97%)", "hsl(20, 90%, 60%)"],
+        value: {
+            light: ["hsl(40, 80%, 97%)", "hsl(20, 90%, 60%)"],
+            dark: undefined
+        } satisfies ThemeInput
+    },
+    {
+        id: 'forest',
+        name: 'Forest',
+        colors: ["hsl(120, 20%, 95%)", "hsl(150, 60%, 40%)"],
+        value: {
+            light: ["hsl(120, 20%, 95%)", "hsl(150, 60%, 40%)"],
+            dark: undefined
+        } satisfies ThemeInput
+    },
+    {
+        id: 'lavender',
+        name: 'Lavender',
+        colors: ["hsl(280, 20%, 95%)", "hsl(280, 60%, 65%)"],
+        value: {
+            light: ["hsl(280, 20%, 95%)", "hsl(280, 60%, 65%)"],
+            dark: undefined
+        } satisfies ThemeInput
+    }
 ] as const
 
 interface ThemeSelectorProps {
-    value: string
-    onChange: (value: string) => void
+    value: ThemeInput | undefined
+    setValue: React.Dispatch<React.SetStateAction<ThemeInput | undefined>>
 }
 
-const GithubSelect = () => {
-  const [theme, setTheme] = useState('light')
+export default function ThemeSelector({ value, setValue }: ThemeSelectorProps) {
+    const getCurrentThemeId = () => {
+        if (!value) return 'github'
+        return themes.find(theme => 
+            JSON.stringify(theme.value) === JSON.stringify(value)
+        )?.id || 'github'
+    }
 
-  return (
-    <div>
-        <Label htmlFor="theme" className="mb-2">Color Theme</Label>
-        <ThemeSelector value={theme} onChange={setTheme} />
-    </div>
-  )
-}
+    const currentTheme = themes.find((theme) => theme.id === getCurrentThemeId()) || themes[0]
 
-export function ThemeSelector({ value, onChange }: ThemeSelectorProps) {
     return (
         <Popover>
             <PopoverTrigger asChild>
@@ -49,7 +100,7 @@ export function ThemeSelector({ value, onChange }: ThemeSelectorProps) {
                     role="combobox"
                     className="w-full justify-between"
                 >
-                    {themes.find((theme) => theme.id === value)?.name || "Select theme"}
+                    {currentTheme.name}
                     <ChevronDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
                 </Button>
             </PopoverTrigger>
@@ -66,9 +117,9 @@ export function ThemeSelector({ value, onChange }: ThemeSelectorProps) {
                             role="option"
                             className={cn(
                                 "justify-between",
-                                value === theme.id && "bg-accent"
+                                getCurrentThemeId() === theme.id && "bg-accent"
                             )}
-                            onClick={() => onChange(theme.id)}
+                            onClick={() => setValue(theme.value)}
                         >
                             <div className="flex items-center gap-2">
                                 {theme.name}
@@ -77,7 +128,7 @@ export function ThemeSelector({ value, onChange }: ThemeSelectorProps) {
                                     style={{ background: theme.colors[1] }}
                                 />
                             </div>
-                            {value === theme.id && (
+                            {getCurrentThemeId() === theme.id && (
                                 <Check className="h-4 w-4" />
                             )}
                         </Button>
@@ -87,5 +138,3 @@ export function ThemeSelector({ value, onChange }: ThemeSelectorProps) {
         </Popover>
     )
 }
-
-export default GithubSelect

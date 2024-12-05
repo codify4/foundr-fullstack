@@ -1,17 +1,17 @@
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
-import { useState } from "react"
-import { ThemeSelector } from "./github-select"
+import ThemeSelector from "./github-select"
+import { ThemeInput } from "@/types/theme-type";
 
 type GithubSectionProps = {
     username: string;
-    theme: string;
+    setUsername: React.Dispatch<React.SetStateAction<string>>;
+    theme: ThemeInput | undefined;
+    setTheme: React.Dispatch<React.SetStateAction<ThemeInput | undefined>>;
 };
 
-const GithubSection = () => {
-    const [theme, setTheme] = useState('light')
-
+const GithubSection = ({ username, setUsername, theme, setTheme }: GithubSectionProps) => {
     return ( 
         <div className="space-y-6">
             <div className="space-y-2">
@@ -21,11 +21,11 @@ const GithubSection = () => {
             <form className="flex flex-col gap-3">
                 <div>
                     <Label htmlFor="username" className="mb-2">Github Username</Label>
-                    <Input id="username" name="username" type="text" placeholder="Enter your github username" />
+                    <Input id="username" name="username" type="text" placeholder="Enter your github username" autoComplete="off" value={username} onChange={(e) => setUsername(e.target.value)}/>
                 </div>
                 <div>
                     <Label htmlFor="theme" className="mb-2">Color Theme</Label>
-                    <ThemeSelector value={theme} onChange={setTheme} />
+                    <ThemeSelector value={theme} setValue={setTheme} />
                 </div>
                 <Button 
                     type="submit" 

@@ -6,28 +6,37 @@ import { Project, Social } from "@/types/page-types"
 import SocialForm from "./socials/socials-form"
 import { SelectProject, SelectSocial } from "@/db/schemas/page-schema"
 import GithubSection from "./github-section"
+import { ThemeInput } from "@/types/theme-type"
 
 type DesignFormProps = {
   slug: string;
   name: string;
   bio: string;
   avatar: string;
+
   setSlug: React.Dispatch<React.SetStateAction<string>>;
   setName: React.Dispatch<React.SetStateAction<string>>;
   setBio: React.Dispatch<React.SetStateAction<string>>;
   setAvatar: React.Dispatch<React.SetStateAction<string>>;
+
   projects: SelectProject[];
   socials: SelectSocial[];
   newProject: Project;
   newSocial: Social;
   isProjectDialogOpen: boolean;
   isSocialDialogOpen: boolean;
+
   setIsProjectDialogOpen: React.Dispatch<React.SetStateAction<boolean>>;
   setIsSocialDialogOpen: React.Dispatch<React.SetStateAction<boolean>>;
   setNewProject: React.Dispatch<React.SetStateAction<Project>>;
   setNewSocial: React.Dispatch<React.SetStateAction<Social>>;
   setProjects: React.Dispatch<React.SetStateAction<SelectProject[]>>;
   setSocials: React.Dispatch<React.SetStateAction<SelectSocial[]>>;
+
+  username: string;
+  setUsername: React.Dispatch<React.SetStateAction<string>>;
+  theme: ThemeInput | undefined;
+  setTheme: React.Dispatch<React.SetStateAction<ThemeInput | undefined>>;
 }
 
 const DesignForm = ({
@@ -50,7 +59,11 @@ const DesignForm = ({
   setNewProject, 
   setNewSocial,
   setProjects,
-  setSocials
+  setSocials,
+  username,
+  setUsername,
+  theme,
+  setTheme
 }: DesignFormProps) => {
   return (
     <div className="w-full lg:w-2/5 py-4 lg:p-8 overflow-auto overflow-y-scroll no-scrollbar">
@@ -93,7 +106,12 @@ const DesignForm = ({
         </div>
         
         <div className="bg-card rounded-lg p-6 border shadow-sm">
-          <GithubSection />
+          <GithubSection
+            username={username}
+            setUsername={setUsername}
+            theme={theme}
+            setTheme={setTheme}
+          />
         </div>
         
       </div>
