@@ -6,6 +6,7 @@ import { Github, Twitter, Linkedin, Instagram, Facebook, LinkIcon, DollarSign } 
 import { getPageBySlug } from '@/actions/page-actions'
 import { getProjectByPageSlug } from '@/actions/project-actions'
 import { getSocialLinkByPageSlug } from '@/actions/socials-actions'
+import { getGithubCalendar } from '@/actions/page-actions'
 import { Suspense } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -31,6 +32,7 @@ async function SlugPage({ slug }: { slug: string }) {
   const pageInfo = await getPageBySlug(slug);
   const projects = await getProjectByPageSlug(slug);
   const socials = await getSocialLinkByPageSlug(slug);
+  const githubCalendar = pageInfo ? await getGithubCalendar(pageInfo.id) : null;
 
   if (!pageInfo) {
     return (
@@ -134,12 +136,14 @@ async function SlugPage({ slug }: { slug: string }) {
               </div>
             </div>
           )}
-          <div className="mt-10">
+          {githubCalendar && (
+            <div className="mt-10">
               <h2 className={"font-bold mb-6 text-center text-2xl"}>Github Activity</h2>
               <div className={"block py-6 px-3 rounded-xl border hover:border-gray-300 dark:hover:border-gray-600 transition-all duration-200 hover:shadow-md bg-gray-50 dark:bg-neutral-800/50 group"}>
-                  <GithubCalendarWrapper />
+                  <GithubCalendarWrapper username={githubCalendar.username} theme={githubCalendar.theme} />
               </div>
-          </div>
+            </div>
+          )}
         </div>
       </div>
     </div>

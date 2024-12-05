@@ -3,8 +3,9 @@
 import { useEffect, useState } from 'react'
 import GitHubCalendar from 'react-github-calendar'
 import { selectLastElevenYear, selectLastNineYear, selectLastSixYear } from '@/lib/github-date'
+import { themes } from '@/constants/themes'
 
-export const GithubCalendarWrapper = () => {
+export const GithubCalendarWrapper = ({ username, theme }: { username: string; theme: string }) => {
     const [screenSize, setScreenSize] = useState<'mobile' | 'tablet' | 'desktop'>('desktop')
 
     useEffect(() => {
@@ -36,14 +37,17 @@ export const GithubCalendarWrapper = () => {
         }
     }
 
+    const selectedTheme = themes.find(t => t.id === theme) || themes[0]
+
     return (
         <div className="flex justify-center">
             <GitHubCalendar 
-                username="codify4" 
+                username={username}
                 fontSize={screenSize === 'mobile' ? 12 : 14}
                 blockSize={screenSize === 'mobile' ? 8 : 10}
                 blockMargin={4}
-                colorScheme={"light"}
+                colorScheme={'light'}
+                theme={selectedTheme.value}
                 hideTotalCount
                 transformData={getTransformData()}
             />
