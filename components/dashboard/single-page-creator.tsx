@@ -5,17 +5,19 @@ import Sidebar from './sidebar'
 import DesignForm from './design-form/design-form'
 import Preview from './preview/preview'
 import { Project, Social } from '@/types/page-types'
-import { SelectPage, SelectProject, SelectSocial } from '@/db/schemas/page-schema'
+import { SelectGithubCalendar, SelectPage, SelectProject, SelectSocial } from '@/db/schemas/page-schema'
 import { ThemeInput } from '@/types/theme-type'
 
 export function SinglePageCreator({ 
   initialSocials, 
   initialProjects, 
-  initialPageInfo 
+  initialPageInfo,
+  initialGithubCalendar
 }: { 
   initialSocials: SelectSocial[], 
   initialProjects: SelectProject[], 
-  initialPageInfo: SelectPage
+  initialPageInfo: SelectPage,
+  initialGithubCalendar: SelectGithubCalendar
 }) {
   const [slug, setSlug] = useState(initialPageInfo.pageSlug)
   const [name, setName] = useState(initialPageInfo.name)
@@ -36,8 +38,8 @@ export function SinglePageCreator({
     link: ''
   })
 
-  const [username, setUsername] = useState('');
-  const [theme, setTheme] = useState<ThemeInput | undefined>();
+  const [username, setUsername] = useState(initialGithubCalendar?.username || '');
+  const [theme, setTheme] = useState<string | undefined>(initialGithubCalendar?.theme);
 
   const [isProjectDialogOpen, setIsProjectDialogOpen] = useState(false)
   const [isSocialDialogOpen, setIsSocialDialogOpen] = useState(false)

@@ -7,26 +7,17 @@ import {
     PopoverTrigger,
 } from "@/components/ui/popover"
 import { Check, ChevronDown } from "lucide-react"
-import { cn } from "@/lib/utils"
-import { ThemeInput } from "@/types/theme-type"
 import { themes } from "@/constants/themes"
 
 
 
 interface ThemeSelectorProps {
-    value: ThemeInput | undefined
-    setValue: React.Dispatch<React.SetStateAction<ThemeInput | undefined>>
+    value: string | undefined
+    setValue: React.Dispatch<React.SetStateAction<string | undefined>>
 }
 
 export default function ThemeSelector({ value, setValue }: ThemeSelectorProps) {
-    const getCurrentThemeId = () => {
-        if (!value) return 'github'
-        return themes.find(theme => 
-            JSON.stringify(theme.value) === JSON.stringify(value)
-        )?.id || 'github'
-    }
-
-    const currentTheme = themes.find((theme) => theme.id === getCurrentThemeId()) || themes[0]
+    const currentTheme = themes.find((theme) => theme.id === value) || themes[0]
 
     return (
         <Popover>
@@ -36,7 +27,13 @@ export default function ThemeSelector({ value, setValue }: ThemeSelectorProps) {
                     role="combobox"
                     className="w-full justify-between"
                 >
-                    {currentTheme.name}
+                    <div className="flex items-center gap-2">
+                        {currentTheme.name}
+                        <div
+                            className="w-3 h-3 rounded-full"
+                            style={{ background: currentTheme.colors[1] }}
+                        />
+                    </div>
                     <ChevronDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
                 </Button>
             </PopoverTrigger>
@@ -50,12 +47,8 @@ export default function ThemeSelector({ value, setValue }: ThemeSelectorProps) {
                         <Button
                             key={theme.id}
                             variant="ghost"
-                            role="option"
-                            className={cn(
-                                "justify-between",
-                                getCurrentThemeId() === theme.id && "bg-accent"
-                            )}
-                            onClick={() => setValue(theme.value)}
+                            className="flex w-full items-center justify-between"
+                            onClick={() => setValue(theme.id)}
                         >
                             <div className="flex items-center gap-2">
                                 {theme.name}
@@ -64,7 +57,7 @@ export default function ThemeSelector({ value, setValue }: ThemeSelectorProps) {
                                     style={{ background: theme.colors[1] }}
                                 />
                             </div>
-                            {getCurrentThemeId() === theme.id && (
+                            {theme.id === value && (
                                 <Check className="h-4 w-4" />
                             )}
                         </Button>

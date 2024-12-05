@@ -117,7 +117,7 @@ export async function getSlug() {
   return pageResult[0]?.pageSlug;
 }
 
-export async function getGithubCalendar(pageId: number): Promise<SelectGithubCalendar | null> {
+export async function getGithubCalendar(pageId: number): Promise<SelectGithubCalendar> {
   try {
     const result = await db
       .select()
@@ -125,7 +125,7 @@ export async function getGithubCalendar(pageId: number): Promise<SelectGithubCal
       .where(eq(githubCalendar.pageId, pageId))
       .limit(1);
 
-    return result.length > 0 ? result[0] : null;
+    return result[0];
   } catch (error) {
     console.error('Error getting github calendar:', error);
     throw error;
@@ -133,7 +133,7 @@ export async function getGithubCalendar(pageId: number): Promise<SelectGithubCal
 }
 
 export async function upsertGithubCalendar(
-  pageId: number, 
+  pageId: number,
   data: { username: string; theme: string }
 ): Promise<SelectGithubCalendar> {
   try {

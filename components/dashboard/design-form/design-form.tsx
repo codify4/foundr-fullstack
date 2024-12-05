@@ -6,7 +6,6 @@ import { Project, Social } from "@/types/page-types"
 import SocialForm from "./socials/socials-form"
 import { SelectProject, SelectSocial } from "@/db/schemas/page-schema"
 import GithubSection from "./github-section"
-import { ThemeInput } from "@/types/theme-type"
 
 type DesignFormProps = {
   slug: string;
@@ -35,8 +34,8 @@ type DesignFormProps = {
 
   username: string;
   setUsername: React.Dispatch<React.SetStateAction<string>>;
-  theme: ThemeInput | undefined;
-  setTheme: React.Dispatch<React.SetStateAction<ThemeInput | undefined>>;
+  theme: string | undefined;
+  setTheme: React.Dispatch<React.SetStateAction<string | undefined>>;
 }
 
 const DesignForm = ({

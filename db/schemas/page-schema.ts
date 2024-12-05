@@ -65,7 +65,7 @@ export const githubCalendar = pgTable('github_calendar', {
     createdAt: timestamp('created_at').defaultNow(),
     updatedAt: timestamp('updated_at').defaultNow(),
     username: varchar('username').notNull(),
-    theme: varchar('theme').notNull().default('light'),
+    theme: varchar('theme').notNull().default('github'),
     pageId: integer('page_id').notNull().references(() => page.id, { onDelete: 'cascade' }),
 });
 
