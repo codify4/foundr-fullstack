@@ -40,17 +40,15 @@ export const GithubCalendarWrapper = ({ username, theme }: { username: string; t
     const selectedTheme = themes.find(t => t.id === theme) || themes[0]
 
     return (
-        <div className="flex justify-center">
-            <GitHubCalendar 
-                username={username}
-                fontSize={screenSize === 'mobile' ? 12 : 14}
-                blockSize={screenSize === 'mobile' ? 8 : 10}
-                blockMargin={4}
-                colorScheme={'light'}
-                theme={selectedTheme.value}
-                hideTotalCount
-                transformData={getTransformData()}
-            />
-        </div>
+        <GitHubCalendar 
+            username={username}
+            fontSize={screenSize === 'mobile' ? 12 : 14}
+            blockSize={screenSize === 'mobile' ? 8 : 10}
+            blockMargin={4}
+            colorScheme={'light'}
+            theme={selectedTheme.value}
+            hideTotalCount
+            transformData={getTransformData()}
+        />
     )
 }

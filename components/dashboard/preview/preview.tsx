@@ -178,21 +178,19 @@ const Preview = ({ name, bio, projects, socials, avatar, username, theme }: Prev
                                 device === 'desktop' ? 'text-3xl' : 'text-2xl'
                             )}>Github Activity</h2>
                             <div className={cn(
-                                "block py-6 px- rounded-xl border hover:border-gray-300 dark:hover:border-gray-600 transition-all duration-200 hover:shadow-md bg-gray-50 dark:bg-neutral-800/50 group",
-                                device === 'desktop' ? 'max-w-3xl mx-auto' : ''
+                                "flex items-center justify-center py-6 px-3 rounded-xl border hover:border-gray-300 dark:hover:border-gray-600 transition-all duration-200 hover:shadow-md bg-gray-50 dark:bg-neutral-800/50 group",
+                                device === 'desktop' ? 'mx-auto' : ''
                             )}>
-                                <div className="flex justify-center px-3">
-                                    <GitHubCalendar 
-                                        username={username} 
-                                        fontSize={device === 'desktop' ? 14 : 12}
-                                        blockSize={device === 'desktop' ? 10 : 8}
-                                        blockMargin={4}
-                                        colorScheme={"light"}
-                                        hideTotalCount
-                                        transformData={device === 'desktop' ? selectLastElevenYear : selectLastSixYear}
-                                        theme={getThemeColors()}
-                                    />
-                                </div>
+                                <GitHubCalendar 
+                                    username={username} 
+                                    fontSize={device === 'desktop' ? 14 : 12}
+                                    blockSize={device === 'desktop' ? 10 : 8}
+                                    blockMargin={4}
+                                    colorScheme={"light"}
+                                    hideTotalCount
+                                    transformData={device === 'desktop' ? selectLastElevenYear : selectLastSixYear}
+                                    theme={getThemeColors()}
+                                />
                             </div>
                         </div>
                     </div>
