@@ -40,7 +40,7 @@ const Preview = ({ name, bio, projects, socials, avatar }: PreviewProps) => {
             case 'mobile':
                 return 'w-[375px]'
             case 'desktop':
-                return 'w-10/12'
+                return 'w-11/12'
         }
     }
 
@@ -54,7 +54,7 @@ const Preview = ({ name, bio, projects, socials, avatar }: PreviewProps) => {
             </div>
             <div className="flex justify-center items-start w-full">
                 <div 
-                    className={`w-full bg-white dark:bg-neutral-900 text-black dark:text-white rounded-2xl border shadow-lg backdrop-blur-sm transition-all duration-300 ${getPreviewWidth()}`}
+                    className={`bg-white dark:bg-neutral-900 text-black dark:text-white rounded-2xl border shadow-lg backdrop-blur-sm transition-all duration-300 ${getPreviewWidth()}`}
                 >
                     <div className={cn("py-8 px-4 xl:px-8", device === 'desktop' ? 'w-full mx-auto' : '')}>
                         <div className={cn("text-center mb-12", device === 'desktop' ? 'w-full mx-auto' : '')}>
