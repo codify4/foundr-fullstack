@@ -70,7 +70,7 @@ const Sidebar = ({ slug }: { slug?: string }) => {
                             </Link>
                         </div>
                         <div>
-                            <ThemeToggle />
+                            {/* <ThemeToggle /> */}
                         </div>
                     </div>
 
@@ -164,7 +164,7 @@ const Sidebar = ({ slug }: { slug?: string }) => {
                                     <span className="font-medium">Settings</span>
                                 </Link>
                             </div>
-                            <ThemeToggle />
+                            {/* <ThemeToggle /> */}
                         </nav>
                     </SheetContent>
                 </Sheet>
