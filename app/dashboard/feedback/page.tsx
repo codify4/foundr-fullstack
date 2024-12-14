@@ -1,4 +1,5 @@
 import { getSlug } from "@/actions/page-actions";
+import FeedbackForm from "@/components/dashboard/feedback-page";
 import Sidebar from "@/components/dashboard/sidebar"
 import { redirect } from "next/navigation";
 
@@ -12,7 +13,7 @@ export default async function FeedbackPage() {
         <Sidebar 
           slug={slug !== undefined ? slug : ''}
         />
-        <h1 className="w-full lg:w-2/5 mx-auto py-6">Feedback</h1>
+        <FeedbackForm />
     </div>
   )
 }

@@ -1,6 +1,6 @@
 'use client'
 
-import { BarChart, Menu, Palette, Settings, Clipboard, ClipboardCheck, SearchCheck, MessageCircle } from "lucide-react"
+import { MessageCircleQuestion, Menu, Palette, Settings, Clipboard, ClipboardCheck, SearchCheck } from "lucide-react"
 import {
     Sheet,
     SheetContent,
@@ -53,7 +53,7 @@ const Sidebar = ({ slug }: { slug?: string }) => {
                                 }`}
                                 href={`/dashboard/feedback`}
                             >   
-                                <MessageCircle className="inline-block w-4 h-4 mr-3" />
+                                <MessageCircleQuestion className="inline-block w-4 h-4 mr-3" />
                                 <span className="font-medium">Feedback</span>
                             </Link>
                             <Link
@@ -148,7 +148,7 @@ const Sidebar = ({ slug }: { slug?: string }) => {
                                     }`}
                                     href={`/dashboard/feedback`}
                                 >   
-                                    <MessageCircle className="inline-block w-4 h-4 mr-3" />
+                                    <MessageCircleQuestion className="inline-block w-4 h-4 mr-3" />
                                     <span className="font-medium">Feedback</span>
                                 </Link>
                                 <Link
