@@ -1,0 +1,18 @@
+import { getSlug } from "@/actions/page-actions";
+import Sidebar from "@/components/dashboard/sidebar"
+import { redirect } from "next/navigation";
+
+export default async function FeedbackPage() {
+  const slug = await getSlug();
+
+  if(!slug) redirect('/signin')
+
+  return (
+    <div className="flex flex-col lg:flex-row w-full lg:h-screen p-5 lg:p-0 bg-white dark:bg-neutral-900 text-black dark:text-white border">
+        <Sidebar 
+          slug={slug !== undefined ? slug : ''}
+        />
+        <h1 className="w-full lg:w-2/5 mx-auto py-6">Feedback</h1>
+    </div>
+  )
+}
