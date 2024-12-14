@@ -36,6 +36,8 @@ type DesignFormProps = {
   setUsername: React.Dispatch<React.SetStateAction<string>>;
   theme: string | undefined;
   setTheme: React.Dispatch<React.SetStateAction<string | undefined>>;
+  showGithub: boolean;
+  setShowGithub: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const DesignForm = ({
@@ -62,7 +64,9 @@ const DesignForm = ({
   username,
   setUsername,
   theme,
-  setTheme
+  setTheme,
+  showGithub,
+  setShowGithub
 }: DesignFormProps) => {
   return (
     <div className="w-full lg:w-2/5 py-4 lg:p-8 overflow-auto overflow-y-scroll no-scrollbar">
@@ -110,6 +114,8 @@ const DesignForm = ({
             setUsername={setUsername}
             theme={theme}
             setTheme={setTheme}
+            showGithub={showGithub}
+            setShowGithub={setShowGithub}
           />
         </div>
         

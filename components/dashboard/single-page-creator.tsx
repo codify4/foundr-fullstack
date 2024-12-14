@@ -6,7 +6,6 @@ import DesignForm from './design-form/design-form'
 import Preview from './preview/preview'
 import { Project, Social } from '@/types/page-types'
 import { SelectGithubCalendar, SelectPage, SelectProject, SelectSocial } from '@/db/schemas/page-schema'
-import { ThemeInput } from '@/types/theme-type'
 
 export function SinglePageCreator({ 
   initialSocials, 
@@ -40,6 +39,7 @@ export function SinglePageCreator({
 
   const [username, setUsername] = useState(initialGithubCalendar?.username || '');
   const [theme, setTheme] = useState<string | undefined>(initialGithubCalendar?.theme);
+  const [showGithub, setShowGithub] = useState(initialGithubCalendar?.show || false);
 
   const [isProjectDialogOpen, setIsProjectDialogOpen] = useState(false)
   const [isSocialDialogOpen, setIsSocialDialogOpen] = useState(false)
@@ -77,6 +77,8 @@ export function SinglePageCreator({
         setUsername={setUsername}
         theme={theme}
         setTheme={setTheme}
+        showGithub={showGithub}
+        setShowGithub={setShowGithub}
       />
 
       {/* Right side - Preview */}
@@ -92,6 +94,7 @@ export function SinglePageCreator({
         setIsSocialDialogOpen={setIsSocialDialogOpen}
         username={username}
         theme={theme}
+        showGithub={showGithub}
       />
     </div>
   )

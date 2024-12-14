@@ -1,4 +1,4 @@
-import { pgTable, serial, timestamp, varchar, text, integer, pgEnum } from 'drizzle-orm/pg-core';
+import { pgTable, serial, timestamp, varchar, text, integer, pgEnum, boolean } from 'drizzle-orm/pg-core';
 import { InferInsertModel, InferSelectModel, relations } from 'drizzle-orm';
 import { users } from './auth-schema';
 
@@ -66,6 +66,7 @@ export const githubCalendar = pgTable('github_calendar', {
     updatedAt: timestamp('updated_at').defaultNow(),
     username: varchar('username').notNull(),
     theme: varchar('theme').notNull().default('github'),
+    show: boolean('show').notNull().default(false),
     pageId: integer('page_id').notNull().references(() => page.id, { onDelete: 'cascade' }),
 });
 

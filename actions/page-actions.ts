@@ -134,7 +134,7 @@ export async function getGithubCalendar(pageId: number): Promise<SelectGithubCal
 
 export async function upsertGithubCalendar(
   pageId: number,
-  data: { username: string; theme: string }
+  data: { username: string; theme: string; show: boolean }
 ): Promise<SelectGithubCalendar> {
   try {
     const existing = await getGithubCalendar(pageId);

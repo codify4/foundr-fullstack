@@ -24,6 +24,7 @@ type PreviewProps = {
     avatar?: string;
     username: string;
     theme: string | undefined;
+    showGithub: boolean;
 }
 
 const socialIcons = {
@@ -34,7 +35,7 @@ const socialIcons = {
     facebook: Facebook,
 }
 
-const Preview = ({ name, bio, projects, socials, avatar, username, theme }: PreviewProps) => {
+const Preview = ({ name, bio, projects, socials, avatar, username, theme, showGithub }: PreviewProps) => {
     const [device, setDevice] = useState<Device>('desktop')
 
     const getPreviewWidth = () => {
@@ -172,27 +173,29 @@ const Preview = ({ name, bio, projects, socials, avatar, username, theme }: Prev
                             </div>
                         )}
 
-                        <div className="mt-10">
-                            <h2 className={cn(
-                                "font-bold mb-6 text-center",
-                                device === 'desktop' ? 'text-3xl' : 'text-2xl'
-                            )}>Github Activity</h2>
-                            <div className={cn(
-                                "flex items-center justify-center py-6 px-3 rounded-xl border hover:border-gray-300 dark:hover:border-gray-600 transition-all duration-200 hover:shadow-md bg-gray-50 dark:bg-neutral-800/50 group",
-                                device === 'desktop' ? 'mx-auto' : ''
-                            )}>
-                                <GitHubCalendar 
-                                    username={username} 
-                                    fontSize={device === 'desktop' ? 14 : 12}
-                                    blockSize={device === 'desktop' ? 10 : 8}
-                                    blockMargin={4}
-                                    colorScheme={"light"}
-                                    hideTotalCount
-                                    transformData={device === 'desktop' ? selectLastElevenYear : selectLastSixYear}
-                                    theme={getThemeColors()}
-                                />
+                        {showGithub && username && (
+                            <div className="mt-10">
+                                <h2 className={cn(
+                                    "font-bold mb-6 text-center",
+                                    device === 'desktop' ? 'text-3xl' : 'text-2xl'
+                                )}>Github Activity</h2>
+                                <div className={cn(
+                                    "flex items-center justify-center py-6 px-3 rounded-xl border hover:border-gray-300 dark:hover:border-gray-600 transition-all duration-200 hover:shadow-md bg-gray-50 dark:bg-neutral-800/50 group",
+                                    device === 'desktop' ? 'mx-auto' : ''
+                                )}>
+                                    <GitHubCalendar 
+                                        username={username} 
+                                        fontSize={device === 'desktop' ? 14 : 12}
+                                        blockSize={device === 'desktop' ? 10 : 8}
+                                        blockMargin={4}
+                                        colorScheme={"light"}
+                                        hideTotalCount
+                                        transformData={device === 'desktop' ? selectLastElevenYear : selectLastSixYear}
+                                        theme={getThemeColors()}
+                                    />
+                                </div>
                             </div>
-                        </div>
+                        )}
                     </div>
                 </div>
             </div>
