@@ -136,7 +136,7 @@ async function SlugPage({ slug }: { slug: string }) {
               </div>
             </div>
           )}
-          {githubCalendar && (
+          {githubCalendar && githubCalendar.show && (
             <div className="mt-10">
               <h2 className={"font-bold mb-6 text-center text-2xl"}>Github Activity</h2>
               <div className={"flex items-center justify-center py-6 px-3 rounded-xl border hover:border-gray-300 dark:hover:border-gray-600 transition-all duration-200 hover:shadow-md bg-gray-50 dark:bg-neutral-800/50 group"}>

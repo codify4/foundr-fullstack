@@ -142,14 +142,14 @@ const Sidebar = ({ slug }: { slug?: string }) => {
                                 </Link>
                                 <Link
                                     className={`w-full text-left px-3 py-2.5 rounded-lg transition-all duration-200 ${
-                                        pathname === '/dashboard/analytics'
+                                        pathname === '/dashboard/feedback'
                                         ? 'bg-gray-100 dark:bg-neutral-800 text-black dark:text-white font-medium shadow-sm'
                                         : 'text-neutral-600 dark:text-neutral-300 hover:bg-gray-50 dark:hover:bg-neutral-800 hover:text-black dark:hover:text-white'
                                     }`}
-                                    href={`/dashboard/analytics`}
+                                    href={`/dashboard/feedback`}
                                 >   
-                                    <BarChart className="inline-block w-4 h-4 mr-3" />
-                                    <span className="font-medium">Analytics</span>
+                                    <MessageCircle className="inline-block w-4 h-4 mr-3" />
+                                    <span className="font-medium">Feedback</span>
                                 </Link>
                                 <Link
                                     className={`w-full text-left px-3 py-2.5 rounded-lg transition-all duration-200 ${
