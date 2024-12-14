@@ -148,6 +148,27 @@
       "when": 1734197931647,
       "tag": "0020_freezing_lady_deathstrike",
       "breakpoints": true
+    },
+    {
+      "idx": 21,
+      "version": "7",
+      "when": 1734201568981,
+      "tag": "0021_gifted_blue_blade",
+      "breakpoints": true
+    },
+    {
+      "idx": 22,
+      "version": "7",
+      "when": 1734201647778,
+      "tag": "0022_omniscient_odin",
+      "breakpoints": true
+    },
+    {
+      "idx": 23,
+      "version": "7",
+      "when": 1734202144346,
+      "tag": "0023_modern_magdalene",
+      "breakpoints": true
     }
   ]
 }

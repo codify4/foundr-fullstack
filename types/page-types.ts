@@ -6,6 +6,7 @@ export interface Project {
 }
 
 export type SocialTypes = 'github' | 'twitter' | 'linkedin' | 'instagram' | 'facebook' | null;
+export type FeedbackTypes = 'feature' | 'improvement' | 'bug';
 
 export interface Social {
     type: string;

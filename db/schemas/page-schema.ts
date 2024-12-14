@@ -13,7 +13,6 @@ export const page = pgTable('page', {
     avatar: text('avatar').notNull(),
     pageSlug: text('page_slug').notNull().unique(),
     userId: text('user_id').notNull().references(() => users.id),
-    
 });
 
 export const pageRelations = relations(page, ({ many, one }) => ({
@@ -77,12 +76,31 @@ export const githubCalendarRelations = relations(githubCalendar, ({ one }) => ({
     }),
 }));
 
+export const feedback = pgTable('feedback', {
+    id: serial('id').primaryKey(),
+    createdAt: timestamp('created_at').defaultNow(),
+    updatedAt: timestamp('updated_at').defaultNow(),
+    type: varchar('type').notNull(),
+    title: varchar('title').notNull(),
+    message: varchar('message').notNull(),
+    userId: varchar('user_id').notNull().references(() => users.id),
+});
+
+export const feedbackRelations = relations(feedback, ({ one }) => ({
+    user: one(users, {
+        fields: [feedback.userId],
+        references: [users.id],
+    }),
+}));
+
 export type SelectPage = InferSelectModel<typeof page>;
 export type SelectProject = InferSelectModel<typeof project>;
 export type SelectSocial = InferSelectModel<typeof socialLink>;
 export type SelectGithubCalendar = InferSelectModel<typeof githubCalendar>;
+export type SelectFeedback = InferSelectModel<typeof feedback>;
 
 export type InsertPage = InferInsertModel<typeof page>;
 export type InsertProject = InferInsertModel<typeof project>;
 export type InsertSocial = InferInsertModel<typeof socialLink>;
 export type InsertGithubCalendar = InferInsertModel<typeof githubCalendar>;
+export type InsertFeedback = InferInsertModel<typeof feedback>;
